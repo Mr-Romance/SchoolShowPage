@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  必须要登录的操作
+ *  不需要登录的操作
  */
 namespace app\index\controller;
 

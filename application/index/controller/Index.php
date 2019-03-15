@@ -22,7 +22,7 @@ class Index extends Controller
     }
 
     /**
-     *  点击
+     *  带分类的资源首页搜索页面
      *
      * @param Request $request
      */

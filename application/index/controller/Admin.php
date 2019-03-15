@@ -14,6 +14,15 @@ use think\Validate;
 class Admin extends Controller
 {
     /**
+     *  资源网站的首页展示
+     *
+        @return mixed
+     */
+    public function index(){
+        return $this->fetch();
+    }
+
+    /**
      *  展示增加用户的界面
      *
      * @return mixed
