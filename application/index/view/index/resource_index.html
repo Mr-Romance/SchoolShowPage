@@ -6,13 +6,353 @@
     <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/resource_index.css">
     <script src="/static/jQuery331.js"></script>
+    <script src="/static/popper.js"></script>
     <script src="/static/layer/layer.js"></script>
     <script src="/static/dialog.js"></script>
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
 </head>
 <body>
 <div class="container">
-        <div class="header"></div>
+    <!--头部导航-->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <div class="collapse navbar-collapse" id="navbarText">
+            <a class="navbar-brand school-title" href="#">家里蹲大学资源库</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">非常热门 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">非常热门</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">非常热门</a>
+                </li>
+            </ul>
+
+            <div class="top-search">
+                <nav class="navbar navbar-light bg-light ">
+                    <form class="form-inline">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                资源类型
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                        <input class="form-control mr-sm-2" type="search" placeholder="输入资源名称搜索" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+
+                        <div class="dropdown show login-menu">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                小明
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </form>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col bg-img">
+            <img src="/static/imgs/banner1.jpg">
+        </div>
+    </div>
+
+    <div class="total-statics">
+        <p>资源数数：100</p>
+        <p>资源总大小：100G</p>
+    </div>
+
+    <div class="content">
+        <div class="recommend">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class='col-md-10'>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div><h3>最新推荐</h3></div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="recommend-rec">
+                                        <div>
+                                            <img src="/static/imgs/column.jpg">
+                                            <p>xxx</p>
+                                            <p>0o00o</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="recommend-rec">
+                                        <div>
+                                            <img src="/static/imgs/column.jpg">
+                                            <p>xxx</p>
+                                            <p>0o00o</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="recommend-rec">
+                                        <div>
+                                            <img src="/static/imgs/column.jpg">
+                                            <p>xxx</p>
+                                            <p>0o00o</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="recommend-rec">
+                                        <div>
+                                            <img src="/static/imgs/column.jpg">
+                                            <p>xxx</p>
+                                            <p>0o00o</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="newest">
+                                <div><h3>最新上传</h3></div>
+                                <div class="newest-rec">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Cras justo odio
+                                            <span class="badge badge-primary badge-pill">14</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Dapibus ac facilisis in
+                                            <span class="badge badge-primary badge-pill">2</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Morbi leo risus
+                                            <span class="badge badge-primary badge-pill">1</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+
+        <div class="video">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class='col-md-10'>
+                    <div><h3>视频资源</h3></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="video-rec">
+                                <div>
+                                    <img src="/static/imgs/column.jpg">
+                                    <p>xxx</p>
+                                    <p>0o00o</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="video-rec">
+                                <div>
+                                    <img src="/static/imgs/column.jpg">
+                                    <p>xxx</p>
+                                    <p>0o00o</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="video-rec">
+                                <div>
+                                    <img src="/static/imgs/column.jpg">
+                                    <p>xxx</p>
+                                    <p>0o00o</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="video-rec">
+                                <div>
+                                    <img src="/static/imgs/column.jpg">
+                                    <p>xxx</p>
+                                    <p>0o00o</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+
+        <div class="hot">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div><h3>热门资源</h3></div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-group">
+                                <li class="list-group-item active">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-group">
+                                <li class="list-group-item active">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-group">
+                                <li class="list-group-item active">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-group">
+                                <li class="list-group-item active">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+
+        <div class="teachers">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div><h3>明星教师</h3></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="the-teacher">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="teacher-main">
+                                    <div class="teacher-img">
+                                    <img class="card-img-top" src="/static/imgs/headimg1.png" >
+                                    </div>
+                                        <h5>老师名字</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="the-teacher">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="teacher-main">
+                                        <div class="teacher-img">
+                                            <img class="card-img-top" src="/static/imgs/headimg1.png" >
+                                        </div>
+                                        <h5>老师名字</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="the-teacher">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="teacher-main">
+                                        <div class="teacher-img">
+                                            <img class="card-img-top" src="/static/imgs/headimg1.png" >
+                                        </div>
+                                        <h5>老师名字</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="the-teacher">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="teacher-main">
+                                        <div class="teacher-img">
+                                            <img class="card-img-top" src="/static/imgs/headimg1.png" >
+                                        </div>
+                                        <h5>老师名字</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="the-teacher">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="teacher-main">
+                                        <div class="teacher-img">
+                                            <img class="card-img-top" src="/static/imgs/headimg1.png" >
+                                        </div>
+                                        <h5>老师名字</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        <div class="row">
+            <div class="col" style="width:100%;height:50px;background-color: #1d2124"></div>
+        </div>
+    </div>
+
+
 </div>
 </body>
 </html>

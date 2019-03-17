@@ -12,3 +12,53 @@
     height:50px;
     background-color: #f1b0b7;
 }
+
+.school-title{
+    margin-left:100px;
+}
+
+.top-nav{
+    margin:0 50px;
+}
+
+.top-search{
+    margin:0 auto;
+}
+
+.login-menu{
+    margin-left: 100px;
+}
+
+.total-statics{
+    position:absolute;
+    top:450px;
+    right:100px;
+    float:left;
+}
+
+.recommend img {
+    width:180px;
+    height: 202px;
+}
+
+.recommend-rec {
+    width:180px;
+    height:270px;
+}
+.video-rec{
+    width:253px;
+    height:270px;
+}
+.video-rec img{
+    width:253px;
+    height:147px;
+}
+
+.teachers img{
+    width: 61px;
+    height: 61px;
+}
+
+.teacher-img{
+    float:left;
+}
