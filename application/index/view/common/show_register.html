@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+    {block name="cur_css"}{/block}
+    <script src="/static/jQuery331.js"></script>
+    <script src="/static/popper.js"></script>
+    <script src="/static/layer/layer.js"></script>
+    <script src="/static/dialog.js"></script>
+    <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
+</head>
+<body class="text-center">
+<form class="form-signin" id="register-form">
+    <img class="mb-4" src="/static/imgs/headimg1.png" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">家里蹲大学用户注册</h1>
+    <label for="inputEmail" class="sr-only">用户名</label>
+    <input type="text" id="inputEmail" name='name' class="form-control" placeholder="输入用户名" required autofocus>
+
+    <label for="inputPassword" class="sr-only">邮箱</label>
+    <input type="text" id="email" name="email" class="form-control" placeholder="请输入邮箱" required>
+
+    <label for="inputPassword" class="sr-only">密码</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="请输入密码" required>
+
+    <label for="inputPassword" class="sr-only">确认密码</label>
+    <input type="password" id="reinputPassword" name="re_password" class="form-control" placeholder="请输入密码" required>
+    <button class="btn btn-lg btn-primary btn-block" id="register" type="submit">注册</button>
+</form>
+
+<script>
+    $('#register').click(function () {
+        var post_data = $('#register-form').serializeArray();
+        $.post(
+            '/register',
+            post_data,
+            function (data) {
+                if (100 == data.code) {
+                    dialog.successAuto(data.msg, '/login');
+                } else {
+                    dialog.showError(data.msg);
+                }
+            }
+        );
+    });
+</script>
+</body>
+</html>

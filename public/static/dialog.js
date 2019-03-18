@@ -19,13 +19,11 @@ dialog = {
      * @param url
      */
     successAuto: function (msg, url) {
-        layer.open({
-            title: '操作提示',
-            icom: 1,
-            content: msg,
-            yes: function () {
-                window.location.href = url;
-            }
+        layer.msg(msg, {
+            icon: 1,
+            time: 1500 //2秒关闭（如果不配置，默认是3秒）
+        }, function(){
+            window.location.href=url;
         });
     },
 

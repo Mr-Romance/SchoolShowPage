@@ -69,7 +69,7 @@ class Common extends Controller
      *
      * @return mixed
      */
-    public function showregister() {
+    public function showRegister() {
         return $this->fetch();
     }
 

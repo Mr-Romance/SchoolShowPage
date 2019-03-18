@@ -22,7 +22,8 @@ use think\Route;
 
 Route::get('login','index/common/showLogin');
 Route::post('login','index/common/login');
-Route::get('show_register','index/admin/showregister');
+Route::get('register','index/common/showRegister');
+Route::post('register','index/common/register');
 Route::get('/','index/index/index');
 Route::get('resource_index','index/index/resourceIndex');
 Route::get('resource_category','index/index/resourceCategory');

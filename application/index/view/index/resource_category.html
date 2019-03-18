@@ -65,6 +65,7 @@
     </nav>
 
     <div class="body">
+        <!--资源分类-->
         <div class="categories">
             <div class="row">
                 <div class="col-md-1 col-lg-1"></div>
@@ -116,7 +117,7 @@
                                             <input type="checkbox" value="12" autocomplete="off"> 分类1
                                         </label>
                                         <label class="btn  btn-outline-info">
-                                            <input type="checkbox" value="13"  autocomplete="off"> 分类22
+                                            <input type="checkbox" value="13" autocomplete="off"> 分类22
                                         </label>
                                         <label class="btn btn-outline-dark">
                                             <input type="checkbox" value="14" autocomplete="off"> 分类 3
@@ -132,8 +133,87 @@
             </div>
         </div>
 
+        <!--内容列表部分-->
         <div class="cat-lists">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <ul class="list-unstyled">
+                                <li class="media">
+                                    <img class="mr-3" src="..." alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">List-based media object</h5>
+                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
+                                        sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra
+                                        turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
+                                        felis in faucibus.
+                                    </div>
+                                </li>
+                                <li class="media my-4">
+                                    <img class="mr-3" src="..." alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">List-based media object</h5>
+                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
+                                        sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra
+                                        turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
+                                        felis in faucibus.
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <img class="mr-3" src="..." alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">List-based media object</h5>
+                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
+                                        sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra
+                                        turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
+                                        felis in faucibus.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="main-info">
+                                <div>
+                                    <span class="badge badge-primary">Primary</span>
+                                </div>
+                                <div>
+                                    <span class="badge badge-secondary">Secondary</span>
+                                </div>
+                                <div>
+                                    <span class="badge badge-success">Success</span>
+                                </div>
+                            </div>
 
+                            <div class="main-info">
+                                <div>
+                                    <span class="badge badge-primary">Primary</span>
+                                </div>
+                                <div>
+                                    <span class="badge badge-secondary">Secondary</span>
+                                </div>
+                                <div>
+                                    <span class="badge badge-success">Success</span>
+                                </div>
+                            </div>
+
+                            <div class="main-info">
+                                <div>
+                                    <span class="badge badge-primary">Primary</span>
+                                </div>
+                                <div>
+                                    <span class="badge badge-secondary">Secondary</span>
+                                </div>
+                                <div>
+                                    <span class="badge badge-success">Success</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
         </div>
     </div>
 
@@ -147,15 +227,15 @@
 </div>
 
 <script>
-    var check_box=[];
-    $('input[type="checkbox"]').change(function(){
+    var check_box = [];
+    $('input[type="checkbox"]').change(function () {
 
         // this.blur();
         // this.focus();
         // alert($(this).val());
         // return ;
-        $('input[type="checkbox"]').each(function(){
-            if($(this).attr('checked')){
+        $('input[type="checkbox"]').each(function () {
+            if ($(this).attr('checked')) {
                 $(this).setAttribute('checked');
                 alert($(this).val())
                 return;
