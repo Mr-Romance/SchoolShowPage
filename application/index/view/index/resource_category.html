@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资源展示首页</title>
+    <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/resource_category.css">
+    <script src="/static/jQuery331.js"></script>
+    <script src="/static/popper.js"></script>
+    <script src="/static/layer/layer.js"></script>
+    <script src="/static/dialog.js"></script>
+    <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <!--头部导航-->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <div class="collapse navbar-collapse" id="navbarText">
+            <a class="navbar-brand school-title" href="#">家里蹲大学资源库</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">非常热门 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">非常热门</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">非常热门</a>
+                </li>
+            </ul>
+
+            <div class="top-search">
+                <nav class="navbar navbar-light bg-light ">
+                    <form class="form-inline">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                资源类型
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                        <input class="form-control mr-sm-2" type="search" placeholder="输入资源名称搜索" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+
+                        <div class="dropdown show login-menu">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                小明
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </form>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <div class="body">
+        <div class="categories">
+            <div class="row">
+                <div class="col-md-1 col-lg-1"></div>
+                <div class="col-md-10 col-lg-10">
+                    <form id="search_form">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-secondary active">
+                                            <input type="checkbox" checked autocomplete="off"> 分类1
+                                        </label>
+                                        <label class="btn btn-secondary active">
+                                            <input type="checkbox" autocomplete="off"> 分类22
+                                        </label>
+                                        <label class="btn btn-secondary active">
+                                            <input type="checkbox" autocomplete="off"> 分类 3
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-secondary active">
+                                            <input type="checkbox" checked autocomplete="off"> 分类1
+                                        </label>
+                                        <label class="btn btn-secondary active">
+                                            <input type="checkbox" autocomplete="off"> 分类22
+                                        </label>
+                                        <label class="btn btn-secondary active">
+                                            <input type="checkbox" autocomplete="off"> 分类 3
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-primary">
+                                            <input type="checkbox" value="12" autocomplete="off"> 分类1
+                                        </label>
+                                        <label class="btn  btn-outline-info">
+                                            <input type="checkbox" value="13"  autocomplete="off"> 分类22
+                                        </label>
+                                        <label class="btn btn-outline-dark">
+                                            <input type="checkbox" value="14" autocomplete="off"> 分类 3
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="col-md-1 col-lg-1"></div>
+            </div>
+        </div>
+
+        <div class="cat-lists">
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="row">
+            <div class="col" style="width:100%;height:50px;background-color: #1d2124"></div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    var check_box=[];
+    $('input[type="checkbox"]').change(function(){
+
+        // this.blur();
+        // this.focus();
+        // alert($(this).val());
+        // return ;
+        $('input[type="checkbox"]').each(function(){
+            if($(this).attr('checked')){
+                $(this).setAttribute('checked');
+                alert($(this).val())
+                return;
+
+                check_box.push($(this).val());
+                console.log(check_box);
+            }
+        });
+    });
+</script>
+</body>
+</html>

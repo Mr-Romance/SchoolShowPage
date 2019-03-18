@@ -25,6 +25,7 @@ Route::post('login','index/common/login');
 Route::get('show_register','index/admin/showregister');
 Route::get('/','index/index/index');
 Route::get('resource_index','index/index/resourceIndex');
+Route::get('resource_category','index/index/resourceCategory');
 
 
 Route::post('add_category','index/resource/addCategory');

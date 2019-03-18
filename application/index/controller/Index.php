@@ -15,18 +15,21 @@ class Index extends Controller
     /**
      *  资源展示首页
      *
+     * * @param Request $request
      * @return mixed
      */
-    public function resourceIndex(){
+    public function resourceIndex(Request $request){
+
         return $this->fetch();
     }
 
     /**
      *  带分类的资源首页搜索页面
      *
+     * @return mixed
      * @param Request $request
      */
     public function resourceCategory(Request $request){
-
+        return $this->fetch();
     }
 }
