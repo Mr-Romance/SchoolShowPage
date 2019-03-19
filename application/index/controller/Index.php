@@ -6,6 +6,11 @@ use think\Request;
 
 class Index extends Controller
 {
+    protected function _initialize() {
+        $user = $this->getLoginUser();
+        $this->assign('user', $user);
+    }
+
     public function index()
     {
         return $this->fetch();

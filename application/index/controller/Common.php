@@ -61,7 +61,7 @@ class Common extends Controller
      */
     public function logout(){
         Session::delete('login_user_id');
-        $this->success('新增成功', '');
+        $this->redirect('/login');
     }
 
     /**

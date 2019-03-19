@@ -11,6 +11,7 @@
 
 namespace think;
 
+use app\index\model\Users;
 use think\exception\ValidateException;
 use traits\controller\Jump;
 
@@ -247,5 +248,24 @@ class Controller
     public function successResponse($code = 100, $msg = '')
     {
         return json(['code' => $code, 'msg' => $msg]);
+    }
+
+    /**
+     *  获取当前登录的用户
+     *
+     * @return Users
+     */
+    public function getLoginUser() {
+        $user_id = Session::get('login_user_id');
+        if (empty($user_id)) {
+            $this->success('请先登录', 'Common/showLogin');
+        }
+        try {
+            $user = Users::getUserById($user_id);
+            return $user;
+        } catch (Exception $exception) {
+            $this->success('请先登录', 'Common/showLogin');
+        }
+
     }
 }

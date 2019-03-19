@@ -34,7 +34,7 @@ function think_encrypt($data, $key = '123456', $expire = 0) {
         $str .= chr(ord(substr($data, $i, 1)) + (ord(substr($char, $i, 1)))%256);
     }
     $en_pwd=str_replace(array('+','/','='),array('-','_',''),base64_encode($str));
-    return substr($en_pwd,0,20);
+    return $en_pwd;
 }
 /**
  * 系统解密方法

@@ -8,18 +8,19 @@ namespace app\index\controller;
 
 use app\index\model\Users;
 use think\Controller;
+use think\Exception;
 use think\Request;
+use think\Session;
 use think\Validate;
 
 class Admin extends Controller
 {
-    /**
-     *  资源网站的首页展示
-     *
-        @return mixed
-     */
-    public function index(){
-        return $this->fetch();
+    protected function _initialize() {
+        if (!Session::get('login_user_id')) {
+            $this->success('请先登录', 'Common/showLogin');
+        }
+        $user = $this->getLoginUser();
+        $this->assign('user', $user);
     }
 
     /**
@@ -75,4 +76,80 @@ class Admin extends Controller
         return $this->successResponse(100, '添加用户成功');
     }
 
+    /**
+     * 显示用户列表
+     */
+    public function usersList() {
+
+    }
+
+    /**
+     *  显示用户信息页面
+     *
+     * @return mixed
+     */
+    public function userPage() {
+        return $this->fetch();
+    }
+
+    /**
+     *  更新用户信息
+     *
+     * @param Request $request
+     * @return \think\response\Json
+     */
+    public function editUser(Request $request) {
+        $params = $request->param();
+
+        try {
+            $user_id = $params['id'];
+            $params['password']= think_encrypt($params['password']);
+            unset($params['id']);
+            Users::updUser($params, $user_id);
+        } catch (Exception $exception) {
+            return $this->errorResponse(200, $exception->getMessage());
+        }
+
+        return $this->successResponse(100, '更新成功');
+    }
+
+    /**
+     *  更新用户头像
+     *
+     * @param Request $request
+     * @return \think\response\Json
+     */
+    public function updHeadPortrait(Request $request) {
+        $user_id = $request->param('user_id');
+        if (empty($user_id)) {
+            return $this->errorResponse('用户ID为空');
+        }
+
+        $file = request()->file('head_portrait');
+
+        // 图片验证
+        if (empty($file)) {
+            return $this->errorResponse(200, '图片为空');
+        }
+
+        $info = $file->validate([
+            'size' => 900000,
+            'ext' => 'jpg,png,gif'
+        ])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'head_portrait');
+
+        if ($info) {
+            $save_name = $info->getSaveName();
+            $full_path = DS . 'uploads' . DS . 'head_portrait' . DS . $save_name;
+            try {
+                Users::updUser(['head_portrait' => $full_path], $user_id);
+            } catch (Exception $exception) {
+                return $this->errorResponse(200, $exception->getMessage());
+            }
+        } else {
+            // 上传失败获取错误信息
+            return $this->errorResponse(200, $file->getError());
+        }
+
+        return $this->successResponse(100, '更新头像成功');
+    }
 }

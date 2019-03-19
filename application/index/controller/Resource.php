@@ -24,6 +24,15 @@ class Resource extends Controller
     }
 
     /**
+     *  显示添加分类页面
+     *
+     * @return mixed
+     */
+    public function showAddCategory(){
+        return $this->fetch();
+    }
+
+    /**
      *  创建分类
      *
      * @param Request $request
@@ -53,5 +62,14 @@ class Resource extends Controller
         } else {
             return $this->successResponse(100, '添加分类成功');
         }
+    }
+
+    /**
+     *  显示添加资源页面
+     *
+     * @return mixed
+     */
+    public function showAddResource(){
+        return $this->fetch();
     }
 }
