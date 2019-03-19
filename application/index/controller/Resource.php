@@ -21,6 +21,8 @@ class Resource extends Controller
         if (!Session::get('login_user_id')) {
             $this->success('请先登录', 'Common/showLogin');
         }
+        $user=$this->getLoginUser();
+        $this->assign('user',$user);
     }
 
     /**
@@ -72,4 +74,18 @@ class Resource extends Controller
     public function showAddResource(){
         return $this->fetch();
     }
+
+    public function addResource(Request $request){
+
+    }
+
+    /**
+     *  展示用户已经发布资源的列表
+     *
+     * @return mixed
+     */
+    public function showUserResourceList(){
+        return $this->fetch();
+    }
+
 }

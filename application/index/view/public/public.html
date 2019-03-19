@@ -47,26 +47,39 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="输入资源名称搜索" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
 
+                    {if condition="!empty($user)"}
                     <div class="dropdown show login-menu">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                            data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            小明
+                            {$user->name}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="/user_page">个人主页</a>
+                            <a class="dropdown-item" href="/logout">退出</a>
                         </div>
                     </div>
+                    {else /}
+                    <div class="dropdown show login-menu">
+                        <a class="btn btn-secondary dropdown-toggle" href="/login" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            登录
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="/register">注册</a>
+                        </div>
+                    </div>
+                    {/if}
+
                 </form>
             </nav>
         </div>
     </div>
 </nav>
 
-{block name="content"}
-
+{block name="main"}
+主要部分
 {/block}
 
 <div class="footer">

@@ -39,6 +39,12 @@ Route::get('user_page','index/admin/userPage');
 Route::post('user_edit','index/admin/editUser');
 Route::post('upd_head_portrait','index/admin/updHeadPortrait');
 
+/**
+ *  资源相关的操作
+ */
+Route::get('show_add_resource','index/resource/showAddResource');
+Route::get('user_resource_list','index/resource/showUserResourceList');
+
 Route::post('add_category','index/resource/addCategory');
 
 
