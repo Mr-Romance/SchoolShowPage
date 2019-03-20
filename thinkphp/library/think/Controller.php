@@ -51,8 +51,7 @@ class Controller
      * @access public
      * @param Request $request Request 对象
      */
-    public function __construct(Request $request = null)
-    {
+    public function __construct(Request $request = null) {
         $this->view = View::instance(Config::get('template'), Config::get('view_replace_str'));
         $this->request = is_null($request) ? Request::instance() : $request;
 
@@ -71,8 +70,7 @@ class Controller
      * 初始化操作
      * @access protected
      */
-    protected function _initialize()
-    {
+    protected function _initialize() {
     }
 
     /**
@@ -82,8 +80,7 @@ class Controller
      * @param  array $options 调用参数 ['only'=>[...]] 或者 ['except'=>[...]]
      * @return void
      */
-    protected function beforeAction($method, $options = [])
-    {
+    protected function beforeAction($method, $options = []) {
         if (isset($options['only'])) {
             if (is_string($options['only'])) {
                 $options['only'] = explode(',', $options['only']);
@@ -114,8 +111,7 @@ class Controller
      * @param  array $config 模板参数
      * @return mixed
      */
-    protected function fetch($template = '', $vars = [], $replace = [], $config = [])
-    {
+    protected function fetch($template = '', $vars = [], $replace = [], $config = []) {
         return $this->view->fetch($template, $vars, $replace, $config);
     }
 
@@ -128,8 +124,7 @@ class Controller
      * @param  array $config 模板参数
      * @return mixed
      */
-    protected function display($content = '', $vars = [], $replace = [], $config = [])
-    {
+    protected function display($content = '', $vars = [], $replace = [], $config = []) {
         return $this->view->display($content, $vars, $replace, $config);
     }
 
@@ -140,8 +135,7 @@ class Controller
      * @param  mixed $value 变量的值
      * @return $this
      */
-    protected function assign($name, $value = '')
-    {
+    protected function assign($name, $value = '') {
         $this->view->assign($name, $value);
 
         return $this;
@@ -153,8 +147,7 @@ class Controller
      * @param array|string $engine 引擎参数
      * @return $this
      */
-    protected function engine($engine)
-    {
+    protected function engine($engine) {
         $this->view->engine($engine);
 
         return $this;
@@ -166,8 +159,7 @@ class Controller
      * @param bool $fail 是否抛出异常
      * @return $this
      */
-    protected function validateFailException($fail = true)
-    {
+    protected function validateFailException($fail = true) {
         $this->failException = $fail;
 
         return $this;
@@ -184,8 +176,7 @@ class Controller
      * @return array|string|true
      * @throws ValidateException
      */
-    protected function validate($data, $validate, $message = [], $batch = false, $callback = null)
-    {
+    protected function validate($data, $validate, $message = [], $batch = false, $callback = null) {
         if (is_array($validate)) {
             $v = Loader::validate();
             $v->rule($validate);
@@ -233,8 +224,7 @@ class Controller
      * @param string $msg
      * @return response\Json
      */
-    public function errorResponse($code = 200, $msg = '')
-    {
+    public function errorResponse($code = 200, $msg = '') {
         return json(['code' => $code, 'msg' => $msg]);
     }
 
@@ -243,11 +233,11 @@ class Controller
      *
      * @param int $code
      * @param string $msg
+     * @param string $data
      * @return response\Json
      */
-    public function successResponse($code = 100, $msg = '')
-    {
-        return json(['code' => $code, 'msg' => $msg]);
+    public function successResponse($code = 100, $msg = '', $data = '') {
+        return json(['code' => $code, 'msg' => $msg, 'data' => $data]);
     }
 
     /**

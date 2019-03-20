@@ -13,18 +13,11 @@ use think\Model;
 
 class Categories extends Model
 {
-    protected $table ='categories';
+    protected $table = 'categories';
 
-    public static function saveCategories($data){
+    public static function saveCategories($data) {
         if (empty($data)) {
             return '要保存数据为空';
-        }
-
-        // 增加二级分类
-        if(2==$data['type']){
-            if(empty($data['parent_id'])){
-                return '一级分类id为空';
-            }
         }
 
         $category = new Categories();
@@ -44,5 +37,39 @@ class Categories extends Model
         if (!$save_res) {
             return '添加分类失败';
         }
+    }
+
+    /**
+     *  获取所有的一级分类
+     *
+     * @return Categories|array
+     * @throws \think\exception\DbException
+     */
+    public static function getAllFirstCategories() {
+        $categories = Categories::all(['parent_id' => 0]);
+
+        if (!$categories) {
+            return [];
+        }
+
+        return $categories;
+    }
+
+
+    /**
+     *  获取一级分类下的所有二级分类
+     *
+     * @param $parent_id
+     * @return Categories[]|array|false
+     * @throws \think\exception\DbException
+     */
+    public static function getAllSecondCategories($parent_id) {
+        $categories = Categories::all(['parent_id' => $parent_id]);
+
+        if (!$categories) {
+            return [];
+        }
+
+        return $categories;
     }
 }

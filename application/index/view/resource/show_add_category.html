@@ -1,0 +1,73 @@
+{extend name="public:public"}
+
+{block name="cur_css"}
+
+{/block}
+
+{block name="main"}
+<div class="content">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            菜单列表
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                        <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                        <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                        <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <form id="form_add_category">
+                        <div class="form-group">
+                            <label>分类名称</label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">所属分类</label>
+                            <select class="form-control" name="parent_id" id="exampleFormControlSelect1">
+                                <option value="0">作为一级分类</option>
+                                {if condition ="!empty($first_categories)"}
+                                {volist name="first_categories" id = "vo"}
+                                <option value="{$vo->id}">{$vo['name']}</option>
+                                {/volist}
+                                {/if}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>排序</label>
+                            <input type="text" name="sort" placeholder="数字越大，排名越前面" value="1">
+                        </div>
+                        <button type="button" id="add_categories" class="btn btn-primary">添加</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+{/block}
+
+{block name="cur_js"}
+<script>
+    $("#add_categories").click(function () {
+        var post_data = $('#form_add_category').serializeArray();
+
+        $.post(
+            '/add_category',
+            post_data,
+            function (data) {
+                if (100 == data.code) {
+                    dialog.successAuto(data.msg, '/show_add_category');
+                } else {
+                    dialog.showError(data.msg);
+                }
+            }
+        );
+    });
+</script>
+{/block}
