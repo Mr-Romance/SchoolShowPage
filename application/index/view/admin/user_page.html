@@ -1,214 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta charset="UTF-8">
-    <title>{block name="title"}标题{/block}</title>
-    <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/css/public.css">
-    <link rel="stylesheet" href="/static/css/user_page.css">
-    <script src="/static/jQuery331.js"></script>
-    <script src="/static/popper.js"></script>
-    <script src="/static/layer/layer.js"></script>
-    <script src="/static/dialog.js"></script>
-    <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
-</head>
-<body class="container">
-<!--头部导航-->
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <div class="collapse navbar-collapse" id="navbarText">
-        <a class="navbar-brand school-title" href="#">家里蹲大学资源库</a>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">非常热门 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="#">非常热门</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="#">非常热门</a>
-            </li>
-        </ul>
+{extend name="public:public_admin"}
 
-        <div class="top-search">
-            <nav class="navbar navbar-light bg-light ">
-                <form class="form-inline">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            资源类型
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                    <input class="form-control mr-sm-2" type="search" placeholder="输入资源名称搜索" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+{block name="cur_css"}
+    <style>
+        .content label{
+            font-size: 20px;
+        }
+    </style>
+{/block}
 
-                    {if condition="!empty($user)"}
-                    <div class="dropdown show login-menu">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            {$user->name}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="/user_page">个人主页</a>
-                            <a class="dropdown-item" href="/logout">退出</a>
-                        </div>
-                    </div>
-                    {else /}
-                    <div class="dropdown show login-menu">
-                        <a class="btn btn-secondary dropdown-toggle" href="/login" role="button" id="dropdownMenuLink"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            登录
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="/register">注册</a>
-                        </div>
-                    </div>
-                    {/if}
+{block name="right-content"}
+<form enctype="multipart/form-data">
+    <div class="head_portrait">
+        <img src="{$user->head_portrait}">
+    </div>
+    <input type="file" name="head_portrait" class="form-control-file" id="head_portrait">
+    <br>
+    <button type="button" id="upd_head_portrait" class="btn btn-success">上传头像</button>
+</form>
 
-                </form>
-            </nav>
+<form class="user_info" id="user_info">
+    <div class="form-group">
+        <label>用户名</label>
+        <input type="email" class="form-control" id="user_name" name="name"
+               aria-describedby="emailHelp"
+               placeholder="请输入用户名" value="{$user->name}">
+        <small id="name" class="form-text text-muted">用户名不可以与其他用户相同
+        </small>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">性别</label>
+            <select class="form-control" name="sex" id="exampleFormControlSelect1">
+                <option {if condition="1==$user->sex" } selected{
+                /if} value="1">男</option>
+                <option {if condition="2==$user->sex" } selected{
+                /if} value="2">女</option>
+            </select>
         </div>
     </div>
-</nav>
 
-<div class="content">
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="menu_btn">
-                        <button type="button" class="btn btn-secondary">个人信息</button>
-                    </div>
-                    <div class="menu_btn">
-                        <button type="button" class="btn btn-secondary">资源管理</button>
-                    </div>
-                    <div class="menu_btn">
-                        <button type="button" class="btn btn-secondary">Secondary</button>
-                    </div>
-                    <div class="menu_btn">
-                        <button type="button" class="btn btn-secondary">Secondary</button>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <form enctype="multipart/form-data">
-                        <div class="head_portrait">
-                            <img src="{$user->head_portrait}">
-                        </div>
-                        <input type="file" name="head_portrait" class="form-control-file" id="head_portrait">
-                        <button type="button" id="upd_head_portrait" class="btn btn-success">上传头像</button>
-                    </form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">邮箱</label>
+        <input type="email" class="form-control" name="email" id="exampleInputEmail1"
+               aria-describedby="emailHelp" placeholder="输入邮箱" value="{$user->email}">
+        <small id="emailHelp" class="form-text text-muted">
+            邮箱地址不可以与其他用户重复
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">密码</label>
+        <input type="text" class="form-control" name="password" id="exampleInputPassword1"
+               placeholder="请输入密码" value="<?php echo think_decrypt($user->password); ?>">
+        <small id="password" class="form-text text-muted">
+            可在这里重新设置密码
+        </small>
+    </div>
 
-                    <form class="user_info" id="user_info">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">用户名</label>
-                            <input type="email" class="form-control" id="user_name" name="name"
-                                   aria-describedby="emailHelp"
-                                   placeholder="请输入用户名" value="{$user->name}">
-                            <small id="name" class="form-text text-muted">用户名不可以与其他用户相同
-                            </small>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">性别</label>
-                                <select class="form-control" name="sex" id="exampleFormControlSelect1">
-                                    <option {if condition="1==$user->sex" } selected{
-                                    /if} value="1">男</option>
-                                    <option {if condition="2==$user->sex" } selected{
-                                    /if} value="2">女</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">邮箱</label>
-                            <input type="email" class="form-control" name="email" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp" placeholder="输入邮箱" value="{$user->email}">
-                            <small id="emailHelp" class="form-text text-muted">
-                                邮箱地址不可以与其他用户重复
-                            </small>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">密码</label>
-                            <input type="text" class="form-control" name="password" id="exampleInputPassword1"
-                                   placeholder="请输入密码" value="<?php echo think_decrypt($user->password); ?>">
-                            <small id="password" class="form-text text-muted">
-                                可在这里重新设置密码
-                            </small>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">个人简介</span>
-                                </div>
-                                <textarea class="form-control" name="introduction"
-                                          aria-label="With textarea">{$user->introduction}</textarea>
-                            </div>
-                        </div>
-                        <input type="hidden" id="user_id" name="id" value="{$user->id}">
-                        <button type="button" id="eidt_user" class="btn btn-primary">提交</button>
-                    </form>
-                </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">个人简介</span>
             </div>
+            <textarea class="form-control" name="introduction"
+                      aria-label="With textarea">{$user->introduction}</textarea>
         </div>
     </div>
-    <div class="col-md-1"></div>
-</div>
-</div>
+    <input type="hidden" id="user_id" name="id" value="{$user->id}">
+    <button type="button" id="eidt_user" class="btn btn-primary">提交</button>
+</form>
+{/block}
 
-<div class="footer">
-    <div class="row">
-        <div class="col" style="width:100%;height:50px;background-color: #1d2124"></div>
-    </div>
-</div>
+{block name="cur_js"}
 
-<script>
-    $('#eidt_user').click(function () {
-        var post_data = $('#user_info').serializeArray();
-        $.post(
-            '/user_edit',
-            post_data,
-            function (data) {
-                if (100 == data.code) {
-                    dialog.successAuto(data.msg, '/user_page');
-                } else {
-                    dialog.showError(data.msg);
-                }
-            }
-        );
-    });
-
-    $('#upd_head_portrait').click(function () {
-        var form_data = new FormData();
-        var user_id=$('#user_id').val();
-        form_data.append('user_id',user_id);
-        form_data.append("head_portrait", $('#head_portrait').get(0).files[0]);
-        $.ajax({
-            url: "/upd_head_portrait",
-            processData: false,
-            contentType: false,
-            data: form_data,
-            type:"POST",
-            success: function (data) {
-                if (100 == data.code) {
-                    dialog.successAuto(data.msg, '/user_page')
-                } else {
-                    dialog.showError(data.msg);
-                }
-            }
-        });
-    });
-
-</script>
-
-</body>
-</html>
+{/block}

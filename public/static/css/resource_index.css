@@ -29,6 +29,10 @@
     margin-left: 100px;
 }
 
+.login-btn-group{
+    margin-left: 20px;
+}
+
 .total-statics{
     position:absolute;
     top:450px;

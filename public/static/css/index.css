@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+.container-fluid{
+    background-color: oldlace;
+}
+
 .banner {
     width: 100%;
     height: 318px;
@@ -15,13 +19,15 @@
     height: 318px;
 }
 
-.top-nav {
-    margin: 0 100px;
+.top-nav-btns{
+    margin:0 auto;
+    text-align: center;
 }
 
 .column-top-news{
     width:100%;
-    height:60px;
+    height:80px;
+    margin: 5px 0;
 }
 
 .news-img{
@@ -55,4 +61,18 @@
     width:330px;
     height:200px;
     background-color: #f1b0b7;
+}
+
+.column-video img{
+    width:240px;
+    height:130px;
+}
+
+.column-fixed img{
+    width:240px;
+    height:130px;
+}
+
+.footer{
+    margin-top:10px;
 }

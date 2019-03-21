@@ -183,11 +183,33 @@ class Resource extends Controller
     /**
      *  展示用户已经发布资源的列表
      *
+     * @param Request $request
      * @return mixed
+     * @throws \think\exception\DbException
      */
-    public function showUserResourceList() {
+    public function showUserResourceList(Request $request) {
+        $param = $request->param();
+        if (empty($param)) {
+            $param = [];
+        }
+        if (!empty($param)) {
+            if (!empty($param['res_category'])) {
+                // 把字符串打散为数组
+                $param['res_category'] = explode(',', $param['res_category']);
+            }
+            if (!empty($param['res_type'])) {
+                $param['res_type'] = explode(',', $param['res_type']);
+            }
+        }
+
+        $user = $this->getLoginUser();
+
+        $list = Resources::getResourcesList($param, $user->id);
+
+        $this->assign('list', $list);
         return $this->fetch();
     }
+
 
     /**
      *  获取一级分类下的所有二级分类
