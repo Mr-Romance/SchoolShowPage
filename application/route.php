@@ -49,7 +49,10 @@ Route::post('add_category', 'index/resource/addCategory');
 Route::post('get_second_categories', 'index/resource/getSecondCategories');
 Route::post('add_resource', 'index/resource/addResource');
 Route::get('user_resource_list','index/resource/showUserResourceList');
-Route::post('user_resource_list_2','index/resource/showUserResourceList');
+Route::post('user_resource_list','index/resource/showUserResourceList');
+Route::post('search_user_resource_list','index/resource/searchUserResourceList');
+Route::get('delete_search_session','index/resource/deleteSearchSession');
+
 
 Route::post('add_category', 'index/resource/addCategory');
 

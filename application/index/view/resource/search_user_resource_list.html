@@ -1,0 +1,58 @@
+{extend name="public:public_admin"}
+{block name="cur_css"}
+<style>
+    .list-unstyled img{
+        width:240px;
+        height:130px;
+    }
+
+    .media{
+        margin-bottom: 5px;
+        border:1px #0c5460 solid;
+    }
+</style>
+{/block}
+
+{block name="right-content"}
+
+{include file="../application/index/view/public/search_form.html"}
+
+<div>
+    <ul class="list-unstyled">
+        {if condition="!empty($list)"}
+        {volist name="list" id="vo"}
+        <li class="media">
+            <img class="mr-3" src="{$vo.thumbnail}">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">{$vo.title}</h5>
+                {$vo.introduction}
+            </div>
+            <div>
+                <div>
+                    <span class="badge badge-primary">Primary</span>
+                </div>
+                <div>
+                    <span class="badge badge-secondary">Secondary</span>
+                </div>
+                <div>
+                    <span class="badge badge-success">Success</span>
+                </div>
+            </div>
+        </li>
+        {/volist}
+
+        {$list->render()}
+
+        {else/}
+        暂无数据
+        {/if}
+    </ul>
+</div>
+{/block}
+
+{block name="cur_js"}
+<script>
+
+</script>
+
+{/block}

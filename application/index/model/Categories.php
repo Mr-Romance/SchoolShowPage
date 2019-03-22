@@ -72,4 +72,35 @@ class Categories extends Model
 
         return $categories;
     }
+
+    /**
+     * 获取所有的分类信息
+     *
+     * @return array
+     * @throws \think\exception\DbException
+     */
+    public static function getCategoriesGroup(){
+        // 此处有坑，费解
+        $first_cats=self::getAllFirstCategories();
+        $res_data=[];
+        if(!empty($first_cats)){
+            foreach($first_cats as $category){
+                $second_arr=[];
+                $second_cats=self::getAllSecondCategories($category->data['id']);
+                foreach($second_cats as $s_category){
+                    $second_arr[]=[
+                        'name'=>$s_category->data['name'],
+                        'id'=>$s_category->data['id']
+                        ];
+                }
+                $res_data[]=[
+                    'first_cat_name'=>$category->data['name'],
+                    'second_cat_arr'=>$second_arr
+                    ];
+            }
+        }
+
+        return $res_data;
+    }
+
 }

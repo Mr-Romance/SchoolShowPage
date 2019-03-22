@@ -6,55 +6,86 @@
             </tr>
             </thead>
             <tbody>
+            {if condition="!empty($cat_groups)"}
+            {volist name="cat_groups" id="vo"}
             <tr>
-                <th scope="row">1</th>
+                <th class="search_th">{$vo['first_cat_name']}</th>
                 <td>
                     <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-secondary active">
-                            <input type="checkbox" checked autocomplete="off"> 分类1
-                        </label>
-                        <label class="btn btn-secondary active">
-                            <input type="checkbox" autocomplete="off"> 分类22
-                        </label>
-                        <label class="btn btn-secondary active">
-                            <input type="checkbox" autocomplete="off"> 分类 3
-                        </label>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-secondary active">
-                            <input type="checkbox" checked autocomplete="off"> 分类1
-                        </label>
-                        <label class="btn btn-secondary active">
-                            <input type="checkbox" autocomplete="off"> 分类22
-                        </label>
-                        <label class="btn btn-secondary active">
-                            <input type="checkbox" autocomplete="off"> 分类 3
-                        </label>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary">
-                            <input type="checkbox" value="12" autocomplete="off"> 分类1
-                        </label>
-                        <label class="btn  btn-outline-info">
-                            <input type="checkbox" value="13" autocomplete="off"> 分类22
-                        </label>
+                        {php}$second_cat_arr=$vo['second_cat_arr']; {/php}
+                        {volist name="second_cat_arr" id="category"}
                         <label class="btn btn-outline-dark">
-                            <input type="checkbox" value="14" autocomplete="off"> 分类 3
+                            <input class="cat_checkbox" type="checkbox" value="{$category['id']}" autocomplete="off"
+                            {if condition="!empty($category_checked)"}
+                                   {if condition="in_array($category['id'],$category_checked)"} checked{/if}
+                                   checked{/if}
+                            >
+                            {$category['name']}
                         </label>
+                        {/volist}
                     </div>
+                </td>
+            </tr>
+            {/volist}
+            {/if}
+
+            {if condition="!empty($res_type)"}
+            <tr>
+                <th>资源类型</th>
+                <td>
+                    <div class="btn-group" data-toggle="buttons">
+                        {volist name="res_type" id="type"}
+                        <label class="btn btn-outline-danger">
+                            <input class="cat_checkbox" type="checkbox" value="{$type['id']}" autocomplete="off">
+                            {$type['name']}
+                        </label>
+                        {/volist}
+                    </div>
+                </td>
+            </tr>
+            {/if}
+            <tr>
+                <th>根据标题搜索</th>
+                <td>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="输入标题进行搜索">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <button type="button" class="btn btn-primary btn-lg btn-block">点击查询</button>
                 </td>
             </tr>
             </tbody>
         </table>
     </form>
 </div>
+
+<script>
+    var cat_id_arr = new Array();
+    $('.cat_checkbox').change(function () {
+        var the_cat_id = $(this).val();
+
+        if ($(this).is(':checked')) {
+            cat_id_arr.push(the_cat_id);
+            cat_id_arr=unique_array(cat_id_arr);
+        } else {
+            var index =  cat_id_arr.indexOf(the_cat_id);
+            cat_id_arr.splice(index, 1);
+        }
+    });
+
+    $("#")
+
+    /**
+     *  数组去除重复
+     *
+     * @param a
+     * @returns {T[]}
+     */
+    function unique_array(a) {
+        return a.concat().sort().filter(function (item, pos, ary) {
+            return !pos || item != ary[pos - 1];
+        });
+    }
+</script>

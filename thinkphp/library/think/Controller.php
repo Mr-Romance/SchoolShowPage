@@ -248,13 +248,13 @@ class Controller
     public function getLoginUser() {
         $user_id = Session::get('login_user_id');
         if (empty($user_id)) {
-            $this->success('请先登录', 'Common/showLogin');
+            $this->success('请先登录', '/login');
         }
         try {
             $user = Users::getUserById($user_id);
             return $user;
         } catch (Exception $exception) {
-            $this->success('请先登录', 'Common/showLogin');
+            $this->success('请先登录', '/login');
         }
 
     }

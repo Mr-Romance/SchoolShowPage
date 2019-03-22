@@ -28,6 +28,15 @@
     margin: 0 auto;
 }
 
+.search_th{
+    text-align:center;
+}
+
+.btn_search{
+    text-align: center;
+    margin:0 auto;
+}
+
 .login-menu {
     margin-left: 100px;
 }

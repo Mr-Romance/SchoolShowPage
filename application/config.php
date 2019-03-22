@@ -240,4 +240,14 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    // 资源分类配置项
+    'resource_type'=>[
+        ['id'=>1,'name'=>'图片'],
+        ['id'=>2,'name'=>'PDF'],
+        ['id'=>3,'name'=>'压缩包'],
+        ['id'=>4,'name'=>'视频'],
+        ['id'=>5,'name'=>'音频'],
+        ['id'=>6,'name'=>'其他'],
+    ],
 ];
