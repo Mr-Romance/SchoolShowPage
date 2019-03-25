@@ -16,9 +16,9 @@
                         {volist name="second_cat_arr" id="category"}
                         <label class="btn btn-outline-dark">
                             <input class="cat_checkbox" type="checkbox" value="{$category['id']}" autocomplete="off"
-                            {if condition="!empty($category_checked)"}
-                                   {if condition="in_array($category['id'],$category_checked)"} checked{/if}
-                                   checked{/if}
+                                   {if condition="!empty($category_checked)" }
+                                   {if condition="in_array($category['id'],$category_checked)" } checked{/if}
+                            {/if}
                             >
                             {$category['name']}
                         </label>
@@ -44,6 +44,17 @@
                 </td>
             </tr>
             {/if}
+
+            <tr>
+                <th>状态</th>
+                <td>
+                    <select class="form-control" name="type" id="res_type">
+                        <option value="0">全部状态</option>
+                        <option value="1">正常显示</option>
+                        <option value="2">禁用</option>
+                    </select>
+                </td>
+            </tr>
             <tr>
                 <th>根据标题搜索</th>
                 <td>
@@ -53,7 +64,7 @@
 
             <tr>
                 <td colspan="2">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">点击查询</button>
+                    <button type="button" id="search_btn" class="btn btn-primary btn-lg btn-block">点击查询</button>
                 </td>
             </tr>
             </tbody>
@@ -68,14 +79,27 @@
 
         if ($(this).is(':checked')) {
             cat_id_arr.push(the_cat_id);
-            cat_id_arr=unique_array(cat_id_arr);
+            cat_id_arr = unique_array(cat_id_arr);
         } else {
-            var index =  cat_id_arr.indexOf(the_cat_id);
+            var index = cat_id_arr.indexOf(the_cat_id);
             cat_id_arr.splice(index, 1);
         }
     });
 
-    $("#")
+    $("#search_btn").click(function () {
+        var search_title = $('#title').val();
+
+        $.post(
+            '/search_user_resource_list',
+            {
+                "search_cat_ids": cat_id_arr.toString(),
+                "search_title": search_title,
+            },
+            function (date) {
+                // window.location.href = "/user_resource_list";
+            }
+        );
+    });
 
     /**
      *  数组去除重复

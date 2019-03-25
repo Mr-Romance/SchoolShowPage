@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 use app\index\model\Users;
+use think\Config;
 use think\Controller;
 use think\Request;
 use think\Session;
@@ -27,6 +28,10 @@ class Index extends Controller
      * @return mixed
      */
     public function index() {
+        // 获取所有的主题信息
+        $subject=Config::get('resource_subject');
+        $this->assign('subject',$subject);
+
         return $this->fetch();
     }
 

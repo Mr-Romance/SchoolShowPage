@@ -25,17 +25,15 @@
         <img class="mr-3" src="{$vo.thumbnail}">
         <div class="media-body">
             <h5 class="mt-0 mb-1">{$vo.title}</h5>
+            <h6 class="mt-0 mb-1"><span>创建时间：</span>{$vo.create_at}</h6>
             {$vo.introduction}
         </div>
         <div>
             <div>
-                <span class="badge badge-primary">Primary</span>
+                <button type="button" class="btn btn-danger" id="delete_res" value="{$vo.id}">删除</button>
             </div>
             <div>
-                <span class="badge badge-secondary">Secondary</span>
-            </div>
-            <div>
-                <span class="badge badge-success">Success</span>
+                <button type="button" class="btn btn-primary" id="status_res" value="{$vo.id}">禁用</button>
             </div>
         </div>
     </li>
@@ -52,6 +50,35 @@
 
 {block name="cur_js"}
 <script>
+    // 删除文章
+    $('#delete_res').click(function(){
+        $.post(
+            '/delete_resource',
+            {'resource_id':$(this).val()},
+            function(data){
+                if(100==data.code){
+                    dialog.successTo(data.msg,'/user_resource_list');
+                }else{
+                    dialog.showError(data.msg);
+                }
+            }
+        );
+    });
+
+    // 禁用文章
+    $('#delete_res').click(function(){
+        $.post(
+            '/status_resource',
+            {'resource_id':$(this).val()},
+            function(data){
+                if(100==data.code){
+                    dialog.successTo(data.msg,'/user_resource_list');
+                }else{
+                    dialog.showError(data.msg);
+                }
+            }
+        );
+    });
 
 </script>
 

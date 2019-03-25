@@ -74,8 +74,13 @@ class Resource extends Controller
      * @throws \think\exception\DbException
      */
     public function showAddResource() {
+        // 获取所有的一级分类
         $first_categories = Categories::getAllFirstCategories();
         $this->assign('first_categories', $first_categories);
+
+        // 获取所有的主题配置
+        $subject = Config::get('resource_subject');
+        $this->assign('subject', $subject);
 
         return $this->fetch();
     }
@@ -179,37 +184,23 @@ class Resource extends Controller
     /**
      *  展示用户已经发布资源的列表
      *
-     * @param Request $request
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function showUserResourceList(Request $request) {
-        $param = $request->param();
-        if (empty($param)) {
-            $param = [];
+    public function showUserResourceList() {
+        $search_param = [];
+
+        if (Session::has('param.search_category')) {
+            $search_param['res_category'] = explode(',', Session::get('param.search_category'));
         }
-
-        if (!empty($param['search_cat_ids'])) {
-            // 把字符串打散为数组
-            $param['res_category'] = explode(',', $param['search_cat_ids']);
-
-            Session::set('param.res_category', $param['res_category']);
+        if (Session::has('param.search_type')) {
+            $search_param['res_type'] = explode(',', Session::get('param.search_type'));
         }
-        if (!empty($param['res_type'])) {
-            $param['res_type'] = explode(',', $param['res_type']);
-
-            Session::set('param.res_type', $param['res_type']);
+        if (Session::has('search_title')) {
+            $search_param['res_title'] = Session::get('search_title');
         }
 
         $user = $this->getLoginUser();
-
-        $search_param = [];
-        if (Session::has('param.res_category')) {
-            $search_param['res_category'] = Session::get('param.res_category');
-        }
-        if (Session::has('param.res_type')) {
-            $search_param['res_type'] = Session::get('param.res_type');
-        }
 
         $list = Resources::getResourcesList($search_param, $user->id);
 
@@ -227,8 +218,6 @@ class Resource extends Controller
             $this->assign('res_type', $res_type);
         }
         if (!empty($search_param['res_type'])) {
-            var_dump($search_param['res_type']);
-            exit;
             $this->assign('type_checked', $search_param['res_type']);
         }
         if (!empty($search_param['res_category'])) {
@@ -236,8 +225,7 @@ class Resource extends Controller
         }
         $this->assign('list', $list);
 
-        return $this->fetch();
-
+        return $this->fetch('show_user_resource_list');
     }
 
 
@@ -277,44 +265,49 @@ class Resource extends Controller
      */
     public function searchUserResourceList(Request $request) {
         $param = $request->param();
-        if (empty($param)) {
-            $param = [];
-        }
-        if (!empty($param)) {
-            if (!empty($param['search_cat_ids'])) {
-                // 把字符串打散为数组
-                $param['res_category'] = explode(',', $param['search_cat_ids']);
-            }
-            if (!empty($param['res_type'])) {
-                $param['res_type'] = explode(',', $param['res_type']);
-            }
-        }
 
-        $user = $this->getLoginUser();
+        $search_param = [];
 
-        $list = Resources::getResourcesList($param, $user->id);
-
-        // 获取所有的一级分类
-        $cat_groups = Categories::getCategoriesGroup();
-        if ($cat_groups) {
-            $this->assign('cat_groups', $cat_groups);
+        if (!empty($param['search_cat_ids'])) {
+            // 把字符串打散为数组
+            $search_param['res_category'] = explode(',', $param['search_cat_ids']);
+            // 这里存入的，其实是一个字符串，tp——session不支持3维数组
+            Session::set('param.search_category', $param['search_cat_ids']);
+        } else {
+            Session::delete('param.search_category');
         }
 
-        // 资源类型信息
-        $res_type = Config::get('resource_type');
-        if (!empty($res_type)) {
-            $this->assign('res_type', $res_type);
+        if (!empty($param['res_type'])) {
+            $search_param['res_type'] = explode(',', $param['search_type_ids']);
+            Session::set('param.search_type', $param['search_type_ids']);
+        } else {
+            Session::delete('param.search_type');
         }
-
-        $this->assign('list', $list);
-        return $this->fetch();
+        if (!empty($param['search_title'])) {
+            $search_param['res_title'] = $param['search_title'];
+            Session::set('search_title', $param['search_title']);
+        } else {
+            Session::delete('search_title');
+        }
     }
 
     /**
      *  清除查询缓存
      */
-    public function deleteSearchSession(){
-        Session::delete('param.res_category');
-        Session::delete('param.res_type');
+    public function deleteSearchSession() {
+        Session::delete('param.search_category');
+        Session::delete('param.search_type');
+    }
+
+    /**
+     * @param Request $request
+     * @return \think\response\Json
+     */
+    public function deleteResource(Request $request){
+        $id=$request->param('resource_id');
+        if(empty($id) || $id<=0){
+            return $this->errorResponse('请求参数不合法');
+        }
+
     }
 }

@@ -58,18 +58,17 @@
     </div>
 
     <!--导航部分-->
-    <div class="top-nav">
+    <div class="top-nav bg-dark">
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
                 <div class="top-nav-btns">
-                    <button class="btn btn-outline-success" type="button">首页</button>
-                    <button class="btn btn-outline-secondary" type="button">Smaller button</button>
-                    <button class="btn btn-outline-secondary" type="button">Smaller button</button>
-                    <button class="btn btn-outline-secondary" type="button">Smaller button</button>
-                    <button class="btn btn-outline-secondary" type="button">Smaller button</button>
-                    <button class="btn btn-outline-secondary" type="button">Smaller button</button>
-                    <button class="btn btn-outline-secondary" type="button">Smaller button</button>
+                    <a class="btn btn-outline-success" type="button" href="/">首页</a>
+                    {if condition="!empty($subject)"}
+                    {volist name="subject" id="vo"}
+                    <a class="btn btn-outline-secondary" type="button" href="/">{$vo['name']}</a>
+                    {/volist}
+                    {/if}
                 </div>
             </div>
             <div class="col-md-1"></div>
