@@ -128,4 +128,14 @@ class Index extends Controller
             Session::delete('search_title');
         }
     }
+
+    /**
+     *  按照主题进行展示
+     *
+     * @return mixed
+     */
+    public function subjectIndex(){
+
+        return $this->fetch();
+    }
 }
