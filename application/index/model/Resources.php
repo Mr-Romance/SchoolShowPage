@@ -36,13 +36,13 @@ class Resources extends Model
      */
     public static function getResourcesList($search_data = [], $user_id = 0) {
         $base_query = Db::table('resources');
-        if (!empty($search_data['res_title'])) {
+        if (!empty($search_data['res_title']) && isset($search_data['res_title'])) {
             $base_query = $base_query->where('title', 'like', $search_data['res_title']);
         }
-        if (!empty($search_data['res_category'])) {
+        if (!empty($search_data['res_category']) && isset($search_data['res_category'])) {
             $base_query = $base_query->where('category', 'in', $search_data['res_category']);
         }
-        if (!empty($search_data['res_type'])) {
+        if (!empty($search_data['res_type']) && isset($search_data['res_type'])) {
             $base_query = $base_query->where('type', 'in', $search_data['res_type']);
         }
         if (!empty($user_id)) {
@@ -50,7 +50,7 @@ class Resources extends Model
         }
 
         // 分页
-        $list = $base_query->paginate(6);
+        $list = $base_query->paginate(8);
 
         return $list;
     }

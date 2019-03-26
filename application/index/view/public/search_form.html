@@ -74,6 +74,14 @@
 
 <script>
     var cat_id_arr = new Array();
+    var url = '';
+    var url_category = $('#jump_url').val();
+    if (url_category) {
+        url = url_category;
+    }else{
+        url='/user_resource_list';
+    }
+
     $('.cat_checkbox').change(function () {
         var the_cat_id = $(this).val();
 
@@ -96,7 +104,7 @@
                 "search_title": search_title,
             },
             function (date) {
-                // window.location.href = "/user_resource_list";
+                window.location.href = url;
             }
         );
     });

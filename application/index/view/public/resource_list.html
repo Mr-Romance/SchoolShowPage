@@ -1,0 +1,29 @@
+<div>
+    <ul class="list-unstyled">
+        {if condition="!empty($list)"}
+        {volist name="list" id="vo"}
+        <li class="media">
+            <img class="mr-3" src="{$vo.thumbnail}">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">{$vo.title}</h5>
+                <h6 class="mt-0 mb-1"><span>创建时间：</span>{$vo.create_at}</h6>
+                {$vo.introduction}
+            </div>
+            <div>
+                <div>
+                    <button type="button" class="btn btn-danger" id="delete_res" value="{$vo.id}">删除</button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" id="status_res" value="{$vo.id}">禁用</button>
+                </div>
+            </div>
+        </li>
+        {/volist}
+
+        {$list->render()}
+
+        {else/}
+        暂无数据
+        {/if}
+    </ul>
+</div>

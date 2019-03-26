@@ -200,6 +200,7 @@ class Resource extends Controller
             $search_param['res_title'] = Session::get('search_title');
         }
 
+
         $user = $this->getLoginUser();
 
         $list = Resources::getResourcesList($search_param, $user->id);
@@ -254,41 +255,6 @@ class Resource extends Controller
         }
 
         return $this->successResponse(100, '获取分类成功', $res_data);
-    }
-
-    /**
-     *  根据搜索条件，显示用户资源信息
-     *
-     * @param Request $request
-     * @return mixed
-     * @throws \think\exception\DbException
-     */
-    public function searchUserResourceList(Request $request) {
-        $param = $request->param();
-
-        $search_param = [];
-
-        if (!empty($param['search_cat_ids'])) {
-            // 把字符串打散为数组
-            $search_param['res_category'] = explode(',', $param['search_cat_ids']);
-            // 这里存入的，其实是一个字符串，tp——session不支持3维数组
-            Session::set('param.search_category', $param['search_cat_ids']);
-        } else {
-            Session::delete('param.search_category');
-        }
-
-        if (!empty($param['res_type'])) {
-            $search_param['res_type'] = explode(',', $param['search_type_ids']);
-            Session::set('param.search_type', $param['search_type_ids']);
-        } else {
-            Session::delete('param.search_type');
-        }
-        if (!empty($param['search_title'])) {
-            $search_param['res_title'] = $param['search_title'];
-            Session::set('search_title', $param['search_title']);
-        } else {
-            Session::delete('search_title');
-        }
     }
 
     /**

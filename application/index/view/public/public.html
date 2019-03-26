@@ -15,71 +15,7 @@
 </head>
 <body class="container">
 <!--头部导航-->
-<div class="top">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <div class="collapse navbar-collapse" id="navbarText">
-            <a class="navbar-brand school-title" href="#">家里蹲大学资源库</a>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">非常热门 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">非常热门</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">非常热门</a>
-                </li>
-            </ul>
-
-            <div class="top-search">
-                <nav class="navbar navbar-light bg-light ">
-                    <form class="form-inline">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                资源类型
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                        <input class="form-control mr-sm-2" type="search" placeholder="输入资源名称搜索" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-
-                        {if condition="!empty($user)"}
-                        <div class="dropdown show login-menu">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                {$user->name}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="/user_page">个人主页</a>
-                                <a class="dropdown-item" href="/logout">退出</a>
-                            </div>
-                        </div>
-                        {else /}
-                        <div class="dropdown show login-menu">
-                            <a class="btn btn-secondary dropdown-toggle" href="/login" role="button"
-                               id="dropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                登录
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="/register">注册</a>
-                            </div>
-                        </div>
-                        {/if}
-
-                    </form>
-                </nav>
-            </div>
-        </div>
-    </nav>
-</div>
+{include file="../application/index/view/public/public_top.html"}
 
 {block name="main"}
 主要部分

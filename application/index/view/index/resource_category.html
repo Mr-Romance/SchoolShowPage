@@ -1,262 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>资源展示首页</title>
-    <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/css/resource_category.css">
-    <script src="/static/jQuery331.js"></script>
-    <script src="/static/popper.js"></script>
-    <script src="/static/layer/layer.js"></script>
-    <script src="/static/dialog.js"></script>
-    <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
-</head>
-<body>
-<div class="container">
-    <!--头部导航-->
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <div class="collapse navbar-collapse" id="navbarText">
-            <a class="navbar-brand school-title" href="#">家里蹲大学资源库</a>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">非常热门 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">非常热门</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">非常热门</a>
-                </li>
-            </ul>
+{extend name="public:public"}
+{block name="cur_css"}
+<style>
+    .list-unstyled img{
+        width:240px;
+        height:130px;
+    }
 
-            <div class="top-search">
-                <nav class="navbar navbar-light bg-light ">
-                    <form class="form-inline">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                资源类型
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                        <input class="form-control mr-sm-2" type="search" placeholder="输入资源名称搜索" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+    .media{
+        margin-bottom: 5px;
+        border:1px #0c5460 solid;
+    }
 
-                        {if condition="!empty($user)"}
-                        <div class="dropdown show login-menu">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                {$user->name}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="/user_page">个人主页</a>
-                                <a class="dropdown-item" href="/logout">退出</a>
-                            </div>
-                        </div>
-                        {else /}
-                        <div class="dropdown show login-menu">
-                            <a class="btn btn-secondary dropdown-toggle" href="/login" role="button" id="dropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                登录
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="/register">注册</a>
-                            </div>
-                        </div>
-                        {/if}
-                    </form>
-                </nav>
-            </div>
-        </div>
-    </nav>
+    .statics_info{
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+{/block}
 
-    <div class="body">
-        <!--资源分类-->
-        <div class="categories">
-            <div class="row">
-                <div class="col-md-1 col-lg-1"></div>
-                <div class="col-md-10 col-lg-10">
-                    <form id="search_form">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>
-                                    <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-secondary active">
-                                            <input type="checkbox" checked autocomplete="off"> 分类1
-                                        </label>
-                                        <label class="btn btn-secondary active">
-                                            <input type="checkbox" autocomplete="off"> 分类22
-                                        </label>
-                                        <label class="btn btn-secondary active">
-                                            <input type="checkbox" autocomplete="off"> 分类 3
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>
-                                    <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-secondary active">
-                                            <input type="checkbox" checked autocomplete="off"> 分类1
-                                        </label>
-                                        <label class="btn btn-secondary active">
-                                            <input type="checkbox" autocomplete="off"> 分类22
-                                        </label>
-                                        <label class="btn btn-secondary active">
-                                            <input type="checkbox" autocomplete="off"> 分类 3
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>
-                                    <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-primary">
-                                            <input type="checkbox" value="12" autocomplete="off"> 分类1
-                                        </label>
-                                        <label class="btn  btn-outline-info">
-                                            <input type="checkbox" value="13" autocomplete="off"> 分类22
-                                        </label>
-                                        <label class="btn btn-outline-dark">
-                                            <input type="checkbox" value="14" autocomplete="off"> 分类 3
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-                <div class="col-md-1 col-lg-1"></div>
-            </div>
-        </div>
+{block name="main"}
 
-        <!--内容列表部分-->
-        <div class="cat-lists">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <ul class="list-unstyled">
-                                <li class="media">
-                                    <img class="mr-3" src="..." alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1">List-based media object</h5>
-                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                                        sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra
-                                        turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
-                                        felis in faucibus.
-                                    </div>
-                                </li>
-                                <li class="media my-4">
-                                    <img class="mr-3" src="..." alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1">List-based media object</h5>
-                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                                        sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra
-                                        turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
-                                        felis in faucibus.
-                                    </div>
-                                </li>
-                                <li class="media">
-                                    <img class="mr-3" src="..." alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1">List-based media object</h5>
-                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                                        sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra
-                                        turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
-                                        felis in faucibus.
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="main-info">
-                                <div>
-                                    <span class="badge badge-primary">Primary</span>
-                                </div>
-                                <div>
-                                    <span class="badge badge-secondary">Secondary</span>
-                                </div>
-                                <div>
-                                    <span class="badge badge-success">Success</span>
-                                </div>
-                            </div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <input type="hidden" id="jump_url" value="/resource_category">
+{include file="../application/index/view/public/search_form.html"}
 
-                            <div class="main-info">
-                                <div>
-                                    <span class="badge badge-primary">Primary</span>
-                                </div>
-                                <div>
-                                    <span class="badge badge-secondary">Secondary</span>
-                                </div>
-                                <div>
-                                    <span class="badge badge-success">Success</span>
-                                </div>
-                            </div>
-
-                            <div class="main-info">
-                                <div>
-                                    <span class="badge badge-primary">Primary</span>
-                                </div>
-                                <div>
-                                    <span class="badge badge-secondary">Secondary</span>
-                                </div>
-                                <div>
-                                    <span class="badge badge-success">Success</span>
-                                </div>
-                            </div>
-                        </div>
+        <div>
+            <ul class="list-unstyled">
+                {if condition="!empty($list)"}
+                {volist name="list" id="vo"}
+                <li class="media">
+                    <img class="mr-3" src="{$vo.thumbnail}">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">{$vo.title}</h5>
+                        <h6 class="mt-0 mb-1"><span>创建时间：</span>{$vo.create_at}</h6>
+                        {$vo.introduction}
                     </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
+                    <div class="statics_info">
+                        <h6>下载量： <span class="badge badge-secondary">100</span></h6>
+                        <h6>阅读量： <span class="badge badge-secondary">100</span></h6>
+                    </div>
+                </li>
+                {/volist}
+
+                {$list->render()}
+
+                {else/}
+                暂无数据
+                {/if}
+            </ul>
         </div>
     </div>
 
-    <div class="footer">
-        <div class="row">
-            <div class="col" style="width:100%;height:50px;background-color: #1d2124"></div>
-        </div>
-    </div>
-
-
+    <div class="col-md-1"></div>
 </div>
 
-<script>
-    var check_box = [];
-    $('input[type="checkbox"]').change(function () {
+{/block}
 
-        // this.blur();
-        // this.focus();
-        // alert($(this).val());
-        // return ;
-        $('input[type="checkbox"]').each(function () {
-            if ($(this).attr('checked')) {
-                $(this).setAttribute('checked');
-                alert($(this).val())
-                return;
-
-                check_box.push($(this).val());
-                console.log(check_box);
-            }
-        });
-    });
-</script>
-</body>
-</html>
+{block name="cur_js"}
+{/block}

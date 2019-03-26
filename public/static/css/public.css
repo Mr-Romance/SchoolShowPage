@@ -49,6 +49,16 @@
     margin: 10px;
 }
 
+.list-unstyled img{
+    width:240px;
+    height:130px;
+}
+
+.media{
+    margin-bottom: 5px;
+    border:1px #0c5460 solid;
+}
+
 .footer {
     margin-top: 10px;
 }
