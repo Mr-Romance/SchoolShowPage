@@ -269,11 +269,36 @@ class Resource extends Controller
      * @param Request $request
      * @return \think\response\Json
      */
-    public function deleteResource(Request $request){
-        $id=$request->param('resource_id');
-        if(empty($id) || $id<=0){
+    public function deleteResource(Request $request) {
+        $id = $request->param('resource_id');
+        if (empty($id) || $id <= 0) {
             return $this->errorResponse('请求参数不合法');
         }
+
+    }
+
+    /**
+     * @throws \think\exception\DbException
+     */
+    public function categoryList() {
+        $category_list = Categories::getCategoriesGroup();
+        $this->assign('category_list', $category_list);
+        return $this->fetch();
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function deleteCategory(Request $request){
+        $category_id_str=$request->param('category_ids');
+        if(empty($category_id_str)){
+            return $this->errorResponse('请选择具体的分类');
+        }
+
+        $category_arr= explode(',', $category_id_str);
+
+        // 执行删除
+
 
     }
 }

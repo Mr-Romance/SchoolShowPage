@@ -9,6 +9,7 @@
 namespace app\index\model;
 
 
+use think\Exception;
 use think\Model;
 
 class Categories extends Model
@@ -101,6 +102,15 @@ class Categories extends Model
         }
 
         return $res_data;
+    }
+
+    public function deleteCategory($id_arr){
+        if(empty($id_arr)){
+            throw new Exception('没有要删除的分类');
+        }
+
+        
+
     }
 
 }
