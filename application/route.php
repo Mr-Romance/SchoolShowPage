@@ -34,6 +34,7 @@ Route::get('resource_index', 'index/index/resourceIndex');
 Route::get('resource_category', 'index/index/resourceCategory');
 Route::get('subject_index','index/index/subjectIndex');
 Route::get('index_resource_show','index/index/indexShowResource');
+Route::get('zyk_resource_show','index/index/zykResourceShow');
 
 /**
  * 用户相关操作的路由
@@ -54,6 +55,8 @@ Route::post('add_resource', 'index/resource/addResource');
 Route::get('user_resource_list','index/resource/showUserResourceList');
 Route::post('search_user_resource_list','index/index/searchUserResourceList');
 Route::get('delete_search_session','index/resource/deleteSearchSession');
+Route::get('show_user_resource_detail','index/resource/showUserResourceDetail');
+Route::get('manage_resource_list','index/resource/manageResourceList');
 
 
 Route::post('add_category', 'index/resource/addCategory');

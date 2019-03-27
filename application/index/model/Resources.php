@@ -50,6 +50,14 @@ class Resources extends Model
         if (!empty($user_id)) {
             $base_query = $base_query->where('user_id', $user_id);
         }
+        if (!empty($search_data['order_type'])) {
+            if (1 == $search_data['order_type']) {
+                $base_query = $base_query->order('id', 'desc');
+            } elseif (2 == $search_data['order_type']) {
+                $base_query = $base_query->order('id', 'asc');
+            }
+        }
+
 
         // 分页
         $list = $base_query->paginate(8);
@@ -69,8 +77,8 @@ class Resources extends Model
      */
     public static function getDataBySubject($subject_id, $limit)
     {
-        $resource=new Resources();
-        $data = $resource->where('subject', $subject_id)->limit($limit)->order('id','desc')->select();
+        $resource = new Resources();
+        $data = $resource->where('subject', $subject_id)->limit($limit)->order('id', 'desc')->select();
         $ret_data = [];
         // 把集合转换成数组
         foreach ($data as $item) {
@@ -90,9 +98,10 @@ class Resources extends Model
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function getTopResources($limit){
-        $resource=new Resources();
-        $data=$resource->limit($limit)->order('id','desc')->select();
+    public static function getTopResources($limit)
+    {
+        $resource = new Resources();
+        $data = $resource->limit($limit)->order('id', 'desc')->select();
 
         $ret_data = [];
         // 把集合转换成数组
@@ -101,9 +110,12 @@ class Resources extends Model
             $tem['id'] = $item->id;
             $tem['subject'] = $item->subject;
             $tem['title'] = $item->title;
+            $tem['thumb'] = $item->thumbnail;
             $ret_data[] = $tem;
         }
 
         return $ret_data;
     }
+
+
 }

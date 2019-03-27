@@ -31,12 +31,14 @@
 
             {if condition="!empty($res_type)"}
             <tr>
-                <th>资源类型</th>
+                <th class="search_th">资源类型</th>
                 <td>
                     <div class="btn-group" data-toggle="buttons">
                         {volist name="res_type" id="type"}
                         <label class="btn btn-outline-danger">
-                            <input class="cat_checkbox" type="checkbox" value="{$type['id']}" autocomplete="off">
+                            <input class="type_checkbox" type="checkbox" value="{$type['id']}" autocomplete="off"
+                            {if condition="!empty($type_checked)"}
+                                {if condition="in_array($type['id'],$type_checked)"} checked {/if} {/if}>
                             {$type['name']}
                         </label>
                         {/volist}
@@ -46,17 +48,17 @@
             {/if}
 
             <tr>
-                <th>状态</th>
+                <th class="search_th">排序方式</th>
                 <td>
-                    <select class="form-control" name="type" id="res_type">
-                        <option value="0">全部状态</option>
-                        <option value="1">正常显示</option>
-                        <option value="2">禁用</option>
+                    <select class="form-control" name="type" id="order_type">
+                        <option value="1">显示最早</option>
+                        <option value="2">显示之前</option>
                     </select>
                 </td>
             </tr>
+
             <tr>
-                <th>根据标题搜索</th>
+                <th class="search_th">根据标题搜索</th>
                 <td>
                     <input type="text" class="form-control" id="title" name="title" placeholder="输入标题进行搜索">
                 </td>
@@ -74,6 +76,7 @@
 
 <script>
     var cat_id_arr = new Array();
+    var type_id_arr=new Array();
     var url = '';
     var url_category = $('#jump_url').val();
     if (url_category) {
@@ -84,7 +87,6 @@
 
     $('.cat_checkbox').change(function () {
         var the_cat_id = $(this).val();
-
         if ($(this).is(':checked')) {
             cat_id_arr.push(the_cat_id);
             cat_id_arr = unique_array(cat_id_arr);
@@ -94,14 +96,27 @@
         }
     });
 
+    $('.type_checkbox').change(function () {
+        var the_type_id = $(this).val();
+        if ($(this).is(':checked')) {
+            type_id_arr.push(the_type_id);
+            type_id_arr = unique_array(type_id_arr);
+        } else {
+            var index = type_id_arr.indexOf(the_type_id);
+            type_id_arr.splice(index, 1);
+        }
+    });
+
     $("#search_btn").click(function () {
         var search_title = $('#title').val();
-
+        var order_type=$('#order_type').val();
         $.post(
             '/search_user_resource_list',
             {
                 "search_cat_ids": cat_id_arr.toString(),
                 "search_title": search_title,
+                "search_type_ids":type_id_arr.toString(),
+                "order_type":order_type,
             },
             function (date) {
                 window.location.href = url;

@@ -22,7 +22,9 @@
     {if condition="!empty($list)"}
         {volist name="list" id="vo"}
     <li class="media">
+        <a href="/show_user_resource_detail?id={$vo.id}">
         <img class="mr-3" src="{$vo.thumbnail}">
+        </a>
         <div class="media-body">
             <h5 class="mt-0 mb-1">{$vo.title}</h5>
             <h6 class="mt-0 mb-1"><span>创建时间：</span>{$vo.create_at}</h6>

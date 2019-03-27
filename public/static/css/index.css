@@ -110,6 +110,12 @@
 .column-fixed img{
     width:240px;
     height:130px;
+    text-align: center;
+}
+
+.column-fixed .tui_jian_title{
+    font-size: 20px;
+    margin-left: 30px;
 }
 
 .footer{

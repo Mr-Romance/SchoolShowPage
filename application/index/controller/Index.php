@@ -51,7 +51,7 @@ class Index extends Controller
         $this->assign('dian_xing_info',$dian_xing_info);
         $this->assign('dx_subject_id',3);
 
-        $zong_jie_info=Resources::getDataBySubject(4,3);
+        $zong_jie_info=Resources::getDataBySubject(4,4);
         $this->assign('zong_jie_info',$zong_jie_info);
         $this->assign('zj_subject_id',4);
 
@@ -70,11 +70,44 @@ class Index extends Controller
     /**
      *  资源展示首页
      *
-     * * @param Request $request
+     * *
+     * @param Request $request
      * @return mixed
+     * @throws \think\exception\DbException
      */
     public function resourceIndex(Request $request)
     {
+        $recomend_resource_info= Resources::where('status',1)->order('sort','desc')->paginate(3);
+        $this->assign('recomend_resource_info',$recomend_resource_info);
+
+        $new_resource_info= Resources::where('status',1)->order('id','desc')->paginate(4);
+        $this->assign('new_resource_info',$new_resource_info);
+
+        $start_resource_info=Resources::where('status',1)->order('user_id','asc')->paginate(4);
+        $this->assign('start_resource_info',$start_resource_info);
+
+        // 按照分类获取资源，获取前4名分类
+        $top_category=Categories::order('sort','desc')->paginate(4);
+        $category_resource_info=[];
+
+        $cat_one=Resources::where('category',$top_category[0]->id)->order('id','desc')->paginate(4);
+        $this->assign('cat_one',$cat_one);
+        $this->assign('cat_one_name',$top_category[0]->name);
+
+        $cat_two=Resources::where('category',$top_category[1]->id)->order('id','desc')->paginate(4);
+        $this->assign('cat_two',$cat_two);
+        $this->assign('cat_two_name',$top_category[1]->name);
+
+        $cat_three=Resources::where('category',$top_category[2]->id)->order('id','desc')->paginate(4);
+        $this->assign('cat_three',$cat_three);
+        $this->assign('cat_three_name',$top_category[2]->name);
+
+        $cat_four=Resources::where('category',$top_category[3]->id)->order('id','desc')->paginate(4);
+        $this->assign('cat_four',$cat_four);
+        $this->assign('cat_four_name',$top_category[3]->name);
+
+        $top_four_teacher=Users::where('status',1)->order('id','asc')->paginate(4);
+        $this->assign('top_four_teacher',$top_four_teacher);
 
         return $this->fetch();
     }
@@ -98,6 +131,9 @@ class Index extends Controller
         }
         if (Session::has('search_title')) {
             $search_param['res_title'] = Session::get('search_title');
+        }
+        if(Session::has('order_type')){
+            $search_param['order_type'] = Session::get('order_type');
         }
 
         // 显示所有
@@ -124,6 +160,9 @@ class Index extends Controller
         }
         $this->assign('list', $list);
 
+        $page=$list->render();
+        $this->assign('page',$page);
+
         return $this->fetch();
     }
 
@@ -136,7 +175,6 @@ class Index extends Controller
     public function searchUserResourceList(Request $request)
     {
         $param = $request->param();
-
         $search_param = [];
 
         if (!empty($param['search_cat_ids'])) {
@@ -148,7 +186,7 @@ class Index extends Controller
             Session::delete('param.search_category');
         }
 
-        if (!empty($param['res_type'])) {
+        if (!empty($param['search_type_ids'])) {
             $search_param['res_type'] = explode(',', $param['search_type_ids']);
             Session::set('param.search_type', $param['search_type_ids']);
         } else {
@@ -159,6 +197,12 @@ class Index extends Controller
             Session::set('search_title', $param['search_title']);
         } else {
             Session::delete('search_title');
+        }
+        if(!empty($param['order_type'])){
+            $search_param['order_type']=$param['order_type'];
+            Session::set('order_type',$param['order_type']);
+        }else{
+            Session::delete('order_type');
         }
     }
 
@@ -214,6 +258,25 @@ class Index extends Controller
 
         $resource=Resources::get($id);
         $this->assign('resource',$resource);
+        return $this->fetch();
+    }
+
+    /**
+     *  资源库首页显示详情
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function zykResourceShow(Request $request){
+        $res_id=$request->param('id');
+
+        $resource=Resources::get($res_id);
+        $this->assign('resource',$resource);
+
+        $user=Users::get($resource->user_id);
+        $this->assign('user',$user);
+
         return $this->fetch();
     }
 }

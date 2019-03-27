@@ -1,0 +1,38 @@
+{extend name="public:public_admin"}
+{block name="cur_css"}
+<script src="/static/jquery.media.js"></script>
+<script>
+    $(function() {
+        $('a.media').media({width:800, height:800});
+        $('a.mediase').media({width:800, height:800});
+    });
+</script>
+<style>
+    .list-unstyled img{
+        width:240px;
+        height:130px;
+    }
+
+    .media{
+        margin-bottom: 5px;
+        border:1px #0c5460 solid;
+    }
+</style>
+{/block}
+
+{block name="right-content"}
+<div class="resource_title">
+    <h5 class="title">{$resource->title}<h5>
+                        <span>上传时间：{$resource->create_at}<span>
+</div>
+<div class="panel-body">
+    <a class="media" href="{$resource->src}"></a>
+</div>
+{/block}
+
+{block name="cur_js"}
+<script>
+
+</script>
+
+{/block}

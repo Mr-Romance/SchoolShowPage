@@ -15,6 +15,11 @@
         margin-left: 10px;
         margin-bottom: 10px;
     }
+
+    .page{
+        margin:0 auto;
+        font-size: 15px;
+    }
 </style>
 {/block}
 
@@ -43,8 +48,9 @@
                     </div>
                 </li>
                 {/volist}
-
-                {$list->render()}
+                <div class="page">
+                {$page}
+                </div>
 
                 {else/}
                 暂无数据

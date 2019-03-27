@@ -40,6 +40,12 @@
     float:left;
 }
 
+
+.total-statics span{
+    color:#000000;
+    font-size: 50px;
+}
+
 .recommend img {
     width:180px;
     height: 202px;

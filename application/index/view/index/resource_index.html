@@ -11,10 +11,10 @@
     </div>
 </div>
 
-<div class="total-statics">
-    <p>资源数数：100</p>
-    <p>资源总大小：100G</p>
-</div>
+<!--<div class="total-statics">-->
+    <!--<span class="total-statics-text">资源数数：100</span>-->
+    <!--<span class="total-statics-text">资源总大小：100G</span>-->
+<!--</div>-->
 
 <div class="content">
     <div class="recommend">
@@ -25,33 +25,18 @@
                     <div class="col-md-8 col-sm-8">
                         <div><h3>最新推荐</h3></div>
                         <div class="row">
+                            {volist name="recomend_resource_info" id="vo"}
                             <div class="col">
                                 <div class="recommend-rec">
                                     <div>
-                                        <img src="/static/imgs/column.jpg">
-                                        <p>xxx</p>
-                                        <p>0o00o</p>
+                                        <a href="/zyk_resource_show?id={$vo->id}">
+                                        <img src="{$vo->thumbnail}">
+                                        </a>
+                                        <p>{$vo->title}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="recommend-rec">
-                                    <div>
-                                        <img src="/static/imgs/column.jpg">
-                                        <p>xxx</p>
-                                        <p>0o00o</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="recommend-rec">
-                                    <div>
-                                        <img src="/static/imgs/column.jpg">
-                                        <p>xxx</p>
-                                        <p>0o00o</p>
-                                    </div>
-                                </div>
-                            </div>
+                            {/volist}
 
                         </div>
                     </div>
@@ -61,18 +46,12 @@
                             <div><h3>最新上传</h3></div>
                             <div class="newest-rec">
                                 <ul class="list-group">
+                                    {volist name="new_resource_info" id="vo"}
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Cras justo odio
-                                        <span class="badge badge-primary badge-pill">14</span>
+                                        <a href="/zyk_resource_show?id={$vo->id}"> {$vo->title}</a>/
+                                        <span class="badge badge-primary badge-pill">{$vo->create_at}</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Dapibus ac facilisis in
-                                        <span class="badge badge-primary badge-pill">2</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Morbi leo risus
-                                        <span class="badge badge-primary badge-pill">1</span>
-                                    </li>
+                                    {/volist}
                                 </ul>
                             </div>
                         </div>
@@ -87,44 +66,20 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class='col-md-10'>
-                <div><h3>视频资源</h3></div>
+                <div><h3>明星资源</h3></div>
                 <div class="row">
+                    {volist name="start_resource_info" id="vo"}
                     <div class="col">
                         <div class="video-rec">
                             <div>
-                                <img src="/static/imgs/column.jpg">
-                                <p>xxx</p>
-                                <p>0o00o</p>
+                                <a href="/zyk_resource_show?id={$vo->id}">
+                                <img src="{$vo->thumbnail}">
+                                </a>
+                                <p>{$vo->title}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="video-rec">
-                            <div>
-                                <img src="/static/imgs/column.jpg">
-                                <p>xxx</p>
-                                <p>0o00o</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="video-rec">
-                            <div>
-                                <img src="/static/imgs/column.jpg">
-                                <p>xxx</p>
-                                <p>0o00o</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="video-rec">
-                            <div>
-                                <img src="/static/imgs/column.jpg">
-                                <p>xxx</p>
-                                <p>0o00o</p>
-                            </div>
-                        </div>
-                    </div>
+                    {/volist}
                 </div>
             </div>
             <div class="col-md-1"></div>
@@ -135,42 +90,38 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <div><h3>热门资源</h3></div>
+                <div><h3>热门专区</h3></div>
                 <div class="row">
                     <div class="col">
                         <ul class="list-group">
-                            <li class="list-group-item active">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            <li class="list-group-item active">{$cat_one_name}</li>
+                            {volist name="cat_one" id="vo"}
+                            <li class="list-group-item"><a href="/zyk_resource_show?id={$vo->id}">{$vo->title}</a></li>
+                            {/volist}
                         </ul>
                     </div>
                     <div class="col">
                         <ul class="list-group">
-                            <li class="list-group-item active">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            <li class="list-group-item active">{$cat_two_name}</li>
+                            {volist name="cat_two" id="vo"}
+                            <li class="list-group-item"><a href="/zyk_resource_show?id={$vo->id}">{$vo->title}</a></li>
+                            {/volist}
                         </ul>
                     </div>
                     <div class="col">
                         <ul class="list-group">
-                            <li class="list-group-item active">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            <li class="list-group-item active">{$cat_three_name}</li>
+                            {volist name="cat_three" id="vo"}
+                            <li class="list-group-item"><a href="/zyk_resource_show?id={$vo->id}">{$vo->title}</a></li>
+                            {/volist}
                         </ul>
                     </div>
                     <div class="col">
                         <ul class="list-group">
-                            <li class="list-group-item active">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            <li class="list-group-item active">{$cat_four_name}</li>
+                            {volist name="cat_four" id="vo"}
+                            <li class="list-group-item"><a href="/zyk_resource_show?id={$vo->id}">{$vo->title}</a></li>
+                            {/volist}
                         </ul>
                     </div>
                 </div>
@@ -185,78 +136,25 @@
             <div class="col-md-10 col-sm-10">
                 <div><h3>明星教师</h3></div>
                 <div class="row">
+                    {volist name="top_four_teacher" id="vo"}
                     <div class="col-md-3">
                         <div class="the-teacher">
                             <div class="card" style="width: 18rem;">
                                 <div class="teacher-main">
                                     <div class="teacher-img">
-                                        <img class="card-img-top" src="/static/imgs/headimg1.png">
+                                        <img class="card-img-top" src="{$vo->head_portrait}">
                                     </div>
-                                    <h5>老师名字</h5>
+                                    <h5>{$vo->name}</h5>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make
-                                        up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">{$vo->email}</h5>
+                                    <p class="card-text">{$vo->introduction}</p>
+                                    <a href="#" class="btn btn-primary">教师资源</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="the-teacher">
-                            <div class="card" style="width: 18rem;">
-                                <div class="teacher-main">
-                                    <div class="teacher-img">
-                                        <img class="card-img-top" src="/static/imgs/headimg1.png">
-                                    </div>
-                                    <h5>老师名字</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make
-                                        up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="the-teacher">
-                            <div class="card" style="width: 18rem;">
-                                <div class="teacher-main">
-                                    <div class="teacher-img">
-                                        <img class="card-img-top" src="/static/imgs/headimg1.png">
-                                    </div>
-                                    <h5>老师名字</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make
-                                        up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="the-teacher">
-                            <div class="card" style="width: 18rem;">
-                                <div class="teacher-main">
-                                    <div class="teacher-img">
-                                        <img class="card-img-top" src="/static/imgs/headimg1.png">
-                                    </div>
-                                    <h5>老师名字</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make
-                                        up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/volist}
                 </div>
             </div>
             <div class="col-md-1"></div>

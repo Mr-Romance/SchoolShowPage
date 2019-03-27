@@ -301,4 +301,63 @@ class Resource extends Controller
 
 
     }
+
+    /**
+     *  显示个人主页的文章详情
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function showUserResourceDetail(Request $request){
+        $res_id=$request->param('id');
+
+        $resource=Resources::get($res_id);
+        $this->assign('resource',$resource);
+
+        return $this->fetch();
+    }
+
+    /**
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function manageResourceList(){
+        $search_param = [];
+
+        if (Session::has('param.search_category')) {
+            $search_param['res_category'] = explode(',', Session::get('param.search_category'));
+        }
+        if (Session::has('param.search_type')) {
+            $search_param['res_type'] = explode(',', Session::get('param.search_type'));
+        }
+        if (Session::has('search_title')) {
+            $search_param['res_title'] = Session::get('search_title');
+        }
+
+        $list = Resources::getResourcesList($search_param,0);
+
+        // 获取所有的一级分类
+        $cat_groups = Categories::getCategoriesGroup();
+        if ($cat_groups) {
+            $this->assign('cat_groups', $cat_groups);
+        }
+
+        // 资源类型信息
+        $res_type = Config::get('resource_type');
+
+        // 渲染赋值
+        if (!empty($res_type)) {
+            $this->assign('res_type', $res_type);
+        }
+        if (!empty($search_param['res_type'])) {
+            $this->assign('type_checked', $search_param['res_type']);
+        }
+        if (!empty($search_param['res_category'])) {
+            $this->assign('category_checked', $search_param['res_category']);
+        }
+        $this->assign('list', $list);
+
+        return $this->fetch('show_user_resource_list');
+    }
 }
