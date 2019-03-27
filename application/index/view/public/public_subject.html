@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item active">{$subject_name}</li>
+                <li class="list-group-item">{$subject_name}</li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <ul class="list-group list-group-flush">
+                {volist name="list" id="vo"}
+                <a class="list-group-item" href="/">{$vo->title}</a>
+                {/volist}
+            </ul>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>

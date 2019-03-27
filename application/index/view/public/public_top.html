@@ -13,50 +13,41 @@
             </ul>
 
             <div class="top-search">
-                <nav class="navbar navbar-light bg-light ">
-                    <form class="form-inline">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                资源类型
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                        <input class="form-control mr-sm-2" type="search" placeholder="输入资源名称搜索" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-
-                        {if condition="!empty($user)"}
-                        <div class="dropdown show login-menu">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                {$user->name}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="/user_page">个人主页</a>
-                                <a class="dropdown-item" href="/logout">退出</a>
-                            </div>
-                        </div>
-                        {else /}
-                        <div class="dropdown show login-menu">
-                            <a class="btn btn-secondary dropdown-toggle" href="/login" role="button"
-                               id="dropdownMenuLink"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                登录
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="/register">注册</a>
-                            </div>
-                        </div>
-                        {/if}
-
-                    </form>
-                </nav>
+                {if condition="!empty($user)"}
+                <div class="dropdown show login-menu">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        {$user->name}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/user_page">个人主页</a>
+                        <a class="dropdown-item" href="/logout">退出</a>
+                    </div>
+                </div>
+                {else /}
+                <div class="dropdown show login-menu">
+                    <button type="button" class="btn btn-success"><a href="/login">登录</a></button>
+                    <button type="button" class="btn btn-success"><a href="/register">注册</a></button>
+                </div>
+                {/if}
+                <!--<nav class="navbar navbar-light bg-light ">-->
+                    <!--<form class="form-inline">-->
+                        <!--&lt;!&ndash;<div class="dropdown">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
+                                <!--&lt;!&ndash;资源类型&ndash;&gt;-->
+                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a class="dropdown-item" href="#">Action</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a class="dropdown-item" href="#">Another action</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a class="dropdown-item" href="#">Something else here</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input class="form-control mr-sm-2" type="search" placeholder="输入资源名称搜索" aria-label="Search">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>&ndash;&gt;-->
+                    <!--</form>-->
+                <!--</nav>-->
             </div>
         </div>
     </nav>

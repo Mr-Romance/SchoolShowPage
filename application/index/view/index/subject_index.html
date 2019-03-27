@@ -66,7 +66,7 @@
                     <a class="btn btn-outline-success" type="button" href="/">首页</a>
                     {if condition="!empty($subject)"}
                     {volist name="subject" id="vo"}
-                    <a class="btn btn-outline-secondary" type="button" href="/">{$vo['name']}</a>
+                    <a class="btn btn-outline-secondary" type="button" href="/subject_index?subject_id={$vo['id']}">{$vo['name']}</a>
                     {/volist}
                     {/if}
                 </div>
@@ -76,7 +76,7 @@
     </div>
 
     <!--展示主题部分-->
-
+    {include file="../application/index/view/public/public_subject.html"}
 
     <div class="footer">
         <div class="row">

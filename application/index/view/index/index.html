@@ -66,7 +66,7 @@
                     <a class="btn btn-outline-success" type="button" href="/">首页</a>
                     {if condition="!empty($subject)"}
                     {volist name="subject" id="vo"}
-                    <a class="btn btn-outline-secondary" type="button" href="/">{$vo['name']}</a>
+                    <a class="btn btn-outline-secondary" type="button" href="/subject_index?subject_id={$vo['id']}">{$vo['name']}</a>
                     {/volist}
                     {/if}
                 </div>
@@ -78,26 +78,32 @@
     <!--头部新闻分类-->
     <div class="top-news">
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md 10">
+            <div class="col-md-1 col-sm-1"></div>
+            <div class="col-md 10 col-sm-10">
                 <div class="row column-top-news">
                     <div class="col">
                         <div class="news-img">
+                            <div class="media">
+                                <img class="mr-3" src="/static/imgs/loudspeaker.png">
+                                <div class="media-body news-img-title">
+                                    <h5 class="mt-0">建设动态</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="news-left">
                             <ul class="news-left">
-                                <li>新闻导航文字1</li>
-                                <li>新闻导航文字1</li>
+                                <li>{$dong_tai_info[0]['title']}</li>
+                                <li>{$dong_tai_info[1]['title']}</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col">
                         <div class="news-right">
                             <ul class="news-right">
-                                <li>新闻导航文字1</li>
-                                <li>新闻导航文字1</li>
+                                <li>{$dong_tai_info[2]['title']}</li>
+                                <li>{$dong_tai_info[3]['title']}</li>
                             </ul>
                         </div>
                     </div>
@@ -110,48 +116,71 @@
     <!--新闻分类，文字新闻-->
     <div class="column-news">
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
+            <div class="col-md-1 col-sm-1"></div>
+            <div class="col-md-10 col-sm-10">
                 <div class="row">
                     <div class="col ">
-                        <div class="column-main-left"></div>
+                        <div class="column-main-left">
+                            <ul class="list-group">
+                                <li class="list-group-item "><h5>政策指导</h5></li>
+                                <li class="list-group-item">{$zheng_ce_info[0]['title']}</li>
+                                <li class="list-group-item">{$zheng_ce_info[0]['title']}</li>
+                                <li class="list-group-item">{$zheng_ce_info[0]['title']}</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col">
-                        <div class="column-main-middle"></div>
+                        <div class="column-main-middle">
+                            <ul class="list-group">
+                                <li class="list-group-item "><h5>典型案例</h5></li>
+                                <li class="list-group-item">{$dian_xing_info[0]['title']}</li>
+                                <li class="list-group-item">{$dian_xing_info[0]['title']}</li>
+                                <li class="list-group-item">{$dian_xing_info[0]['title']}</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col">
-                        <div class="column-main-right"></div>
+                        <div class="column-main-right">
+                            <ul class="list-group">
+                                <li class="list-group-item "><h5>总结报告</h5></li>
+                                <li class="list-group-item">{$zong_jie_info[0]['title']}</li>
+                                <li class="list-group-item">{$zong_jie_info[0]['title']}</li>
+                                <li class="list-group-item">{$zong_jie_info[0]['title']}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-1"></div>
+            <div class="col-md-1 col-sm-1"></div>
         </div>
     </div>
 
     <!--新闻分类带视频的-->
     <div class="column-video">
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <h3>大的分类</h3>
+            <div class="col-md-1 col-sm-1"></div>
+            <div class="col-md-10 col-sm-10">
+                <h3>建设成果</h3>
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-7">
                         <div class="media">
                             <img class="align-self-start mr-3 img-fluid" src="/static/imgs/column.jpg">
+
                             <div class="media-body">
                                 <h5 class="mt-0">Top-aligned media</h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante</p>
-                                <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis
+                                <h5 class="mt-0">Top-aligned media</h5>
+                                <h5 class="mt-0">Top-aligned media</h5>
+                                <h5 class="mt-0">Top-aligned media</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-5">
                         <video src="" controls="controls">
                         </video>
                     </div>
                 </div>
             </div>
-            <div class="col-md-1"></div>
+            <div class="col-md-1 col-sm-1"></div>
         </div>
     </div>
 
@@ -160,7 +189,7 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <h3>大的分类</h3>
+                <h3>重点专业</h3>
                 <div class="row">
                     <div class="col-md-3">
                         <img src="/static/imgs/column.jpg">
@@ -189,7 +218,7 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <h3>打的分类</h3>
+                <h3>特色项目</h3>
                 <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-interval="10000">

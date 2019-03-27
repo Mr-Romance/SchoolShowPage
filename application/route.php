@@ -31,6 +31,7 @@ Route::post('register', 'index/common/register');
 Route::get('/', 'index/index/index');
 Route::get('resource_index', 'index/index/resourceIndex');
 Route::get('resource_category', 'index/index/resourceCategory');
+Route::get('subject_index','index/index/subjectIndex');
 
 /**
  * 用户相关操作的路由
