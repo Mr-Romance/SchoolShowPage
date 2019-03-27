@@ -82,4 +82,28 @@ class Resources extends Model
 
         return $ret_data;
     }
+
+    /**
+     * @param $limit
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getTopResources($limit){
+        $resource=new Resources();
+        $data=$resource->limit($limit)->order('id','desc')->select();
+
+        $ret_data = [];
+        // 把集合转换成数组
+        foreach ($data as $item) {
+            $tem = [];
+            $tem['id'] = $item->id;
+            $tem['subject'] = $item->subject;
+            $tem['title'] = $item->title;
+            $ret_data[] = $tem;
+        }
+
+        return $ret_data;
+    }
 }

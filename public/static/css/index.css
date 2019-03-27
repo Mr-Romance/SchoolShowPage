@@ -1,6 +1,8 @@
-* {
-    padding: 0;
-    margin: 0;
+.container {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-width: 100% !important;
 }
 
 .container-fluid{
@@ -53,24 +55,51 @@
 
 .column-news{
     margin-bottom:10px;
+    clear:right;
+    text-align:center;
+
+}
+
+.column-news {
+    text-align:center;
+}
+
+.zi_yuan_ku{
+    height:100px;
+    width:100px;
+    float:right;
+    position:absolute;
+    top:500px;
+    right:0;
+    text-align: center;
+}
+
+.zi_yuan_ku img{
+    height:100px;
+    width:100px;
+}
+
+.zi_yuan_ku_text {
+    font-size: 25px;
+}
+
+.column_title{
+    color: #000000;
 }
 
 .column-main-left{
     width:330px;
     height:200px;
-    background-color: #2D93CA;
 }
 
 .column-main-middle{
     width:330px;
     height:200px;
-    background-color: #1d2124;
 }
 
 .column-main-right{
     width:330px;
     height:200px;
-    background-color: #f1b0b7;
 }
 
 .column-video img{

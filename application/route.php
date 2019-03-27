@@ -23,6 +23,7 @@ use think\Route;
 /**
  *  基础及首页路由
  */
+Route::get('pdf_demo','index/index/pdfDemo');
 Route::get('login', 'index/common/showLogin');
 Route::post('login', 'index/common/login');
 Route::get('logout', 'index/common/logout');
@@ -32,6 +33,7 @@ Route::get('/', 'index/index/index');
 Route::get('resource_index', 'index/index/resourceIndex');
 Route::get('resource_category', 'index/index/resourceCategory');
 Route::get('subject_index','index/index/subjectIndex');
+Route::get('index_resource_show','index/index/indexShowResource');
 
 /**
  * 用户相关操作的路由

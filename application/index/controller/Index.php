@@ -23,6 +23,10 @@ class Index extends Controller
             $user = Users::getUserById($user_id);
             $this->assign('user', $user);
         }
+
+        // 获取所有的主题信息
+        $subject = Config::get('resource_subject');
+        $this->assign('subject', $subject);
     }
 
     /**
@@ -35,21 +39,29 @@ class Index extends Controller
      */
     public function index()
     {
-        // 获取所有的主题信息
-        $subject = Config::get('resource_subject');
-        $this->assign('subject', $subject);
-
         $dong_tai_info=Resources::getDataBySubject(2,4);
         $this->assign('dong_tai_info',$dong_tai_info);
+        $this->assign('dt_subject_id',2);
 
         $zheng_ce_info=Resources::getDataBySubject(1,3);
         $this->assign('zheng_ce_info',$zheng_ce_info);
+        $this->assign('zc_subject_id',1);
 
         $dian_xing_info=Resources::getDataBySubject(3,3);
         $this->assign('dian_xing_info',$dian_xing_info);
+        $this->assign('dx_subject_id',3);
 
         $zong_jie_info=Resources::getDataBySubject(4,3);
         $this->assign('zong_jie_info',$zong_jie_info);
+        $this->assign('zj_subject_id',4);
+
+
+        $jian_she_info=Resources::getDataBySubject(5,3);
+        $this->assign('jian_she_info',$jian_she_info);
+        $this->assign('js_subject_id',5);
+
+        $tui_jian_resource=Resources::getTopResources(4);
+        $this->assign('tui_jian_resource',$tui_jian_resource);
 
 
         return $this->fetch();
@@ -176,8 +188,32 @@ class Index extends Controller
         $subject_name=$subject_info[$subject_id];
         $this->assign('subject_name',empty($subject_name)?'无主题':$subject_name);
 
+        $this->assign("subject_id",$subject_info[$subject_id]);
+
         $list = Resources::where('subject', $subject_id)->paginate(10);
         $this->assign('list', $list);
+        return $this->fetch();
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function indexShowResource(Request $request){
+        $id=$request->param('id');
+        $subject_id=$request->param('subject_id');
+        $subject_info=Config::get('subject_info');
+
+        /**
+         * @var array $subject_info
+         */
+        $subject_name=$subject_info[$subject_id];
+        $this->assign('subject_name',empty($subject_name)?'无主题':$subject_name);
+
+
+        $resource=Resources::get($id);
+        $this->assign('resource',$resource);
         return $this->fetch();
     }
 }

@@ -1,0 +1,50 @@
+{extend name="public:public_index"}
+{block name="cur_css"}
+    <script>
+        $(function() {
+            $('a.media').media({width:800, height:800});
+            $('a.mediase').media({width:800, height:800});
+        });
+    </script>
+<style>
+    .resource_title{
+        text-align: center;
+        border-bottom: 10px;
+        background-color: #cccccc;
+    }
+
+    .title{
+       font-size: 25px;
+    }
+</style>
+{/block}
+
+{block name="main"}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item active">{$subject_name}</li>
+                    <li class="list-group-item">{$subject_name}</li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="resource_title">
+                    <h5 class="title">{$resource->title}<h5>
+                        <span>上传时间：{$resource->create_at}<span>
+                </div>
+                <div class="panel-body">
+                    <a class="media" href="{$resource->src}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+{/block}
+
+{block name="cur_js"}
+
+{/block}

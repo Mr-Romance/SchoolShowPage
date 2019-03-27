@@ -109,8 +109,6 @@ class Categories extends Model
             throw new Exception('没有要删除的分类');
         }
 
-        
-
     }
 
 }
