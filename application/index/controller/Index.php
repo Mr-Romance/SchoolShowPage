@@ -56,13 +56,12 @@ class Index extends Controller
         $this->assign('zj_subject_id',4);
 
 
-        $jian_she_info=Resources::getDataBySubject(5,3);
+        $jian_she_info=Resources::getDataBySubject(5,4);
         $this->assign('jian_she_info',$jian_she_info);
         $this->assign('js_subject_id',5);
 
         $tui_jian_resource=Resources::getTopResources(4);
         $this->assign('tui_jian_resource',$tui_jian_resource);
-
 
         return $this->fetch();
     }

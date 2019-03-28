@@ -5,7 +5,12 @@
     min-width: 100% !important;
 }
 
-.container-fluid{
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.container-fluid {
     background-color: oldlace;
 }
 
@@ -21,103 +26,189 @@
     height: 318px;
 }
 
-.top-nav-btns{
-    margin:0 auto;
+.top-nav-btns {
+    margin: 0 auto;
     text-align: center;
 }
 
-.column-top-news{
-    width:100%;
-    height:80px;
-    margin: 5px 0;
-}
-
-.news-img{
+.top-news {
     height: 60px;
-    width:200px;
+    margin: 5px 180px;
 }
 
-.news-img img{
-    line-height:60px;
+.news-left {
+    text-align: left;
+}
+
+ul.line {
+    height: 50px;
+    width: 650px;
+    background-color: #F8F8F8;
+    overflow: hidden;
+}
+
+ul.line li {
+    height: 50px;
+    text-indent: 15px;
+    font-size: 18px;
+    color: black;
+    line-height:  50px;
+    list-style: none
+}
+
+.news-left .lb-news-title{
+    color:red;
+}
+
+.news-left .lb-news-content{
+    color:black;
+}
+
+.news-img {
+    height: 60px;
+}
+
+.news-img img {
+    line-height: 60px;
     text-align: center;
     padding-top: 15px;
 }
 
-.news-img-title{
-    line-height:60px;
-    margin-top:15px;
+.news-img-title {
+    line-height: 60px;
+    margin-top: 15px;
 }
 
-.column img{
-    width:240px;
-    height:130px;
+.title_text {
+    color: #000000;
+    font-family: "Arial Black";
 }
 
-.column-news{
-    margin-bottom:10px;
-    clear:right;
-    text-align:center;
-
+.column img {
+    width: 240px;
+    height: 130px;
 }
 
 .column-news {
-    text-align:center;
-}
-
-.zi_yuan_ku{
-    height:100px;
-    width:100px;
-    float:right;
-    position:absolute;
-    top:500px;
-    right:0;
+    margin: 5px 180px;
+    clear: right;
     text-align: center;
 }
 
-.zi_yuan_ku img{
-    height:100px;
-    width:100px;
+.column-news .column-main-left .list-group-item {
+    background-color: #B2B2B2;
+}
+
+.column-news .column-main-right .list-group-item {
+    background-color: #8fd19e;
+}
+
+.column-news .column-main-middle .list-group-item {
+    background-color: #9fcdff;
+}
+
+.column-video {
+    margin: 5px 180px;
+    text-align: center;
+    height: 220px;
+}
+
+.column-video .jian_she_title {
+    text-align: left;
+    padding-top: 10px;
+}
+
+.column-video .media-body {
+    margin-top: 10px;
+}
+
+.column-video .video-jian-she {
+    background-color: #f4f4f4;
+}
+
+.column-video img {
+    width: 240px;
+    height: 130px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+
+.zi_yuan_ku {
+    height: 100px;
+    width: 100px;
+    float: right;
+    position: absolute;
+    top: 500px;
+    right: 0;
+    text-align: center;
+}
+
+.zi_yuan_ku img {
+    height: 100px;
+    width: 100px;
 }
 
 .zi_yuan_ku_text {
     font-size: 25px;
 }
 
-.column_title{
+.column_title {
     color: #000000;
 }
 
-.column-main-left{
-    width:330px;
-    height:200px;
+.column-main-left {
+    width: 330px;
+    height: 200px;
 }
 
-.column-main-middle{
-    width:330px;
-    height:200px;
+.column-main-middle {
+    width: 330px;
+    height: 200px;
 }
 
-.column-main-right{
-    width:330px;
-    height:200px;
+.column-main-right {
+    width: 330px;
+    height: 200px;
 }
 
-.column-video img{
-    width:240px;
-    height:130px;
-}
-
-.column-fixed img{
-    width:240px;
-    height:130px;
+.column-fixed {
+    margin: 0 180px;
     text-align: center;
+    height: 220px;
 }
 
-.column-fixed .tui_jian_title{
+.column-fixed .tui_jian_title {
+    text-align: left;
+}
+
+.column-fixed img {
+    width: 240px;
+    height: 130px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.column-fixed .tui_jian_title {
+    text-align: left;
+}
+
+.column-lb {
+    margin: 5px 180px;
+}
+
+.footer {
+    margin-top: 10px;
+}
+
+.footer .footer-school-name {
+    text-align: center;
     font-size: 20px;
-    margin-left: 30px;
+    color: #dee2e6;
 }
 
-.footer{
-    margin-top:10px;
+.footer-address {
+    text-align: center;
+    font-size: 18px;
+    color: #dee2e6;
 }

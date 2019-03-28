@@ -26,6 +26,10 @@ body {
     top:150px;
 }
 
+.form-signin h1{
+    text-align: center;
+}
+
 .form-signin .checkbox {
     font-weight: 400;
 }

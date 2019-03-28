@@ -78,17 +78,23 @@ class Resources extends Model
     public static function getDataBySubject($subject_id, $limit)
     {
         $resource = new Resources();
-        $data = $resource->where('subject', $subject_id)->limit($limit)->order('id', 'desc')->select();
-        $ret_data = [];
-        // 把集合转换成数组
-        foreach ($data as $item) {
-            $tem = [];
-            $tem['id'] = $item->id;
-            $tem['title'] = $item->title;
-            $ret_data[] = $tem;
-        }
+        $data = $resource
+            ->where('subject', $subject_id)
+            ->limit($limit)
+            ->order('id', 'desc')
+            ->select();
 
-        return $ret_data;
+        return $data;
+//        $ret_data = [];
+//        // 把集合转换成数组
+//        foreach ($data as $item) {
+//            $tem = [];
+//            $tem['id'] = $item->id;
+//            $tem['title'] = $item->title;
+//            $ret_data[] = $tem;
+//        }
+//
+//        return $ret_data;
     }
 
     /**
@@ -101,20 +107,25 @@ class Resources extends Model
     public static function getTopResources($limit)
     {
         $resource = new Resources();
-        $data = $resource->limit($limit)->order('id', 'desc')->select();
+        $data = $resource
+            ->limit($limit)
+            ->order('id', 'desc')
+            ->select();
 
-        $ret_data = [];
-        // 把集合转换成数组
-        foreach ($data as $item) {
-            $tem = [];
-            $tem['id'] = $item->id;
-            $tem['subject'] = $item->subject;
-            $tem['title'] = $item->title;
-            $tem['thumb'] = $item->thumbnail;
-            $ret_data[] = $tem;
-        }
+        return $data;
 
-        return $ret_data;
+//        $ret_data = [];
+//        // 把集合转换成数组
+//        foreach ($data as $item) {
+//            $tem = [];
+//            $tem['id'] = $item->id;
+//            $tem['subject'] = $item->subject;
+//            $tem['title'] = $item->title;
+//            $tem['thumb'] = $item->thumbnail;
+//            $ret_data[] = $tem;
+//        }
+//
+//        return $ret_data;
     }
 
 
