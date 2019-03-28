@@ -5,8 +5,12 @@
     min-width: 100% !important;
 }
 
-.top{
-    margin-bottom: 10px;
+.public-top{
+    margin-bottom: 2px;
+}
+
+.school-name{
+    font-size:28px;
 }
 
 .header {
@@ -61,4 +65,20 @@
 
 .footer {
     margin-top: 10px;
+}
+
+.footer .footer-school-name {
+    text-align: center;
+    font-size: 20px;
+    color: #dee2e6;
+}
+
+.footer-address {
+    text-align: center;
+    font-size: 18px;
+    color: #dee2e6;
+}
+
+.panel-body{
+    height:1000px;
 }

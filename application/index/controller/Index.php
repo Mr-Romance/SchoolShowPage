@@ -39,29 +39,29 @@ class Index extends Controller
      */
     public function index()
     {
-        $dong_tai_info=Resources::getDataBySubject(2,4);
-        $this->assign('dong_tai_info',$dong_tai_info);
-        $this->assign('dt_subject_id',2);
+        $dong_tai_info = Resources::getDataBySubject(2, 4);
+        $this->assign('dong_tai_info', $dong_tai_info);
+        $this->assign('dt_subject_id', 2);
 
-        $zheng_ce_info=Resources::getDataBySubject(1,3);
-        $this->assign('zheng_ce_info',$zheng_ce_info);
-        $this->assign('zc_subject_id',1);
+        $zheng_ce_info = Resources::getDataBySubject(1, 3);
+        $this->assign('zheng_ce_info', $zheng_ce_info);
+        $this->assign('zc_subject_id', 1);
 
-        $dian_xing_info=Resources::getDataBySubject(3,3);
-        $this->assign('dian_xing_info',$dian_xing_info);
-        $this->assign('dx_subject_id',3);
+        $dian_xing_info = Resources::getDataBySubject(3, 3);
+        $this->assign('dian_xing_info', $dian_xing_info);
+        $this->assign('dx_subject_id', 3);
 
-        $zong_jie_info=Resources::getDataBySubject(4,4);
-        $this->assign('zong_jie_info',$zong_jie_info);
-        $this->assign('zj_subject_id',4);
+        $zong_jie_info = Resources::getDataBySubject(4, 4);
+        $this->assign('zong_jie_info', $zong_jie_info);
+        $this->assign('zj_subject_id', 4);
 
 
-        $jian_she_info=Resources::getDataBySubject(5,4);
-        $this->assign('jian_she_info',$jian_she_info);
-        $this->assign('js_subject_id',5);
+        $jian_she_info = Resources::getDataBySubject(5, 4);
+        $this->assign('jian_she_info', $jian_she_info);
+        $this->assign('js_subject_id', 5);
 
-        $tui_jian_resource=Resources::getTopResources(4);
-        $this->assign('tui_jian_resource',$tui_jian_resource);
+        $tui_jian_resource = Resources::getTopResources(4);
+        $this->assign('tui_jian_resource', $tui_jian_resource);
 
         return $this->fetch();
     }
@@ -70,43 +70,42 @@ class Index extends Controller
      *  资源展示首页
      *
      * *
-     * @param Request $request
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function resourceIndex(Request $request)
+    public function resourceIndex()
     {
-        $recomend_resource_info= Resources::where('status',1)->order('sort','desc')->paginate(3);
-        $this->assign('recomend_resource_info',$recomend_resource_info);
+        $recomend_resource_info = Resources::where('status', 1)->order('sort', 'desc')->paginate(3);
+        $this->assign('recomend_resource_info', $recomend_resource_info);
 
-        $new_resource_info= Resources::where('status',1)->order('id','desc')->paginate(4);
-        $this->assign('new_resource_info',$new_resource_info);
+        $new_resource_info = Resources::where('status', 1)->order('id', 'desc')->paginate(6);
+        $this->assign('new_resource_info', $new_resource_info);
 
-        $start_resource_info=Resources::where('status',1)->order('user_id','asc')->paginate(4);
-        $this->assign('start_resource_info',$start_resource_info);
+        $start_resource_info = Resources::where('status', 1)->order('user_id', 'asc')->paginate(4);
+        $this->assign('start_resource_info', $start_resource_info);
 
         // 按照分类获取资源，获取前4名分类
-        $top_category=Categories::order('sort','desc')->paginate(4);
-        $category_resource_info=[];
+        $top_category = Categories::order('sort', 'desc')->paginate(4);
+        $category_resource_info = [];
 
-        $cat_one=Resources::where('category',$top_category[0]->id)->order('id','desc')->paginate(4);
-        $this->assign('cat_one',$cat_one);
-        $this->assign('cat_one_name',$top_category[0]->name);
+        $cat_one = Resources::where('category', $top_category[0]->id)->order('id', 'desc')->paginate(4);
+        $this->assign('cat_one', $cat_one);
+        $this->assign('cat_one_name', $top_category[0]->name);
 
-        $cat_two=Resources::where('category',$top_category[1]->id)->order('id','desc')->paginate(4);
-        $this->assign('cat_two',$cat_two);
-        $this->assign('cat_two_name',$top_category[1]->name);
+        $cat_two = Resources::where('category', $top_category[1]->id)->order('id', 'desc')->paginate(4);
+        $this->assign('cat_two', $cat_two);
+        $this->assign('cat_two_name', $top_category[1]->name);
 
-        $cat_three=Resources::where('category',$top_category[2]->id)->order('id','desc')->paginate(4);
-        $this->assign('cat_three',$cat_three);
-        $this->assign('cat_three_name',$top_category[2]->name);
+        $cat_three = Resources::where('category', $top_category[2]->id)->order('id', 'desc')->paginate(4);
+        $this->assign('cat_three', $cat_three);
+        $this->assign('cat_three_name', $top_category[2]->name);
 
-        $cat_four=Resources::where('category',$top_category[3]->id)->order('id','desc')->paginate(4);
-        $this->assign('cat_four',$cat_four);
-        $this->assign('cat_four_name',$top_category[3]->name);
+        $cat_four = Resources::where('category', $top_category[3]->id)->order('id', 'desc')->paginate(4);
+        $this->assign('cat_four', $cat_four);
+        $this->assign('cat_four_name', $top_category[3]->name);
 
-        $top_four_teacher=Users::where('status',1)->order('id','asc')->paginate(4);
-        $this->assign('top_four_teacher',$top_four_teacher);
+        $top_four_teacher = Users::where('status', 1)->order('id', 'asc')->paginate(4);
+        $this->assign('top_four_teacher', $top_four_teacher);
 
         return $this->fetch();
     }
@@ -115,10 +114,9 @@ class Index extends Controller
      *  带分类的资源首页搜索页面
      *
      * @return mixed
-     * @param Request $request
      * @throws \think\exception\DbException
      */
-    public function resourceCategory(Request $request)
+    public function resourceCategory()
     {
         $search_param = [];
 
@@ -131,7 +129,7 @@ class Index extends Controller
         if (Session::has('search_title')) {
             $search_param['res_title'] = Session::get('search_title');
         }
-        if(Session::has('order_type')){
+        if (Session::has('order_type')) {
             $search_param['order_type'] = Session::get('order_type');
         }
 
@@ -159,8 +157,8 @@ class Index extends Controller
         }
         $this->assign('list', $list);
 
-        $page=$list->render();
-        $this->assign('page',$page);
+        $page = $list->render();
+        $this->assign('page', $page);
 
         return $this->fetch();
     }
@@ -197,10 +195,10 @@ class Index extends Controller
         } else {
             Session::delete('search_title');
         }
-        if(!empty($param['order_type'])){
-            $search_param['order_type']=$param['order_type'];
-            Session::set('order_type',$param['order_type']);
-        }else{
+        if (!empty($param['order_type'])) {
+            $search_param['order_type'] = $param['order_type'];
+            Session::set('order_type', $param['order_type']);
+        } else {
             Session::delete('order_type');
         }
     }
@@ -223,15 +221,15 @@ class Index extends Controller
             return $this->fetch();
         }
 
-        $subject_info=Config::get('subject_info');
+        $subject_info = Config::get('subject_info');
 
         /**
          * @var array $subject_info
          */
-        $subject_name=$subject_info[$subject_id];
-        $this->assign('subject_name',empty($subject_name)?'无主题':$subject_name);
+        $subject_name = $subject_info[$subject_id];
+        $this->assign('subject_name', empty($subject_name) ? '无主题' : $subject_name);
 
-        $this->assign("subject_id",$subject_info[$subject_id]);
+        $this->assign("subject_id", $subject_info[$subject_id]);
 
         $list = Resources::where('subject', $subject_id)->paginate(10);
         $this->assign('list', $list);
@@ -243,20 +241,21 @@ class Index extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function indexShowResource(Request $request){
-        $id=$request->param('id');
-        $subject_id=$request->param('subject_id');
-        $subject_info=Config::get('subject_info');
+    public function indexShowResource(Request $request)
+    {
+        $id = $request->param('id');
+        $subject_id = $request->param('subject_id');
+        $subject_info = Config::get('subject_info');
 
         /**
          * @var array $subject_info
          */
-        $subject_name=$subject_info[$subject_id];
-        $this->assign('subject_name',empty($subject_name)?'无主题':$subject_name);
+        $subject_name = $subject_info[$subject_id];
+        $this->assign('subject_name', empty($subject_name) ? '无主题' : $subject_name);
 
 
-        $resource=Resources::get($id);
-        $this->assign('resource',$resource);
+        $resource = Resources::get($id);
+        $this->assign('resource', $resource);
         return $this->fetch();
     }
 
@@ -267,14 +266,38 @@ class Index extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function zykResourceShow(Request $request){
-        $res_id=$request->param('id');
+    public function zykResourceShow(Request $request)
+    {
+        $res_id = $request->param('id');
 
-        $resource=Resources::get($res_id);
-        $this->assign('resource',$resource);
+        $resource = Resources::get($res_id);
+        $this->assign('resource', $resource);
 
-        $user=Users::get($resource->user_id);
-        $this->assign('user',$user);
+        $user = Users::get($resource->user_id);
+        $this->assign('user', $user);
+
+        return $this->fetch();
+    }
+
+    /**
+     *  展示该老师的资源列表
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function teacherResourceList(Request $request)
+    {
+        $user_id = $request->param('user_id');
+
+        $list = Resources::where('user_id', $user_id)->paginate(10);
+        $this->assign('list', $list);
+
+        $page = $list->render();
+        $this->assign('page', $page);
+
+        $user = Users::get($user_id);
+        $this->assign('user', $user);
 
         return $this->fetch();
     }

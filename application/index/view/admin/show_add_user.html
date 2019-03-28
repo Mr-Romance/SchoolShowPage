@@ -1,0 +1,96 @@
+{extend name="public:public_admin"}
+
+{block name="cur_css"}
+<style>
+    .content label{
+        font-size: 20px;
+    }
+</style>
+{/block}
+
+{block name="right-content"}
+<form class="user_info" id="user_info">
+    <div class="form-group">
+        <label>用户名</label>
+        <input type="email" class="form-control" id="name" name="name"
+               aria-describedby="emailHelp"
+               placeholder="请输入用户名" value="">
+        <small class="form-text text-muted">用户名不可以与其他用户相同
+        </small>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group">
+            <label>性别</label>
+            <select class="form-control" name="sex" id="sex">
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email">邮箱</label>
+        <input type="email" class="form-control" name="email" id="email"
+               aria-describedby="emailHelp" placeholder="输入邮箱" value="">
+        <small id="emailHelp" class="form-text text-muted">
+            邮箱地址不可以与其他用户重复
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="password">密码</label>
+        <input type="text" class="form-control" id="password" name="password"
+               placeholder="请输入密码" value="">
+        <small  class="form-text text-muted">
+            输入要设置密码
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label>头像</label>
+        <input type="file" name="head_portrait" class="form-control-file" id="head_portrait">
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">个人简介</span>
+            </div>
+            <textarea class="form-control" name="introduction" id="introduction"
+                      aria-label="With textarea"></textarea>
+        </div>
+    </div>
+    <button type="button" id="eidt_user" class="btn btn-primary">提交</button>
+</form>
+{/block}
+
+{block name="cur_js"}
+<script>
+    $('#eidt_user').click(function () {
+        var form_data = new FormData();
+        form_data.append('name', $("#name").val());
+        form_data.append('sex', $("#sex").val());
+        form_data.append('email', $("#email").val());
+        form_data.append('password', $("#cat_second").val());
+        form_data.append('introduction', $("#introduction").val());
+        form_data.append("head_portrait", $("#head_portrait").get(0).files[0]);
+        var layer_load = layer.load(0);
+        $.ajax({
+            url: "/add_user",
+            processData: false,
+            contentType: false,
+            data: form_data,
+            type: "POST",
+            success: function (data) {
+                if (100 == data.code) {
+                    layer.close(layer_load);
+                    dialog.successTo(data.msg, '/show_add_user');
+                } else {
+                    layer.close(layer_load);
+                    dialog.showError(data.msg);
+                }
+            }
+        });
+    });
+</script>
+{/block}

@@ -1,0 +1,84 @@
+{extend name="public:public"}
+
+{block name="cur_css"}
+<link rel="stylesheet" href="/static/css/resource_index.css">
+<script>
+    $(function() {
+        $('a.media').media({width:800, height:800});
+        $('a.mediase').media({width:800, height:800});
+    });
+</script>
+<style>
+    .resource_title{
+        text-align: center;
+        border-bottom: 10px;
+        background-color: #cccccc;
+    }
+
+    .title{
+        font-size: 25px;
+    }
+</style>
+{/block}
+
+{block name="main"}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-9">
+                <div>
+                    <ul class="list-unstyled">
+                        {if condition="!empty($list)"}
+                        {volist name="list" id="vo"}
+                        <li class="media">
+                            <a href="/zyk_resource_show?id={$vo->id}">
+                            <img class="mr-3" src="{$vo.thumbnail}">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1"><a href="/zyk_resource_show?id={$vo->id}" class="title_text">{$vo.title}</a></h5>
+                                <h6 class="mt-0 mb-1"><span>创建时间：</span>{$vo.create_at}</h6>
+                                {$vo.introduction}
+                            </div>
+                            <div class="statics_info">
+                                <h6>下载量： <span class="badge badge-secondary">100</span></h6>
+                                <h6>阅读量： <span class="badge badge-secondary">100</span></h6>
+                            </div>
+                        </li>
+                        {/volist}
+                        <div class="page">
+                            {$page}
+                        </div>
+
+                        {else/}
+                        暂无数据
+                        {/if}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="the-teacher">
+                    <div class="card" style="width: 18rem;">
+                        <div class="teacher-main">
+                            <div class="teacher-img">
+                                <img class="card-img-top" src="{$user->head_portrait}">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5>{$user->name}</h5>
+                            <h5 class="card-title">{$user->email}</h5>
+                            <p class="card-text">{$user->introduction}</p>
+                            <a href="#" class="btn btn-primary">教师资源</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+{/block}
+
+{block name="cur_js"}
+
+{/block}

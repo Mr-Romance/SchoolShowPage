@@ -13,7 +13,8 @@ use think\Validate;
 
 class Resource extends Controller
 {
-    protected function _initialize() {
+    protected function _initialize()
+    {
         if (!Session::get('login_user_id')) {
             $this->success('请先登录', 'Common/showLogin');
         }
@@ -27,7 +28,8 @@ class Resource extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function showAddCategory() {
+    public function showAddCategory()
+    {
         // 获取所有的一级分类信息
         $first_categories = Categories::getAllFirstCategories();
         $this->assign('first_categories', $first_categories);
@@ -41,18 +43,15 @@ class Resource extends Controller
      * @param Request $request
      * @return \think\response\Json
      */
-    public function addCategory(Request $request) {
+    public function addCategory(Request $request)
+    {
         $post_data = $request->param();
         if (empty($post_data) || !is_array($post_data)) {
             return $this->errorResponse(200, '参数格式不合法');
         }
 
         // 参数校验
-        $validate = new Validate([
-            'name' => 'require',
-            'sort' => 'require',
-            'parent_id' => 'require|number'
-        ]);
+        $validate = new Validate(['name' => 'require', 'sort' => 'require', 'parent_id' => 'require|number']);
         if (!$validate->check($post_data)) {
             $errors = $validate->getError();
             return $this->errorResponse(200, $errors);
@@ -73,7 +72,8 @@ class Resource extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function showAddResource() {
+    public function showAddResource()
+    {
         // 获取所有的一级分类
         $first_categories = Categories::getAllFirstCategories();
         $this->assign('first_categories', $first_categories);
@@ -92,7 +92,8 @@ class Resource extends Controller
      * @return \think\response\Json
      * @throws \Exception
      */
-    public function addResource(Request $request) {
+    public function addResource(Request $request)
+    {
         // 这里有问题，不能统一获取参数
         $params['title'] = $request->param('title');
         $params['type'] = $request->param('type');
@@ -111,11 +112,7 @@ class Resource extends Controller
         }
 
         // 参数校验
-        $validate = new Validate([
-            'title' => 'require',
-            'type' => 'require|number',
-            'cat_first' => 'require|number'
-        ]);
+        $validate = new Validate(['title' => 'require', 'type' => 'require|number', 'cat_first' => 'require|number']);
 
         if (!$validate->check($params)) {
             $errors = $validate->getError();
@@ -133,14 +130,9 @@ class Resource extends Controller
             return $this->errorResponse(200, '资源为空');
         }
 
-        $thumbnail_res = $thumbnail->validate([
-            'size' => 900000,
-            'ext' => 'jpg,png,gif'
-        ])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'thumbnail');
+        $thumbnail_res = $thumbnail->validate(['size' => 900000, 'ext' => 'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'thumbnail');
 
-        $scr_res = $src->validate([
-            'size' => 322122547,
-        ])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'src');
+        $scr_res = $src->validate(['size' => 322122547,])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'src');
 
         if ($thumbnail_res) {
             $thumbnail_save_name = $thumbnail_res->getSaveName();
@@ -187,7 +179,8 @@ class Resource extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function showUserResourceList() {
+    public function showUserResourceList()
+    {
         $search_param = [];
 
         if (Session::has('param.search_category')) {
@@ -237,7 +230,8 @@ class Resource extends Controller
      * @return \think\response\Json
      * @throws \think\exception\DbException
      */
-    public function getSecondCategories(Request $request) {
+    public function getSecondCategories(Request $request)
+    {
         $params = $request->param();
         if (empty($params)) {
             return $this->errorResponse(200, '父级分类参数不合法');
@@ -260,7 +254,8 @@ class Resource extends Controller
     /**
      *  清除查询缓存
      */
-    public function deleteSearchSession() {
+    public function deleteSearchSession()
+    {
         Session::delete('param.search_category');
         Session::delete('param.search_type');
     }
@@ -269,18 +264,26 @@ class Resource extends Controller
      * @param Request $request
      * @return \think\response\Json
      */
-    public function deleteResource(Request $request) {
+    public function deleteResource(Request $request)
+    {
         $id = $request->param('resource_id');
         if (empty($id) || $id <= 0) {
-            return $this->errorResponse('请求参数不合法');
+            return $this->errorResponse(200,'请求参数不合法');
         }
 
+        $del_id = Resources::destroy($id);
+        if (!is_int($del_id)) {
+            return $this->errorResponse(200,'删除失败');
+        }
+
+        return $this->successResponse(100,'删除成功');
     }
 
     /**
      * @throws \think\exception\DbException
      */
-    public function categoryList() {
+    public function categoryList()
+    {
         $category_list = Categories::getCategoriesGroup();
         $this->assign('category_list', $category_list);
         return $this->fetch();
@@ -289,13 +292,14 @@ class Resource extends Controller
     /**
      * @param Request $request
      */
-    public function deleteCategory(Request $request){
-        $category_id_str=$request->param('category_ids');
-        if(empty($category_id_str)){
+    public function deleteCategory(Request $request)
+    {
+        $category_id_str = $request->param('category_ids');
+        if (empty($category_id_str)) {
             return $this->errorResponse('请选择具体的分类');
         }
 
-        $category_arr= explode(',', $category_id_str);
+        $category_arr = explode(',', $category_id_str);
 
         // 执行删除
 
@@ -309,11 +313,12 @@ class Resource extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function showUserResourceDetail(Request $request){
-        $res_id=$request->param('id');
+    public function showUserResourceDetail(Request $request)
+    {
+        $res_id = $request->param('id');
 
-        $resource=Resources::get($res_id);
-        $this->assign('resource',$resource);
+        $resource = Resources::get($res_id);
+        $this->assign('resource', $resource);
 
         return $this->fetch();
     }
@@ -322,7 +327,8 @@ class Resource extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function manageResourceList(){
+    public function manageResourceList()
+    {
         $search_param = [];
 
         if (Session::has('param.search_category')) {
@@ -335,7 +341,7 @@ class Resource extends Controller
             $search_param['res_title'] = Session::get('search_title');
         }
 
-        $list = Resources::getResourcesList($search_param,0);
+        $list = Resources::getResourcesList($search_param, 0);
 
         // 获取所有的一级分类
         $cat_groups = Categories::getCategoriesGroup();

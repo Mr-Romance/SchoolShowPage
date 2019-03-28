@@ -19,22 +19,24 @@ class Users extends Model
      * @return string
      * @throws DataNotFoundException
      * @throws DbException
+     * @throws Exception
      * @throws ModelNotFoundException
      */
-    public static function saveUser($data) {
+    public static function saveUser($data)
+    {
         if (empty($data)) {
-            return '要保存数据为空';
+            throw new Exception('要保存数据为空');
         }
         $user = new Users();
         // 检查是否有重复
         $name_exists = $user->where('name', $data['name'])->find();
         if ($name_exists) {
-            return '该用户名已经存在';
+            throw new Exception('该用户名已经存在');
         }
 
         $email_exists = $user->where('email', $data['email'])->find();
         if ($email_exists) {
-            return '该邮箱已经存在';
+            throw new Exception('该邮箱已经存在');
         }
 
         // 执行保存
@@ -54,7 +56,8 @@ class Users extends Model
      * @throws Exception
      * @throws ModelNotFoundException
      */
-    public static function checkLogin($data) {
+    public static function checkLogin($data)
+    {
         $user = new Users();
         $name_exists = $user->where('name', $data['name'])->find();
         if (!$name_exists) {
@@ -77,7 +80,8 @@ class Users extends Model
      * @throws DbException
      * @throws Exception
      */
-    public static function getUserById($user_id) {
+    public static function getUserById($user_id)
+    {
         $user = Users::get($user_id);
         if (!$user) {
             throw new Exception('获取用户失败');
@@ -94,7 +98,8 @@ class Users extends Model
      * @throws DbException
      * @throws Exception
      */
-    public static function updUser($data, $user_id) {
+    public static function updUser($data, $user_id)
+    {
         $user = Users::get($user_id);
         if (!$user) {
             throw new Exception('获取用户信息失败');

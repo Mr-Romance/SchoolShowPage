@@ -32,10 +32,7 @@
         </div>
         <div>
             <div>
-                <button type="button" class="btn btn-danger" id="delete_res" value="{$vo.id}">删除</button>
-            </div>
-            <div>
-                <button type="button" class="btn btn-primary" id="status_res" value="{$vo.id}">禁用</button>
+                <button type="button" class="btn btn-danger" name="resource_id" id="delete_res" value="{$vo.id}">删除</button>
             </div>
         </div>
     </li>
@@ -59,7 +56,7 @@
             {'resource_id':$(this).val()},
             function(data){
                 if(100==data.code){
-                    dialog.successTo(data.msg,'/user_resource_list');
+                    dialog.successTo(data.msg,'/manage_resource_list');
                 }else{
                     dialog.showError(data.msg);
                 }
@@ -67,20 +64,6 @@
         );
     });
 
-    // 禁用文章
-    $('#delete_res').click(function(){
-        $.post(
-            '/status_resource',
-            {'resource_id':$(this).val()},
-            function(data){
-                if(100==data.code){
-                    dialog.successTo(data.msg,'/user_resource_list');
-                }else{
-                    dialog.showError(data.msg);
-                }
-            }
-        );
-    });
 
 </script>
 

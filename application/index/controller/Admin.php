@@ -42,38 +42,97 @@ class Admin extends Controller
      * @throws \think\exception\DbException
      */
     public function addUser(Request $request) {
-        $post_data = $request->param();
-        if (empty($post_data) || !is_array($post_data)) {
-            return $this->errorResponse(200, '非法的请求数据');
+//        $post_data = $request->param();
+//        if (empty($post_data) || !is_array($post_data)) {
+//            return $this->errorResponse(200, '非法的请求数据');
+//        }
+//
+//        // 参数校验
+//        $validate = new Validate([
+//            'name' => 'require|min:3|max:20',
+//            'email' => 'require|email',
+//            'password' => 'require|min:6|max:20',
+//            'sex' => 'number|between:1,2'
+//        ]);
+//
+//        if (!$validate->check($post_data)) {
+//            $errors = $validate->getError();
+//            return $this->errorResponse(200, $errors);
+//        }
+//
+//        unset($post_data['re_password']);
+//        $post_data['password'] = think_encrypt($post_data['password']);
+//        $save_res = Users::saveUser($post_data);
+//        if ($save_res) {
+//            return $this->errorResponse(200, $save_res);
+//        }
+//
+//        $post_data['password'] = think_encrypt($post_data['password']);
+//        $save_res = Users::saveUser($post_data);
+//        if ($save_res) {
+//            return $this->errorResponse(200, $save_res);
+//        }
+//
+//        return $this->successResponse(100, '添加用户成功');
+        // 这里有问题，不能统一获取参数
+        $params['name'] = $request->param('name');
+        $params['sex'] = $request->param('sex');
+        $params['email'] = $request->param('email');
+        $params['password'] = $request->param('password');
+        $params['introduction'] = $request->param('introduction');
+
+        $thumbnail_path = '';
+
+        if (empty($params)) {
+            return $this->errorResponse(200, '参数为空');
         }
 
         // 参数校验
         $validate = new Validate([
-            'name' => 'require|min:3|max:20',
+            'name' => 'require',
+            'sex' => 'require|number',
             'email' => 'require|email',
-            'password' => 'require|min:6|max:20',
-            'sex' => 'number|between:1,2'
+            'password' => 'require'
         ]);
 
-        if (!$validate->check($post_data)) {
+        if (!$validate->check($params)) {
             $errors = $validate->getError();
             return $this->errorResponse(200, $errors);
         }
 
-        unset($post_data['re_password']);
-        $post_data['password'] = think_encrypt($post_data['password']);
-        $save_res = Users::saveUser($post_data);
-        if ($save_res) {
-            return $this->errorResponse(200, $save_res);
+        // 保存文件
+        $head_portrait = request()->file('head_portrait');
+
+        if (empty($head_portrait)) {
+            return $this->errorResponse(200, '头像为空');
         }
 
-        $post_data['password'] = think_encrypt($post_data['password']);
-        $save_res = Users::saveUser($post_data);
-        if ($save_res) {
-            return $this->errorResponse(200, $save_res);
+        $thumbnail_res = $head_portrait->validate(['size' => 900000, 'ext' => 'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'head_portrait');
+
+        if ($thumbnail_res) {
+            $thumbnail_save_name = $thumbnail_res->getSaveName();
+            $thumbnail_path = DS . 'uploads' . DS . 'thumbnail' . DS . $thumbnail_save_name;
+        } else {
+            return $this->errorResponse(200, '保存缩略图失败');
         }
 
-        return $this->successResponse(100, '添加用户成功');
+        // 入库
+        $data = [];
+        $data['name'] = $params['name'];
+        $data['email'] = $params['email'];
+        $data['introduction'] = empty($params['introduction']) ? '暂无描述' : $params['introduction'];
+        $data['head_portrait'] = $thumbnail_path;
+        $data['sex'] = $params['sex'];
+        $data['password'] = think_encrypt($params['password']);
+        $data['status'] = 1;
+
+        try {
+            Users::saveUser($data);
+        } catch (Exception $exception) {
+            return $this->errorResponse(200, $exception->getMessage());
+        }
+
+        return $this->successResponse(100, '添加成功');
     }
 
     /**
@@ -152,4 +211,5 @@ class Admin extends Controller
 
         return $this->successResponse(100, '更新头像成功');
     }
+
 }

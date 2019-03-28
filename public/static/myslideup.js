@@ -7,8 +7,8 @@
 			//默认参数
 			value=$.extend({
 				 "li_h":"50",
-				 "time":2000,
-				 "movetime":1000
+				 "time":2500,
+				 "movetime":1500
 			},value)
 			
 			//向上滑动动画

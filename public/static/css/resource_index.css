@@ -1,38 +1,4 @@
 
-.container {
-    width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    min-width:100% !important;
-}
-
-.header{
-    margin:0 auto;
-    width:100%;
-    height:50px;
-    background-color: #f1b0b7;
-}
-
-.school-title{
-    margin-left:100px;
-}
-
-.top-nav{
-    margin:0 50px;
-}
-
-.top-search{
-    margin:0 auto;
-}
-
-.login-menu{
-    margin-left: 100px;
-}
-
-.login-btn-group{
-    margin-left: 20px;
-}
-
 .total-statics{
     position:absolute;
     top:450px;
@@ -46,29 +12,66 @@
     font-size: 50px;
 }
 
+.bg-img img{
+    width:100%;
+    height:460px;
+}
+
+.recommend{
+    width:1200px;
+    margin:5px auto;
+}
+
 .recommend img {
-    width:180px;
-    height: 202px;
+    width:240px;
+    height: 270px;
 }
 
 .recommend-rec {
-    width:180px;
+    width:240px;
     height:270px;
 }
-.video-rec{
-    width:253px;
-    height:270px;
+
+.title_text{
+    margin-top:5px;
+    color: #000000;
+    font-family: "Arial Black";
+    font-size:18px;
+    width:280px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
-.video-rec img{
+
+.star-resource{
+    width:1200px;
+    height:270px;
+    margin:0 auto;
+}
+.star-resource img{
     width:253px;
     height:147px;
 }
 
-.teachers img{
-    width: 61px;
-    height: 61px;
+.hot{
+    width:1200px;
+    margin:0 auto;
 }
 
-.teacher-img{
-    float:left;
+.hot .list-group-item{
+    font-size:25px;
+    text-align: center;
+}
+
+.teachers{
+    width:1200px;
+    margin:0 auto;
+}
+
+.teachers .card{
+    height:450px;
+}
+
+.teachers img{
+    height:270px;
 }

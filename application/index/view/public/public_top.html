@@ -1,54 +1,35 @@
 <!--头部导航-->
-<div class="top">
+<div class="public-top">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
         <div class="collapse navbar-collapse" id="navbarText">
-            <a class="navbar-brand school-title" href="/resource_index">呼和浩特市第三职业中等专业学校资源库</a>
+            <a class="navbar-brand school-title" href="/resource_index"><span class="school-name">呼和浩特市第三职业中等专业学校</span>资源库</a>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/resource_category">按照分类搜索 <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/resource_category" style="font-size:20px;">按照分类搜索 <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/resource_category">最新发布</a>
+                    <a class="nav-link" href="/resource_category" style="font-size:20px;">最新发布</a>
                 </li>
             </ul>
-
-            <div class="top-search">
-                {if condition="!empty($user)"}
-                <div class="dropdown show login-menu">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        {$user->name}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="/user_page">个人主页</a>
-                        <a class="dropdown-item" href="/logout">退出</a>
-                    </div>
+        </div>
+        <div class="top-menus">
+            {if condition="!empty($user)"}
+            <div class="dropdown show login-menu">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    {$user->name}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/user_page">个人主页</a>
+                    <a class="dropdown-item" href="/logout">退出</a>
                 </div>
-                {else /}
-                <div class="dropdown show login-menu">
-                    <a class="btn btn-primary" href="/login">登录</a>
-                    <a class="btn btn-primary" href="/register">注册</a>
-                </div>
-                {/if}
-                <!--<nav class="navbar navbar-light bg-light ">-->
-                    <!--<form class="form-inline">-->
-                        <!--&lt;!&ndash;<div class="dropdown">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"&ndash;&gt;-->
-                                    <!--&lt;!&ndash;data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
-                                <!--&lt;!&ndash;资源类型&ndash;&gt;-->
-                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<a class="dropdown-item" href="#">Action</a>&ndash;&gt;-->
-                                <!--&lt;!&ndash;<a class="dropdown-item" href="#">Another action</a>&ndash;&gt;-->
-                                <!--&lt;!&ndash;<a class="dropdown-item" href="#">Something else here</a>&ndash;&gt;-->
-                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input class="form-control mr-sm-2" type="search" placeholder="输入资源名称搜索" aria-label="Search">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>&ndash;&gt;-->
-                    <!--</form>-->
-                <!--</nav>-->
             </div>
+            {else /}
+            <a class="btn btn-primary bt-lg" href="/login">登录</a>
+            <a class="btn btn-primary bt-lg" href="/register">注册</a>
+
+            {/if}
         </div>
     </nav>
 </div>
