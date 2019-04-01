@@ -1,3 +1,4 @@
+
 .container {
     width: 100% !important;
     padding: 0 !important;
@@ -5,8 +6,9 @@
     min-width: 100% !important;
 }
 
+
 .public-top{
-    margin-bottom: 2px;
+    margin-bottom: 20px;
 }
 
 .school-name{
@@ -63,8 +65,18 @@
     border:1px #0c5460 solid;
 }
 
+.left-menus{
+    margin-top:10px;
+}
+
 .footer {
-    margin-top: 10px;
+    width: 100%;
+    height: 80px;
+    background-color: #1d2124;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-top:20px;
 }
 
 .footer .footer-school-name {
@@ -77,8 +89,4 @@
     text-align: center;
     font-size: 18px;
     color: #dee2e6;
-}
-
-.panel-body{
-    height:1000px;
 }

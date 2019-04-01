@@ -268,15 +268,15 @@ class Resource extends Controller
     {
         $id = $request->param('resource_id');
         if (empty($id) || $id <= 0) {
-            return $this->errorResponse(200,'请求参数不合法');
+            return $this->errorResponse(200, '请求参数不合法');
         }
 
         $del_id = Resources::destroy($id);
         if (!is_int($del_id)) {
-            return $this->errorResponse(200,'删除失败');
+            return $this->errorResponse(200, '删除失败');
         }
 
-        return $this->successResponse(100,'删除成功');
+        return $this->successResponse(100, '删除成功');
     }
 
     /**
@@ -302,7 +302,13 @@ class Resource extends Controller
         $category_arr = explode(',', $category_id_str);
 
         // 执行删除
+        try {
+            Categories::deleteCategory($category_arr);
+        } catch (Exception $exception) {
+            return $this->errorResponse(200, $exception->getMessage());
+        }
 
+        return $this->successResponse(100, '删除成功');
 
     }
 
@@ -366,4 +372,5 @@ class Resource extends Controller
 
         return $this->fetch('show_user_resource_list');
     }
+
 }

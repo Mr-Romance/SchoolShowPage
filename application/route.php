@@ -45,6 +45,9 @@ Route::post('add_user', 'index/admin/addUser');
 Route::get('show_add_user', 'index/admin/showAddUser');
 Route::post('user_edit', 'index/admin/editUser');
 Route::post('upd_head_portrait', 'index/admin/updHeadPortrait');
+Route::get('user_list','index/admin/userList');
+Route::post('user_list_search','index/admin/userListSearch');
+Route::post('delete_user','index/admin/deleteUser');
 
 /**
  *  资源相关的操作
@@ -61,7 +64,8 @@ Route::get('delete_search_session','index/resource/deleteSearchSession');
 Route::get('show_user_resource_detail','index/resource/showUserResourceDetail');
 Route::get('manage_resource_list','index/resource/manageResourceList');
 Route::post('delete_resource','index/resource/deleteResource');
-
+Route::post('delete_category','index/resource/deleteCategory');
+Route::get('category_list','index/resource/categoryList');
 
 Route::post('add_category', 'index/resource/addCategory');
 

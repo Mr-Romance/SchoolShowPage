@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>呼和浩特市第三职业中等专业学校</title>
     <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/plyr.css">
     <script src="/static/jQuery331.js"></script>
     <script src="/static/layer/layer.js"></script>
     <script src="/static/dialog.js"></script>
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
     <script src="/static/myslideup.js"></script>
+    <script src="/static/plyr.js"></script>
     <script>
-        $(function(){
+        $(function () {
             $(".line").slideUp();
         })
     </script>
@@ -98,7 +100,19 @@
                 <div class="news-left">
                     <ul class="line">
                         {volist name="jian_she_info" id="vo"}
-                        <li ><a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}"><span class="lb-news-title">{$vo->title}<span><span class="lb-news-content">{$vo->create_at}<span></span></a></li>
+                        <li><a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
+                            <span class="lb-news-title">{$vo->title}<span></a></li>
+                        {/volist}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="news-left">
+                    <ul class="line">
+                        {volist name="jian_she_info" id="vo"}
+                        <li><a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
+                            <span class="lb-news-title">{$vo->title}<span></a></li>
                         {/volist}
                     </ul>
                 </div>
@@ -108,43 +122,42 @@
 
     <!--新闻分类，文字新闻-->
     <div class="column-news">
-        <div class="row">
-            <div class="col-4">
-                <div class="column-main-left">
-                    <ul class="list-group">
-                        <li class="list-group-item "><h5>政策指导</h5></li>
-                        {volist name="zheng_ce_info" id="vo"}
-                        <li class="list-group-item"><a class="title_text"
-                                                       href="/index_resource_show&id={$vo->id}&subject_id={$zc_subject_id}">{$vo->title}</a>
-                        </li>
-                        {/volist}
-                    </ul>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="column-main-middle">
-                    <ul class="list-group">
-                        <li class="list-group-item "><h5>典型案例</h5></li>
-                        {volist name="dian_xing_info" id="vo"}
-                        <li class="list-group-item"><a class="title_text"
-                                                       href="/index_resource_show&id={$vo->id}&subject_id={$dx_subject_id}">{$vo->title}</a>
-                        </li>
-                        {/volist}
-                    </ul>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="column-main-right">
-                    <ul class="list-group">
-                        <li class="list-group-item "><h5>总结报告</h5></li>
-                        {volist name="zong_jie_info" id="vo"}
-                        <li class="list-group-item"><a class="title_text"
-                                                       href="/index_resource_show&id={$vo->id}&subject_id={$zj_subject_id}">{$vo->title}</a>
-                        </li>
-                        {/volist}
-                    </ul>
-                </div>
-            </div>
+        <div class="zheng-ce">
+            <h5>政策指导</h5>
+            <ul>
+                {volist name="zheng_ce_info" id="vo"}
+                <li>
+                    <a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$zc_subject_id}">
+                        <span>></span>{$vo->title}
+                    </a>
+                </li>
+                {/volist}
+            </ul>
+            <button class="more" style="background-color:#41b3e5;">查看更多</button>
+        </div>
+        <div class="zong-jie">
+            <h5>总结报告</h5>
+            <ul >
+                {volist name="zong_jie_info" id="vo"}
+                <li><a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$zj_subject_id}">
+                    <span>></span> {$vo->title}
+                </a>
+                </li>
+                {/volist}
+            </ul>
+            <button class="more" style="background-color: #0484cf;">查看更多</button>
+        </div>
+        <div class="dian-xing">
+            <h5>典型案例</h5>
+            <ul>
+                {volist name="dian_xing_info" id="vo"}
+                <li><a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$dx_subject_id}">
+                    <span>></span>{$vo->title}
+                </a>
+                </li>
+                {/volist}
+            </ul>
+            <button class="more" style="background-color:#3156a4;">查看更多</button>
         </div>
     </div>
 
@@ -156,7 +169,7 @@
                     <img class="align-self-start mr-3 img-fluid" src="/static/imgs/column.jpg">
                     <div class="media-body">
                         {volist name="jian_she_info" id="vo"}
-                        <h5 class="mt-0"><a class="title_text"
+                        <h5 class="mt-0"><a class="title_text" style="color:black;font-size:13px;"
                                             href="/index_resource_show?id={$vo->id}&subject_id={$js_subject_id}">{$vo->title}</a>
                         </h5>
                         {/volist}
@@ -164,8 +177,13 @@
                 </div>
             </div>
             <div class="col-5">
-                <video src="" controls="controls">
-                </video>
+                <div class="m">
+                    <video poster="vs.png" controls>
+                        <source src="http://www.jplayer.org/video/m4v/Incredibles_Teaser.m4v" type="video/mp4">
+                        <!-- <source src="/path/to/video.webm" type="video/webm">-->
+                        <!-- Captions are optional -->
+                    </video>
+                </div>
             </div>
         </div>
     </div>
@@ -264,6 +282,7 @@
     {include file="../application/index/view/public/footer.html"}
 </div>
 
+<script>plyr.setup();</script>
 
 </body>
 </html>

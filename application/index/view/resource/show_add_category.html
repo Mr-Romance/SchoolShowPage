@@ -44,7 +44,7 @@
             post_data,
             function (data) {
                 if (100 == data.code) {
-                    dialog.successAuto(data.msg, '/show_add_category');
+                    dialog.successAuto(data.msg, '/category_list');
                 } else {
                     dialog.showError(data.msg);
                 }

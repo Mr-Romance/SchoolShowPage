@@ -119,10 +119,10 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="{$vo->head_portrait}" alt="{$vo->name}">
                     <div class="card-body">
-                        <h5 class="card-title">{$vo->name}</h5>
-                        <h5 class="card-title">{$vo->email}</h5>
-                        <p class="card-text title_text">{$vo->introduction}</p>
-                        <a href="/teacher_res_list?user_id={$vo->id}" class="btn btn-primary">教师资源</a>
+                        <h5 class="card-title">姓名：{$vo->name}</h5>
+                        <h5 class="card-title">邮箱：{$vo->email}</h5>
+                        <p class="card-text title_text">教师介绍：{$vo->introduction}</p>
+                        <a href="/teacher_res_list?user_id={$vo->id}" target="_blank"  class="btn btn-primary">教师资源</a>
                     </div>
                 </div>
             </div>
@@ -130,6 +130,7 @@
         </div>
     </div>
 </div>
+
 {/block}
 
 {block name="cur_js"}

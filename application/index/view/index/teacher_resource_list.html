@@ -9,24 +9,23 @@
     });
 </script>
 <style>
-    .resource_title{
-        text-align: center;
-        border-bottom: 10px;
-        background-color: #cccccc;
+
+    .the-teacher{
+        margin-top:10px;
     }
 
-    .title{
-        font-size: 25px;
+    .teacher_resource_list{
+      margin-top:10px;
     }
 </style>
 {/block}
 
 {block name="main"}
-<div class="row">
+<div class="row" style="margin-bottom: 120px;">
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-9 teacher_resource_list">
                 <div>
                     <ul class="list-unstyled">
                         {if condition="!empty($list)"}
@@ -46,9 +45,9 @@
                             </div>
                         </li>
                         {/volist}
-                        <div class="page">
+
                             {$page}
-                        </div>
+
 
                         {else/}
                         暂无数据

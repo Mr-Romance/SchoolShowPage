@@ -10,6 +10,12 @@
         margin-bottom: 5px;
         border:1px #0c5460 solid;
     }
+
+    .footer{
+        position:fixed;
+        bottom: 0;
+        left:0;
+    }
 </style>
 {/block}
 
@@ -17,7 +23,7 @@
 
 {include file="../application/index/view/public/search_form.html"}
 
-<div>
+<div style="margin-bottom:120px;">
 <ul class="list-unstyled">
     {if condition="!empty($list)"}
         {volist name="list" id="vo"}

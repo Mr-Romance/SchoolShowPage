@@ -293,6 +293,9 @@ class Index extends Controller
         $list = Resources::where('user_id', $user_id)->paginate(10);
         $this->assign('list', $list);
 
+        // 给分页连接加参数
+        $list->appends(request()->param());
+
         $page = $list->render();
         $this->assign('page', $page);
 

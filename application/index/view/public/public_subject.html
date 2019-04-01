@@ -2,16 +2,18 @@
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 subject-title-menu">
             <ul class="list-group">
                 <li class="list-group-item active">{$subject_name}</li>
                 <li class="list-group-item">{$subject_name}</li>
             </ul>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 subject-content">
             <ul class="list-group list-group-flush">
                 {volist name="list" id="vo"}
-                <a class="list-group-item" href="/index_resource_show?id={$vo->id}&subject_id={$vo->subject}">{$vo->title}</a>
+                <a class="list-group-item" href="/index_resource_show?id={$vo->id}&subject_id={$vo->subject}">
+                    {$vo->title} &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; {$vo->create_at}
+                </a>
                 {/volist}
             </ul>
         </div>

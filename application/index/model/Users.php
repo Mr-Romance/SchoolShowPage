@@ -2,6 +2,7 @@
 
 namespace app\index\model;
 
+use think\Db;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\ModelNotFoundException;
 use think\Exception;
@@ -109,5 +110,51 @@ class Users extends Model
         if (!$upd_res) {
             throw new Exception('更新用户失败');
         }
+    }
+
+    /**
+     *  删除用户
+     *
+     * @param $user_id
+     * @throws DbException
+     * @throws Exception
+     */
+    public static function delUserById($user_id){
+        if(empty($user_id) || ($user_id)<0){
+            throw new Exception('非法的用户ID');
+        }
+
+        $user = Users::get($user_id);
+        if(empty($user)){
+            throw new Exception('获取用户ID失败');
+        }
+
+        if(!$user->delete()){
+            throw new Exception('删除用户失败');
+        }
+    }
+
+    /**
+     *  用户列表
+     *
+     * @param $search_data
+     * @return \think\Paginator
+     * @throws DbException
+     */
+    public static function userList($search_data){
+        $base_query = Db::table('users');
+        $ids_arr=$search_data['ids_arr'];
+        $search_name=$search_data['search_name'];
+
+        if(!empty($ids_arr)){
+            $base_query=$base_query->where('id','in',$ids_arr);
+        }
+        if(!empty($search_name)){
+            $base_query=$base_query->where('name','like','%'.trim($search_name).'%');
+        }
+
+        $list=$base_query->paginate(8);
+
+        return $list;
     }
 }

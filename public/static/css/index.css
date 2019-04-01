@@ -1,8 +1,17 @@
+
 .container {
     width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
     min-width: 100% !important;
+}
+
+li {
+    list-style: none;
+}
+
+.subject-title-menu{
+margin-top: 10px;
 }
 
 .no-gutters {
@@ -34,7 +43,7 @@
 .top-news {
     height: 60px;
     margin: 0 auto;
-    width:1000px;
+    width: 1000px;
 }
 
 .news-left {
@@ -43,8 +52,7 @@
 
 ul.line {
     height: 50px;
-    width: 650px;
-    background-color: #F8F8F8;
+    width: 330px;
     overflow: hidden;
 }
 
@@ -53,16 +61,16 @@ ul.line li {
     text-indent: 15px;
     font-size: 18px;
     color: black;
-    line-height:  50px;
+    line-height: 50px;
     list-style: none
 }
 
-.news-left .lb-news-title{
-    color:red;
+.news-left .lb-news-title {
+    color: black;
 }
 
-.news-left .lb-news-content{
-    color:black;
+.news-left .lb-news-content {
+    color: black;
 }
 
 .news-img {
@@ -81,55 +89,88 @@ ul.line li {
 }
 
 .title_text {
-    color: #000000;
+    color: #fff;
     font-family: "Arial Black";
-    width:280px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 10px;
 }
 
-.column img {
-    width: 240px;
-    height: 130px;
+a:hover {
+    text-decoration: underline;
+    color: #fff;
 }
 
 .column-news {
-    width:1000px;
+    width: 1000px;
+    height: 200px;
     margin: 5px auto;
     clear: right;
     text-align: center;
+    padding-right: 0;
+    padding-left: 0;
+    color: #fff;
 }
 
-.column-news .column-main-left{
-    width:333px;
+.column-news li {
+    text-align: left;
+    line-height: 35px;
 }
 
-.column-news .column-main-middle{
-    width:333px;
+.column-new h5 {
+    font-size: 20px;
+    margin-top: 15px;
+    line-height: 40px;
 }
 
-.column-news .column-main-right{
-    width:333px;
+.column-news .more {
+    float: right;
+    position: relative;
+    right: 30px;
+    top: 10px;
+    color: #fff;
 }
 
-.column-news .column-main-left .list-group-item {
-    background-color: #B2B2B2;
+.column-news .zheng-ce {
+    width: 333px;
+    height: 200px;
+    background-color: #41b3e5;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+    float: left;
 }
 
-.column-news .column-main-right .list-group-item {
-    background-color: #8fd19e;
+.column-news .zong-jie {
+    width: 333px;
+    height: 200px;
+    background-color: #0484cf;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+    float: left;
 }
 
-.column-news .column-main-middle .list-group-item {
-    background-color: #9fcdff;
+.column-news .dian-xing {
+    width: 333px;
+    height: 200px;
+    background-color: #3156a4;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+    float: left;
 }
 
 .column-video {
     margin: 0 auto;
-    width:1000px;
+    width: 1000px;
     text-align: center;
-    height: 220px;
+    height: 270px;
 }
 
 .column-video .jian_she_title {
@@ -151,7 +192,6 @@ ul.line li {
     margin-top: 10px;
     border-radius: 5px;
 }
-
 
 .zi_yuan_ku {
     height: 100px;
@@ -176,24 +216,9 @@ ul.line li {
     color: #000000;
 }
 
-.column-main-left {
-    width: 330px;
-    height: 200px;
-}
-
-.column-main-middle {
-    width: 330px;
-    height: 200px;
-}
-
-.column-main-right {
-    width: 330px;
-    height: 200px;
-}
-
 .column-fixed {
     margin: 0 auto;
-    width:1000px;
+    width: 1000px;
     text-align: center;
     height: 220px;
 }
@@ -214,12 +239,18 @@ ul.line li {
 }
 
 .column-lb {
-    margin: 0 auto;
-    width:1000px;
+    margin: 0 auto 20px auto;
+    width: 1000px;
 }
 
 .footer {
-    margin-top: 10px;
+    width: 100%;
+    height: 80px;
+    background-color: #1d2124;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-top:20px;
 }
 
 .footer .footer-school-name {
@@ -232,4 +263,12 @@ ul.line li {
     text-align: center;
     font-size: 18px;
     color: #dee2e6;
+}
+
+.subject-content {
+    height: 800px;
+}
+
+.subject-content a {
+    color: black;
 }

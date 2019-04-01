@@ -1,10 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{extend name="public:public_admin"}
+
+{block name="cur_css"}
+<style>
+    .form-add-category{
+        height:1100px;
+    }
+
+    .footer{
+        position:fixed;
+        bottom: 0;
+        left:0;
+    }
+</style>
+{/block}
+
+{block name="right-content"}
+
+<div class="search_form">
+    <button type="button" id="delete_category" class="btn btn-danger btn-lg">删除选中</button>
+    <a href="/show_add_category" class="btn btn-primary btn-lg">添加分类</a>
+    <form id="search_form">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            </tr>
+            </thead>
+            <tbody>
+            {if condition="!empty($category_list)"}
+            {volist name="category_list" id="vo"}
+            <tr>
+                <th class="search_th">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-outline-primary">
+                            <input class="cat_checkbox" type="checkbox" value="{$vo['first_cat_id']}" autocomplete="off">
+                            {$vo['first_cat_name']}
+                        </label>
+                    </div>
+                </th>
+                <td>
+                    <div class="btn-group" data-toggle="buttons">
+                        {php}$second_cat_arr=$vo['second_cat_arr']; {/php}
+                        {volist name="second_cat_arr" id="category"}
+                        <label class="btn btn-outline-dark">
+                            <input class="cat_checkbox" type="checkbox" value="{$category['id']}" autocomplete="off"
+                                   {if condition="!empty($category_checked)" }
+                                   {if condition="in_array($category['id'],$category_checked)" } checked{/if}
+                            {/if}
+                            >
+                            {$category['name']}
+                        </label>
+                        {/volist}
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+            {/if}
+
+            {if condition="!empty($res_type)"}
+            <tr>
+                <th class="search_th">资源类型</th>
+                <td>
+                    <div class="btn-group" data-toggle="buttons">
+                        {volist name="res_type" id="type"}
+                        <label class="btn btn-outline-danger">
+                            <input class="type_checkbox" type="checkbox" value="{$type['id']}" autocomplete="off"
+                                   {if condition="!empty($type_checked)"}
+                                   {if condition="in_array($type['id'],$type_checked)"} checked {/if} {/if}>
+                            {$type['name']}
+                        </label>
+                        {/volist}
+                    </div>
+                </td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+{/block}
+
+{block name="cur_js"}
+<script>
+    var cat_id_arr = new Array();
+    var type_id_arr=new Array();
+    var url = '';
+    var url_category = $('#jump_url').val();
+    if (url_category) {
+        url = url_category;
+    }else{
+        url='/user_resource_list';
+    }
+
+    $('.cat_checkbox').change(function () {
+        var the_cat_id = $(this).val();
+        if ($(this).is(':checked')) {
+            cat_id_arr.push(the_cat_id);
+            cat_id_arr = unique_array(cat_id_arr);
+        } else {
+            var index = cat_id_arr.indexOf(the_cat_id);
+            cat_id_arr.splice(index, 1);
+        }
+    });
+
+    $("#delete_category").click(function () {
+        $.post(
+            '/delete_category',
+            {
+                "category_ids": cat_id_arr.toString(),
+            },
+            function (date) {
+
+                if(100==date.code){
+                    dialog.successAuto(date.msg,'/category_list')
+                }else{
+                    dialog.showError(date.msg);
+                }
+            }
+        );
+        return false;
+    });
+
+    /**
+     *  数组去除重复
+     *
+     * @param a
+     * @returns {T[]}
+     */
+    function unique_array(a) {
+        return a.concat().sort().filter(function (item, pos, ary) {
+            return !pos || item != ary[pos - 1];
+        });
+    }
+</script>
+{/block}

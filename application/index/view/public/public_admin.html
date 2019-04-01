@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta charset="UTF-8">
-    <title>{block name="title"}标题{/block}</title>
+    <title>{block name="title"}呼和浩特市第三职业中等专业学校{/block}</title>
     <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/public.css">
     {block name="cur_css"}{/block}
@@ -12,6 +12,11 @@
     <script src="/static/layer/layer.js"></script>
     <script src="/static/dialog.js"></script>
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
+    <style>
+        /*.list-group{*/
+            /*margin-top:10px;*/
+        /*}*/
+    </style>
 </head>
 <body class="container">
 
@@ -32,9 +37,8 @@
                         <a href="/show_add_resource" class="list-group-item list-group-item-action">添加资源</a>
                         {if condition="$user->type == 2"}
                         <a href="/manage_resource_list" class="list-group-item list-group-item-action">资源列表</a>
-                        <a href="/show_add_user" class="list-group-item list-group-item-action">添加用户</a>
-                        <a href="/show_add_category" class="list-group-item list-group-item-action">添加分类</a>
-                        <!--<a href="/" class="list-group-item list-group-item-action">用户列表</a>-->
+                        <a href="/user_list" class="list-group-item list-group-item-action">用户列表</a>
+                        <a href="/category_list" class="list-group-item list-group-item-action">分类管理</a>
                         {/if}
                     </div>
                 </div>
@@ -48,9 +52,9 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-</div>
 
-{include file="../application/index/view/public/footer.html"}
+    {include file="../application/index/view/public/footer.html"}
+</div>
 
 {block name="cur_js"}{/block}
 </body>
