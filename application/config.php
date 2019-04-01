@@ -271,4 +271,16 @@ return [
         '6'=>'汇报视频',
         '7'=>'佐证材料'
     ],
+
+    // 资源缩略图的移动路径
+    'src_thumbnail_move_path' => ROOT_PATH . 'public' . DS . 'uploads' . DS . 'thumbnail' . DS,
+
+    // 资源缩略图的入库路径
+    'src_thumbnail_save_path' => DS . 'uploads' . DS.'thumbnail' . DS,
+
+    // 资源的移动路径
+    'src_source_move_path' => ROOT_PATH . 'public' . DS . 'uploads' . DS . 'src' .DS,
+
+    // 资源的入库路径
+    'src_source_save_path' => DS . 'uploads' . DS . 'src' . DS,
 ];

@@ -12,11 +12,13 @@
     <script src="/static/layer/layer.js"></script>
     <script src="/static/dialog.js"></script>
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
-    <style>
-        /*.list-group{*/
-            /*margin-top:10px;*/
-        /*}*/
-    </style>
+    <script src="/static/jquery.media.js"></script>
+    <script>
+        $(function() {
+            $('a.media').media({width:1050, height:800});
+            $('a.mediase').media({width:800, height:800});
+        });
+    </script>
 </head>
 <body class="container">
 

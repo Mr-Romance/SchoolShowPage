@@ -6,7 +6,7 @@
             font-size: 20px;
         }
         .footer{
-            position:fixed;
+            position:relative;
             bottom: 0;
             left:0;
         }
@@ -14,29 +14,28 @@
 {/block}
 
 {block name="right-content"}
-<form enctype="multipart/form-data">
+<form class="user_info" id="user_info">
+    <div class="form-group">
+        <label>头像</label>
     <div class="head_portrait">
         <img src="{$user->head_portrait}">
     </div>
-    <input type="file" name="head_portrait" class="form-control-file" id="head_portrait">
-    <br>
-    <button type="button" id="upd_head_portrait" class="btn btn-success">上传头像</button>
-</form>
+    <input type="file" id="head_portrait" name="head_portrait" class="form-control-file">
+    </div>
 
-<form class="user_info" id="user_info">
     <div class="form-group">
         <label>用户名</label>
-        <input type="email" class="form-control" id="user_name" name="name"
+        <input type="email" class="form-control" id="name" name="name"
                aria-describedby="emailHelp"
                placeholder="请输入用户名" value="{$user->name}">
-        <small id="name" class="form-text text-muted">用户名不可以与其他用户相同
+        <small class="form-text text-muted">用户名不可以与其他用户相同
         </small>
     </div>
 
     <div class="form-group">
         <div class="form-group">
-            <label for="exampleFormControlSelect1">性别</label>
-            <select class="form-control" name="sex" id="exampleFormControlSelect1">
+            <label>性别</label>
+            <select class="form-control" name="sex" id="sex">
                 <option {if condition="1==$user->sex" } selected{
                 /if} value="1">男</option>
                 <option {if condition="2==$user->sex" } selected{
@@ -46,18 +45,18 @@
     </div>
 
     <div class="form-group">
-        <label for="exampleInputEmail1">邮箱</label>
-        <input type="email" class="form-control" name="email" id="exampleInputEmail1"
+        <label>邮箱</label>
+        <input type="email" class="form-control" name="email" id="email"
                aria-describedby="emailHelp" placeholder="输入邮箱" value="{$user->email}">
-        <small id="emailHelp" class="form-text text-muted">
+        <small class="form-text text-muted">
             邮箱地址不可以与其他用户重复
         </small>
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">密码</label>
-        <input type="text" class="form-control" name="password" id="exampleInputPassword1"
+        <label>密码</label>
+        <input type="text" class="form-control" name="password" id="password"
                placeholder="请输入密码" value="<?php echo think_decrypt($user->password); ?>">
-        <small id="password" class="form-text text-muted">
+        <small class="form-text text-muted">
             可在这里重新设置密码
         </small>
     </div>
@@ -67,7 +66,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">个人简介</span>
             </div>
-            <textarea class="form-control" name="introduction"
+            <textarea class="form-control" name="introduction" id="introduction"
                       aria-label="With textarea">{$user->introduction}</textarea>
         </div>
     </div>
@@ -77,5 +76,33 @@
 {/block}
 
 {block name="cur_js"}
-
+    <script>
+        $('#eidt_user').click(function () {
+            var form_data = new FormData();
+            form_data.append('name', $("#name").val());
+            form_data.append('sex', $("#sex").val());
+            form_data.append('email', $("#email").val());
+            form_data.append('introduction', $("#introduction").val());
+            form_data.append('password', $("#password").val());
+            form_data.append('user_id',$('#user_id').val());
+            form_data.append("head_portrait", $("#head_portrait").get(0).files[0]);
+            var layer_load = layer.load(0);
+            $.ajax({
+                url: "/upd_user",
+                processData: false,
+                contentType: false,
+                data: form_data,
+                type: "POST",
+                success: function (data) {
+                    if (100 == data.code) {
+                        layer.close(layer_load);
+                        dialog.successTo(data.msg, 'user_resource_list');
+                    } else {
+                        layer.close(layer_load);
+                        dialog.showError(data.msg);
+                    }
+                }
+            });
+        });
+    </script>
 {/block}

@@ -2,7 +2,7 @@
 {block name="cur_css"}
     <script>
         $(function() {
-            $('a.media').media({width:1150, height:800});
+            $('a.media').media({width:1050, height:800});
             $('a.mediase').media({width:800, height:800});
         });
     </script>
@@ -31,13 +31,7 @@
                 </ul>
             </div>
             <div class="col-md-9">
-                <div class="resource_title">
-                    <h5 class="title">{$resource->title}<h5>
-                        <span>上传时间：{$resource->create_at}<span>
-                </div>
-                <div class="panel-body">
-                    <a class="media" href="{$resource->src}"></a>
-                </div>
+                {include file="../application/index/view/public/pdf_show.html"}
             </div>
         </div>
     </div>

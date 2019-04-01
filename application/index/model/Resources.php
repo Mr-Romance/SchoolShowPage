@@ -17,8 +17,7 @@ class Resources extends Model
      * @param $data
      * @throws Exception
      */
-    public static function saveResources($data)
-    {
+    public static function saveResources($data) {
         $resource = new Resources($data);
         $save_res = $resource->save();
 
@@ -35,8 +34,7 @@ class Resources extends Model
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public static function getResourcesList($search_data = [], $user_id = 0)
-    {
+    public static function getResourcesList($search_data = [], $user_id = 0) {
         $base_query = Db::table('resources');
         if (!empty($search_data['res_title']) && isset($search_data['res_title'])) {
             $base_query = $base_query->where('title', 'like', $search_data['res_title']);
@@ -51,11 +49,11 @@ class Resources extends Model
             $base_query = $base_query->where('user_id', $user_id);
         }
         if (!empty($search_data['order_type'])) {
-            if (1 == $search_data['order_type']) {
-                $base_query = $base_query->order('id', 'desc');
-            } elseif (2 == $search_data['order_type']) {
+            if (2 == $search_data['order_type']) {
                 $base_query = $base_query->order('id', 'asc');
             }
+        } else {
+            $base_query = $base_query->order('id', 'desc');
         }
 
 
@@ -75,14 +73,9 @@ class Resources extends Model
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function getDataBySubject($subject_id, $limit)
-    {
+    public static function getDataBySubject($subject_id, $limit) {
         $resource = new Resources();
-        $data = $resource
-            ->where('subject', $subject_id)
-            ->limit($limit)
-            ->order('id', 'desc')
-            ->select();
+        $data = $resource->where('subject', $subject_id)->limit($limit)->order('id', 'desc')->select();
 
         return $data;
 //        $ret_data = [];
@@ -104,13 +97,9 @@ class Resources extends Model
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function getTopResources($limit)
-    {
+    public static function getTopResources($limit) {
         $resource = new Resources();
-        $data = $resource
-            ->limit($limit)
-            ->order('id', 'desc')
-            ->select();
+        $data = $resource->limit($limit)->order('id', 'desc')->select();
 
         return $data;
 

@@ -42,6 +42,7 @@ Route::get('teacher_res_list','index/index/teacherResourceList');
  */
 Route::get('user_page', 'index/admin/userPage');
 Route::post('add_user', 'index/admin/addUser');
+Route::post('upd_user', 'index/admin/updUser');
 Route::get('show_add_user', 'index/admin/showAddUser');
 Route::post('user_edit', 'index/admin/editUser');
 Route::post('upd_head_portrait', 'index/admin/updHeadPortrait');

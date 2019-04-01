@@ -17,31 +17,39 @@ class Users extends Model
      *  保存用户的方法
      *
      * @param $data
+     * @param int $id
      * @return string
      * @throws DataNotFoundException
      * @throws DbException
      * @throws Exception
      * @throws ModelNotFoundException
      */
-    public static function saveUser($data)
+    public static function saveUser($data,$id=0)
     {
         if (empty($data)) {
             throw new Exception('要保存数据为空');
         }
         $user = new Users();
-        // 检查是否有重复
-        $name_exists = $user->where('name', $data['name'])->find();
-        if ($name_exists) {
-            throw new Exception('该用户名已经存在');
-        }
 
-        $email_exists = $user->where('email', $data['email'])->find();
-        if ($email_exists) {
-            throw new Exception('该邮箱已经存在');
+        if(empty($id)){
+            // 检查是否有重复
+            $name_exists = $user->where('name', $data['name'])->find();
+            if ($name_exists) {
+                throw new Exception('该用户名已经存在');
+            }
+
+            $email_exists = $user->where('email', $data['email'])->find();
+            if ($email_exists) {
+                throw new Exception('该邮箱已经存在');
+            }
         }
 
         // 执行保存
-        $save_res = $user->save($data);
+        if(empty($id)){
+            $save_res = $user->save($data);
+        }else{
+            $save_res = $user->save($data,['id'=>$id]);
+        }
         if (!$save_res) {
             return '添加人员失败';
         }

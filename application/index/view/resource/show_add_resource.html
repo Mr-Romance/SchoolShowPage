@@ -7,7 +7,7 @@
 <style rel="stylesheet" href="/static/css/show_add_resource.css"></style>
 <style>
     .footer{
-        position:fixed;
+        position:relative;
         bottom: 0;
         left:0;
     }
@@ -76,6 +76,11 @@
     </div>
 
     <div class="form-group">
+        <label style="color:red">大文件请联系管理员使用FTP工具上传，注意文件后缀名称(尽量使用数字+字母组合命名)</label>
+        <input class="form-control" name= "source_name"  id="source_name" placeholder="请输入资源的名称，已经上传的文件不需要重复填写">
+    </div>
+
+    <div class="form-group">
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">资源介绍</span>
@@ -122,6 +127,7 @@
         form_data.append('cat_second', $("#cat_second").val());
         form_data.append('introduction', $("#introduction").val());
         form_data.append('subject', $("#subject").val());
+        form_data.append('source_name',$('#source_name').val());
         form_data.append("thumbnail", $("#thumbnail").get(0).files[0]);
         form_data.append("src", $("#src").get(0).files[0]);
         var layer_load = layer.load(0);
