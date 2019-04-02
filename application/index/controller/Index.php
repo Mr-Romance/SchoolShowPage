@@ -80,7 +80,7 @@ class Index extends Controller
      */
     public function resourceIndex()
     {
-        $recomend_resource_info = Resources::where('status', 1)->order('sort', 'desc')->paginate(3);
+        $recomend_resource_info = Resources::where('status', 1)->order('sort', 'desc')->paginate(4);
         $this->assign('recomend_resource_info', $recomend_resource_info);
 
         $new_resource_info = Resources::where('status', 1)->order('id', 'desc')->paginate(6);
