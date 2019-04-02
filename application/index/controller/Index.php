@@ -40,7 +40,9 @@ class Index extends Controller
     public function index()
     {
         $dong_tai_info = Resources::getDataBySubject(2, 4);
+        $dong_tai_info2 = Resources::getDataBySubject(2, 4,4);
         $this->assign('dong_tai_info', $dong_tai_info);
+        $this->assign('dong_tai_info2', $dong_tai_info2);
         $this->assign('dt_subject_id', 2);
 
         $zheng_ce_info = Resources::getDataBySubject(1, 3);
@@ -56,8 +58,11 @@ class Index extends Controller
         $this->assign('zj_subject_id', 4);
 
 
-        $jian_she_info = Resources::getDataBySubject(5, 4);
+        $jian_she_info = Resources::getDataBySubject(5, 3);
+        $jian_she_info2 = Resources::getDataBySubject(5, 3, 3);
+
         $this->assign('jian_she_info', $jian_she_info);
+        $this->assign('jian_she_info2', $jian_she_info2);
         $this->assign('js_subject_id', 5);
 
         $tui_jian_resource = Resources::getTopResources(4);
@@ -229,7 +234,7 @@ class Index extends Controller
         $subject_name = $subject_info[$subject_id];
         $this->assign('subject_name', empty($subject_name) ? '无主题' : $subject_name);
 
-        $this->assign("subject_id", $subject_info[$subject_id]);
+        $this->assign("subject_id", $subject_id);
 
         $list = Resources::where('subject', $subject_id)->paginate(10);
         $this->assign('list', $list);

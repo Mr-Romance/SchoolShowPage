@@ -13,9 +13,9 @@
 			
 			//向上滑动动画
 			function autoani(){
-				$("li:first",docthis).animate({"margin-top":-value.li_h},value.movetime,function(){
+				$(".line li:first",docthis).animate({"margin-top":-value.li_h},value.movetime,function(){
 					$(this).css("margin-top",0).appendTo(".line");
-				})
+				});
 			}
 			
 			//自动间隔时间向上滑动
@@ -27,6 +27,6 @@
 			},function(){
 				anifun = setInterval(autoani,value.time);	//继续执行动画
 			})
-		}	
+		}
 	})
 })(jQuery)

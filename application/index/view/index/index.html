@@ -11,10 +11,12 @@
     <script src="/static/dialog.js"></script>
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
     <script src="/static/myslideup.js"></script>
+    <script src="/static/myslideup2.js"></script>
     <script src="/static/plyr.js"></script>
     <script>
         $(function () {
             $(".line").slideUp();
+            $(".line2").slideRight();
         })
     </script>
 </head>
@@ -66,23 +68,28 @@
     </div>
 
     <!--导航部分-->
-    <div class="top-nav bg-dark">
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
-                <div class="top-nav-btns">
-                    <a class="btn btn-outline-success" type="button" href="/">首页</a>
-                    {if condition="!empty($subject)"}
-                    {volist name="subject" id="vo"}
-                    <a class="btn btn-outline-secondary" type="button" href="/subject_index?subject_id={$vo['id']}">{$vo['name']}</a>
-                    {/volist}
-                    {/if}
-                    <a class="btn btn-outline-secondary" type="button" href="/resource_index">资源库</a>
-                </div>
-            </div>
-            <div class="col-1"></div>
+    <div class="nav">
+        <div class="wrap">
+            <ul>
+                <li>
+                    <a href="/">首页</a>
+                </li>
+                {if condition="!empty($subject)"}
+                {volist name="subject" id="vo"}
+                <li>
+                    <a href="/subject_index?subject_id={$vo['id']}">{$vo['name']}</a>
+                </li>
+                {/volist}
+                {/if}
+
+                <li>
+                    <a href="/resource_index">资源库</a>
+                </li>
+            </ul>
         </div>
     </div>
+
+    <div class="clear-float"></div>
 
     <div class="top-news">
         <div class="row">
@@ -99,7 +106,7 @@
             <div class="col">
                 <div class="news-left">
                     <ul class="line">
-                        {volist name="jian_she_info" id="vo"}
+                        {volist name="dong_tai_info" id="vo"}
                         <li><a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
                             <span class="lb-news-title">{$vo->title}<span></a></li>
                         {/volist}
@@ -110,7 +117,7 @@
             <div class="col">
                 <div class="news-left">
                     <ul class="line">
-                        {volist name="jian_she_info" id="vo"}
+                        {volist name="dong_tai_info2" id="vo"}
                         <li><a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
                             <span class="lb-news-title">{$vo->title}<span></a></li>
                         {/volist}
@@ -119,6 +126,8 @@
             </div>
         </div>
     </div>
+
+    <div class="clear-float"></div>
 
     <!--新闻分类，文字新闻-->
     <div class="column-news">
@@ -137,7 +146,7 @@
         </div>
         <div class="zong-jie">
             <h5>总结报告</h5>
-            <ul >
+            <ul>
                 {volist name="zong_jie_info" id="vo"}
                 <li><a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$zj_subject_id}">
                     <span>></span> {$vo->title}
@@ -161,32 +170,50 @@
         </div>
     </div>
 
-    <div class="column-video">
-        <h3 class="jian_she_title">建设成果</h3>
-        <div class="row">
-            <div class="col-7 video-jian-she">
-                <div class="media">
-                    <img class="align-self-start mr-3 img-fluid" src="/static/imgs/column.jpg">
-                    <div class="media-body">
-                        {volist name="jian_she_info" id="vo"}
-                        <h5 class="mt-0"><a class="title_text" style="color:black;font-size:13px;"
-                                            href="/index_resource_show?id={$vo->id}&subject_id={$js_subject_id}">{$vo->title}</a>
-                        </h5>
-                        {/volist}
-                    </div>
+    <div class="clear-float"></div>
+
+    <div class="column-js">
+        <div class="wrap">
+            <div class="js-main">
+                <h3 class="jian_she_title">建设成果</h3>
+                <img class="js-img" src="/static/imgs/column.jpg">
+                <div class="js-info">
+                    <ul>
+                        <li>
+                            <h3>01</h3>
+                            <div class="li-con">
+                                {volist name="jian_she_info" id="vo"}
+                                <a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
+                                    <h4>{$vo->title}</h4>
+                                </a>
+                                {/volist}
+                            </div>
+                        </li>
+                        <li>
+                            <h3>02</h3>
+                            <div class="li-con">
+                                {volist name="jian_she_info2" id="vo"}
+                                <a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
+                                    <h4>{$vo->title}</h4>
+                                </a>
+                                {/volist}
+                            </div>
+                        </li>
+                        <div class="clear-float"></div>
+                    </ul>
                 </div>
             </div>
-            <div class="col-5">
+            <div class="js-media">
                 <div class="m">
                     <video poster="vs.png" controls>
                         <source src="http://www.jplayer.org/video/m4v/Incredibles_Teaser.m4v" type="video/mp4">
-                        <!-- <source src="/path/to/video.webm" type="video/webm">-->
-                        <!-- Captions are optional -->
                     </video>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="clear-float"></div>
 
     <div class="column-fixed">
         <h3 class="tui_jian_title">推荐资源</h3>
@@ -196,7 +223,7 @@
                 <a href="/index_resource_show?id={$vo->id}&subject_id={$vo->subject}">
                     <img src="{$vo->thumbnail}">
                 </a>
-                <p class="tui_jian_title">{$vo->title}</p>
+                <p class="source_title">{$vo->title}</p>
             </div>
             {/volist}
         </div>
@@ -204,7 +231,7 @@
 
     <!--新闻分类，轮播模式的-->
     <div class="column-lb">
-        <h3>校园风采</h3>
+        <h3 class="column-lb-title">校园风采</h3>
         <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-interval="2000">
@@ -282,7 +309,9 @@
     {include file="../application/index/view/public/footer.html"}
 </div>
 
-<script>plyr.setup();</script>
+<script>
+    plyr.setup();
+</script>
 
 </body>
 </html>

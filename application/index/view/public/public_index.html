@@ -11,7 +11,13 @@
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
     <script src="/static/jquery.media.js"></script>
     {block name="cur_css"}
-
+       <style>
+           .footer{
+               position:fixed;
+               bottom:0;
+               left:0;
+           }
+       </style>
     {/block}
 </head>
 <body>
@@ -62,21 +68,20 @@
     </div>
 
     <!--导航部分-->
-    <div class="top-nav bg-dark">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <div class="top-nav-btns">
-                    <a class="btn btn-outline-success" target="_blank" type="button" href="/">首页</a>
-                    {if condition="!empty($subject)"}
-                    {volist name="subject" id="vo"}
-                    <a class="btn btn-outline-secondary" target="_blank" type="button" href="/subject_index?subject_id={$vo['id']}">{$vo['name']}</a>
-                    {/volist}
-                    {/if}
-                    <a class="btn btn-outline-secondary" target="_blank" type="button" href="/resource_index">资源库</a>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
+    <div class="nav">
+        <div class="wrap">
+            <ul>
+                <li>
+                    <a href="/">首页</a>
+                </li>
+                {if condition="!empty($subject)"}
+                {volist name="subject" id="vo"}
+                <li {if condition="$subject_id==$vo['id']" }class="active" {/if}>
+                    <a href="/subject_index?subject_id={$vo['id']}">{$vo['name']}</a>
+                </li>
+                {/volist}
+                {/if}
+            </ul>
         </div>
     </div>
 

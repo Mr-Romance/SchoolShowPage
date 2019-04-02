@@ -67,15 +67,16 @@ class Resources extends Model
      *  首页根据主题进行搜索的数据
      *
      * @param $subject_id
-     * @param $limit
-     * @return array
+     * @param $limit_end
+     * @param $limit_start
+     * @return false|\PDOStatement|string|\think\Collection
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function getDataBySubject($subject_id, $limit) {
+    public static function getDataBySubject($subject_id,$limit_end,$limit_start=0) {
         $resource = new Resources();
-        $data = $resource->where('subject', $subject_id)->limit($limit)->order('id', 'desc')->select();
+        $data = $resource->where('subject', $subject_id)->limit($limit_start,$limit_end)->order('id', 'desc')->select();
 
         return $data;
 //        $ret_data = [];
