@@ -17,6 +17,32 @@
     .teacher_resource_list{
       margin-top:10px;
     }
+
+    .list-unstyled .mr-3{
+        width:200px;
+        height:200px;
+    }
+
+    .list-unstyled img{
+        width:200px;
+        height:200px;
+    }
+
+    .the-teacher img{
+        height:200px;
+        width:280px;
+    }
+
+    .footer{
+        position:fixed;
+        bottom:0;
+        left:0;
+    }
+
+    .card img{
+        height:200px;
+        width:280px;
+    }
 </style>
 {/block}
 
@@ -40,8 +66,8 @@
                                 {$vo.introduction}
                             </div>
                             <div class="statics_info">
-                                <h6>下载量： <span class="badge badge-secondary">100</span></h6>
-                                <h6>阅读量： <span class="badge badge-secondary">100</span></h6>
+                                <!--<h6>下载量： <span class="badge badge-secondary">100</span></h6>-->
+                                <!--<h6>阅读量： <span class="badge badge-secondary">100</span></h6>-->
                             </div>
                         </li>
                         {/volist}
@@ -58,16 +84,13 @@
             <div class="col-md-3">
                 <div class="the-teacher">
                     <div class="card" style="width: 18rem;">
-                        <div class="teacher-main">
-                            <div class="teacher-img">
-                                <img class="card-img-top" src="{$user->head_portrait}">
-                            </div>
-                        </div>
+                        <img class="card-img-top" src="{$user->head_portrait}" alt="{$user->name}">
                         <div class="card-body">
-                            <h5>{$user->name}</h5>
-                            <h5 class="card-title">{$user->email}</h5>
-                            <p class="card-text">{$user->introduction}</p>
-                            <a href="#" class="btn btn-primary">教师资源</a>
+                            <h5 class="card-title">姓名：{$user->name}</h5>
+                            <h5 class="card-title">邮箱：{$user->email}</h5>
+                            <p class="card-text title_text">教师介绍：{$user->introduction}</p>
+                            <a href="/teacher_res_list?user_id={$user->id}" target="_blank"
+                               class="btn btn-primary">教师资源</a>
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ use app\index\model\Resources;
 use app\index\model\Users;
 use think\Config;
 use think\Controller;
+use think\Db;
 use think\Request;
 use think\Session;
 
@@ -40,7 +41,7 @@ class Index extends Controller
     public function index()
     {
         $dong_tai_info = Resources::getDataBySubject(2, 4);
-        $dong_tai_info2 = Resources::getDataBySubject(2, 4,4);
+        $dong_tai_info2 = Resources::getDataBySubject(2, 4, 4);
         $this->assign('dong_tai_info', $dong_tai_info);
         $this->assign('dong_tai_info2', $dong_tai_info2);
         $this->assign('dt_subject_id', 2);
@@ -111,6 +112,41 @@ class Index extends Controller
 
         $top_four_teacher = Users::where('status', 1)->order('id', 'asc')->paginate(4);
         $this->assign('top_four_teacher', $top_four_teacher);
+
+        // 统计信息 此处巨坑，再也不用tp
+        // 没找到group_by，这里先使用原生查询
+        $top_five_user = Db::query('select count(*) as total_count ,user_id from resources group by user_id order by total_count desc limit 5');
+        $users_arr = [];
+        if (!empty($top_five_user)) {
+            foreach ($top_five_user as $top) {
+                $user = Users::get($top['user_id']);
+                $name = $user['name'];
+                $count = $top['total_count'];
+                $users_arr[] = ['name' => $name, 'count' => $count];
+            }
+        }
+        $this->assign('counter_users', $users_arr);
+
+        $top_five_category = Db::query('select count(*) as total_count ,category from resources group by category order by total_count desc limit 5');
+        $categories_arr = [];
+        if (!empty($top_five_category)) {
+            foreach ($top_five_category as $top) {
+                $categorie = Categories::get($top['category']);
+                $count = $top['total_count'];
+                $name = $categorie['name'];
+                $categories_arr[] = ['name' => $name, 'count' => $count];
+            }
+        }
+        $this->assign('counter_category', $categories_arr);
+
+        $top_five_subject = Db::query('select count(*) as total_count ,subject from resources group by category order by total_count desc limit 5');
+        $subjects_arr = [];
+        if (!empty($top_five_subject)) {
+            foreach ($top_five_subject as $top) {
+                $subjects_arr[] = ['name' => Config::get('subject_info')[$top['subject']], 'count'=>$top['total_count']];
+            }
+        }
+        $this->assign('counter_subject', $subjects_arr);
 
         return $this->fetch();
     }
@@ -257,7 +293,7 @@ class Index extends Controller
          */
         $subject_name = $subject_info[$subject_id];
         $this->assign('subject_name', empty($subject_name) ? '无主题' : $subject_name);
-        $this->assign('subject_id',$subject_id);
+        $this->assign('subject_id', $subject_id);
 
 
         $resource = Resources::get($id);

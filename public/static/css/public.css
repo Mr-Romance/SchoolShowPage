@@ -171,6 +171,35 @@
 /**排行**/
 .pai-hang{
     background: #f5f5f5;
+    margin-top: 20px;
+}
+
+.table-head{
+    background-color: #33485d;
+    color: #fff;
+    font-size: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.table-des-title{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.table-des2-title{
+    font-size: 15px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.table-des{
+    font-size: 14px;
+}
+
+.table-des2{
+    font-size: 14px;
+    text-align: right;
 }
 
 

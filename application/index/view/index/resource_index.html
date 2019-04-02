@@ -108,110 +108,6 @@
         </div>
     </div>
 
-    <!--排行-->
-    <div class="pai-hang" ></div>
-    <div class="row rank">
-        <div class="col-4">
-
-
-            <table class="table table-sm table-borderless">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col" colspan="2">First Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                </tr>
-                <tr>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                </tr>
-                <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                </tr>
-                </tbody>
-            </table>
-
-
-        </div>
-        <div class="col-4">
-
-
-            <table class="table table-striped table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Username</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
-
-
-        </div>
-        <div class="col-4">
-
-
-            <table class="table table-striped table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Username</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
-
-
-        </div>
-    </div>
-
     <div class="teachers">
         <div class="row">
             <div><h3 class="column-title">明星教师</h3></div>
@@ -234,6 +130,82 @@
         </div>
     </div>
     <div class="clear-float"></div>
+
+
+    <!--排行-->
+    <div class="pai-hang" >
+        <div class="row ">
+            <div class="col-4">
+                <table class="table table-sm table-borderless">
+                    <thead class="table-head">
+                    <tr>
+                        <th scope="col" colspan="2">教师上传排行</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="table-des-title">姓名</td>
+                        <td class="table-des2-title">上传资源数</td>
+                    </tr>
+                    {volist name="counter_users" id="vo"}
+                    <tr>
+                        <td class="table-des">{$vo['name']}</td>
+                        <td class="table-des2">{$vo['count']}</td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="col-4">
+                <table class="table table-sm table-borderless">
+                    <thead class="table-head">
+                    <tr>
+                        <th scope="col" colspan="2">专业上传排行</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="table-des-title">专业</td>
+                        <td class="table-des2-title">资源总量</td>
+                    </tr>
+                    {volist name="counter_category" id="vo"}
+                    <tr>
+                        <td class="table-des">{$vo['name']}</td>
+                        <td class="table-des2">{$vo['count']}</td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="col-4">
+                <table class="table table-sm table-borderless">
+                    <thead class="table-head">
+                    <tr>
+                        <th scope="col" colspan="2">专题上传排行</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="table-des-title">专题</td>
+                        <td class="table-des2-title">资源总量</td>
+                    </tr>
+                    {volist name="counter_subject" id="vo"}
+                    <tr>
+                        <td class="table-des">{$vo['name']}</td>
+                        <td class="table-des2">{$vo['count']}</td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
 </div>
 <div class="clear-float"></div>
 
