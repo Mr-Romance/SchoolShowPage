@@ -257,6 +257,7 @@ class Index extends Controller
          */
         $subject_name = $subject_info[$subject_id];
         $this->assign('subject_name', empty($subject_name) ? '无主题' : $subject_name);
+        $this->assign('subject_id',$subject_id);
 
 
         $resource = Resources::get($id);

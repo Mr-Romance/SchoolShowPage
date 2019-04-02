@@ -102,7 +102,11 @@ ul.line li {
 }
 
 .news-left .lb-news-title {
-    color: black;
+    padding: 0 0 1px 0;
+    font-size: 16px;
+    color: #474747;
+    line-height: 20px;
+    font-weight: normal;
 }
 
 .news-left .lb-news-content {
@@ -367,4 +371,14 @@ a:hover {
 
 .subject-content a {
     color: black;
+}
+
+.index-page-location{
+    display: inline-block;
+    font: 12px/31px "\5b8b\4f53";
+    color: #6f6f6f;
+}
+
+.index-page-location a:hover{
+    color:red;
 }

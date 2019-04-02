@@ -13,7 +13,7 @@
 			
 			//向上滑动动画
 			function autoani(){
-				$(".line li:first",docthis).animate({"margin-top":-value.li_h},value.movetime,function(){
+				$("li:first",docthis).animate({"margin-top":-value.li_h},value.movetime,function(){
 					$(this).css("margin-top",0).appendTo(".line");
 				});
 			}

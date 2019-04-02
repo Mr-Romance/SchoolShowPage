@@ -9,6 +9,10 @@
             </ul>
         </div>
         <div class="col-md-9 subject-content">
+            <div class="index-page-location">
+                首页 > {$subject_name}
+            </div>
+
             <ul class="list-group list-group-flush">
                 {volist name="list" id="vo"}
                 <a class="list-group-item" href="/index_resource_show?id={$vo->id}&subject_id={$vo->subject}">
