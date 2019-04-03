@@ -108,10 +108,12 @@
                     <ul class="line">
                         {volist name="dong_tai_info" id="vo"}
                         <li>
+                            <div>
                             <a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
                             <span class="lb-news-title">{$vo->title}<span></a>
                             <a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
-                                <span class="lb-news-title lb-news-right">{$vo->title}<span></a>
+                                <span class="lb-news-title">{$vo->title}<span></a>
+                            </div>
                         </li>
                         {/volist}
                     </ul>

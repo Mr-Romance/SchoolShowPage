@@ -84,11 +84,12 @@ a:hover{
 
 .news-left {
     text-align: left;
+    width:700px;
 }
 
 ul.line {
     height: 50px;
-    width: 600px;
+    width: 700px;
     overflow: hidden;
 }
 
@@ -118,19 +119,20 @@ ul.line2 li {
 
 .lb-right-news{
     text-align: right;
-    margin-left: 200px;
+    margin-left: 250px;
 }
 
 .news-left .lb-news-title {
-    padding: 0 0 1px 0;
+    float:left;
+    padding: 25px 0 1px 0;
     font-size: 16px;
     color: #474747;
     line-height: 20px;
     font-weight: normal;
-}
-
-.lb-news-right{
-    margin-left:200px;
+    width:300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .news-left .lb-news-content {
