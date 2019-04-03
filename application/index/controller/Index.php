@@ -40,10 +40,30 @@ class Index extends Controller
      */
     public function index()
     {
-        $dong_tai_info = Resources::getDataBySubject(2, 4);
-        $dong_tai_info2 = Resources::getDataBySubject(2, 4, 4);
-        $this->assign('dong_tai_info', $dong_tai_info);
-        $this->assign('dong_tai_info2', $dong_tai_info2);
+        // 这里至少要4条数据
+        $dong_tai_info1 = Resources::getDataBySubject(2, 2);
+        $dong_tai_info2 = Resources::getDataBySubject(2, 2, 2);
+        $data1 = [];
+        $data2 = [];
+        $data = [];
+
+        if (!empty($dong_tai_info1)) {
+            foreach ($dong_tai_info1 as $info) {
+                $data1[] = ['id' => $info->id, 'title' => $info->title];
+            }
+        }
+
+        if (!empty($dong_tai_info2)) {
+            foreach ($dong_tai_info2 as $info) {
+                $data2[] = ['id' => $info->id, 'title' => $info->title];
+            }
+        }
+
+        for ($i = 0; $i < 2; $i++) {
+            $data[] = [$data1[$i], $data2[$i]];
+        }
+
+        $this->assign('dong_tai_info', $data);
         $this->assign('dt_subject_id', 2);
 
         $zheng_ce_info = Resources::getDataBySubject(1, 3);

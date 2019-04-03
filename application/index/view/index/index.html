@@ -109,27 +109,18 @@
                         {volist name="dong_tai_info" id="vo"}
                         <li>
                             <div>
-                            <a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
-                            <span class="lb-news-title">{$vo->title}<span></a>
-                            <a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
-                                <span class="lb-news-title">{$vo->title}<span></a>
+                            <a href="/index_resource_show&id={$vo[0]['id']}&subject_id={$js_subject_id}">
+                            <span class="lb-news-title">{$vo[0]['title']}<span></a>
+
+                                <a href="/index_resource_show&id={$vo[1]['id']}&subject_id={$js_subject_id}">
+                                    <span class="lb-news-title">{$vo[1]['title']}<span></a>
                             </div>
                         </li>
                         {/volist}
+
                     </ul>
                 </div>
             </div>
-
-            <!--<div class="col">-->
-                <!--<div class="news-left">-->
-                    <!--<ul class="line2">-->
-                        <!--{volist name="dong_tai_info2" id="vo"}-->
-                        <!--<li><a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">-->
-                            <!--<span class="lb-news-title">{$vo->title}<span></a></li>-->
-                        <!--{/volist}-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
         </div>
     </div>
 
