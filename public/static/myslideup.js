@@ -17,10 +17,11 @@
 					$(this).css("margin-top",0).appendTo(".line");
 				});
 			}
+
 			
 			//自动间隔时间向上滑动
 			var anifun = setInterval(autoani,value.time);
-			
+
 			//悬停时停止滑动，离开时继续执行
 			$(docthis).children("li").hover(function(){
 				clearInterval(anifun);			//清除自动滑动动画

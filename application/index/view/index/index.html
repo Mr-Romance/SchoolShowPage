@@ -16,7 +16,7 @@
     <script>
         $(function () {
             $(".line").slideUp();
-            $(".line2").slideRight();
+            $(".line2").slideUp();
         })
     </script>
 </head>
@@ -107,23 +107,27 @@
                 <div class="news-left">
                     <ul class="line">
                         {volist name="dong_tai_info" id="vo"}
-                        <li><a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
-                            <span class="lb-news-title">{$vo->title}<span></a></li>
+                        <li>
+                            <a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
+                            <span class="lb-news-title">{$vo->title}<span></a>
+                            <a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
+                                <span class="lb-news-title lb-news-right">{$vo->title}<span></a>
+                        </li>
                         {/volist}
                     </ul>
                 </div>
             </div>
 
-            <div class="col">
-                <div class="news-left">
-                    <ul class="line">
-                        {volist name="dong_tai_info2" id="vo"}
-                        <li><a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">
-                            <span class="lb-news-title">{$vo->title}<span></a></li>
-                        {/volist}
-                    </ul>
-                </div>
-            </div>
+            <!--<div class="col">-->
+                <!--<div class="news-left">-->
+                    <!--<ul class="line2">-->
+                        <!--{volist name="dong_tai_info2" id="vo"}-->
+                        <!--<li><a href="/index_resource_show&id={$vo->id}&subject_id={$js_subject_id}">-->
+                            <!--<span class="lb-news-title">{$vo->title}<span></a></li>-->
+                        <!--{/volist}-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 

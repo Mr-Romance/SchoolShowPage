@@ -208,10 +208,14 @@
     height:300px;
 }
 
-.the-teacher img{
-    height:100px;
+.teacher-img {
+    text-align: center;
+    height:200px;
     width:280px;
 }
 
-.teachers{
+.teachers img {
+    width:200px;
+    height:200px;
+    border-radius: 50px;
 }
