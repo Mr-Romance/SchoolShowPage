@@ -168,6 +168,10 @@ class Index extends Controller
         }
         $this->assign('counter_subject', $subjects_arr);
 
+        // 页面的统计信息
+        $this->assign('total_resource_count',3256);
+        $this->assign('total_resource_size',281);
+
         return $this->fetch();
     }
 

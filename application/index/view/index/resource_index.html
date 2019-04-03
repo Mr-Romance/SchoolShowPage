@@ -4,16 +4,15 @@
 {/block}
 
 {block name="main"}
-<div class="row">
-    <div class="col bg-img">
+    <div class="bg-img">
         <img src="/static/imgs/banner1.jpg">
-    </div>
-</div>
 
-<!--<div class="total-statics">-->
-<!--<span class="total-statics-text">资源数数：100</span>-->
-<!--<span class="total-statics-text">资源总大小：100G</span>-->
-<!--</div>-->
+        <div class="total-statics">
+            <span class="total-statics-text">资源数数：{$total_resource_count}</span>
+            <br>
+            <span class="total-statics-text">资源总大小：{$total_resource_size}G</span>
+        </div>
+    </div>
 <div class="wrap">
     <!--推荐资源-->
     <div class="recommend">
