@@ -73,7 +73,7 @@
             post_data,
             function (data) {
                 if (100 == data.code) {
-                    dialog.successAuto(data.msg, '/resource_index');
+                    dialog.successAuto(data.msg, '/user_page');
                 } else {
                     dialog.showError(data.msg);
                 }

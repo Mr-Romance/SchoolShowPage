@@ -1,10 +1,20 @@
 {extend name="public:public_admin"}
 
 {block name="cur_css"}
+<link rel="stylesheet" href="/static/layui/css/layui.css">
+<script src="/static/layui/layui.js"></script>
 <style>
-    .form-add-category{
-        height:1100px;
-    }
+        .btn-group{
+            margin-left:100px;
+        }
+
+        .cat-list{
+            margin-top:20px;
+        }
+
+        .cat-list label{
+            font-size:18px;
+        }
 
     .footer{
         position:fixed;
@@ -12,6 +22,7 @@
         left:0;
     }
 </style>
+
 {/block}
 
 {block name="right-content"}
@@ -19,65 +30,39 @@
 <div class="search_form">
     <button type="button" id="delete_category" class="btn btn-danger btn-lg">删除选中</button>
     <a href="/show_add_category" class="btn btn-primary btn-lg">添加分类</a>
-    <form id="search_form">
-        <table class="table table-striped" style="margin-top:20px;">
-            <thead>
-            <tr>
-                <th scope="col" style="text-align:center">一级分类名称</th>
-                <th scope="col"  style="text-align:center">二级分类名称</th>
-            </tr>
-            </thead>
-            <tbody>
-            {if condition="!empty($category_list)"}
-            {volist name="category_list" id="vo"}
-            <tr>
-                <th class="search_th">
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-outline-primary">
-                            <input class="cat_checkbox" type="checkbox" value="{$vo['first_cat_id']}" autocomplete="off">
-                            {$vo['first_cat_name']}
-                        </label>
-                    </div>
-                </th>
-                <td>
-                    <div class="btn-group" data-toggle="buttons">
-                        {php}$second_cat_arr=$vo['second_cat_arr']; {/php}
-                        {volist name="second_cat_arr" id="category"}
-                        <label class="btn btn-outline-dark">
-                            <input class="cat_checkbox" type="checkbox" value="{$category['id']}" autocomplete="off"
-                                   {if condition="!empty($category_checked)" }
-                                   {if condition="in_array($category['id'],$category_checked)" } checked{/if}
-                            {/if}
-                            >
-                            {$category['name']}
-                        </label>
-                        {/volist}
-                    </div>
-                </td>
-            </tr>
-            {/volist}
-            {/if}
 
-            {if condition="!empty($res_type)"}
-            <tr>
-                <th class="search_th">资源类型</th>
-                <td>
-                    <div class="btn-group" data-toggle="buttons">
-                        {volist name="res_type" id="type"}
-                        <label class="btn btn-outline-danger">
-                            <input class="type_checkbox" type="checkbox" value="{$type['id']}" autocomplete="off"
-                                   {if condition="!empty($type_checked)"}
-                                   {if condition="in_array($type['id'],$type_checked)"} checked {/if} {/if}>
-                            {$type['name']}
-                        </label>
-                        {/volist}
-                    </div>
-                </td>
-            </tr>
-            {/if}
-            </tbody>
-        </table>
-    </form>
+    <div class ="cat-list">
+    <div class="layui-collapse">
+        {if condition="!empty($category_list)"}
+        {volist name="category_list" id="vo"}
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">
+                <label class="btn btn-outline-primary">
+                    <input class="cat_checkbox" type="checkbox" value="{$vo['first_cat_id']}" autocomplete="off">
+                    {$vo['first_cat_name']}
+                </label>
+            </h2>
+            <div class="layui-colla-content layui-show">
+                <div class="btn-group" data-toggle="buttons">
+                    {php}$second_cat_arr=$vo['second_cat_arr']; {/php}
+                    {volist name="second_cat_arr" id="category"}
+                    <label class="btn btn-outline-dark">
+                        <input class="cat_checkbox" type="checkbox" value="{$category['id']}" autocomplete="off"
+                               {if condition="!empty($category_checked)" }
+                               {if condition="in_array($category['id'],$category_checked)" } checked{/if}
+                        {/if}
+                        >
+                        {$category['name']}
+                    </label>
+                    {/volist}
+                </div>
+            </div>
+        </div>
+        {/volist}
+        {/if}
+    </div>
+    </div>
+
 </div>
 
 
@@ -85,6 +70,13 @@
 
 {block name="cur_js"}
 <script>
+
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+
     var cat_id_arr = new Array();
     var type_id_arr=new Array();
     var url = '';

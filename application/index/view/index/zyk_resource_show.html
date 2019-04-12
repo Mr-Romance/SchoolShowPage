@@ -3,8 +3,9 @@
 {block name="cur_css"}
 <link rel="stylesheet" href="/static/css/resource_index.css">
 <script>
+    var media_width=$('.resource_title').width;
     $(function() {
-        $('a.media').media({width:1150, height:800});
+        $('a.media').media({width:media_width, height:800});
         $('a.mediase').media({width:800, height:800});
     });
 </script>
@@ -30,10 +31,10 @@
 {block name="main"}
 <div class =wrap>
 <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-1"></div>
+    <div class="col-10">
         <div class="row">
-        <div class="col-md-9">
+        <div class="col-9">
             <div class="resource_title">
                 <h5 class="title">{$resource->title}<h5>
                         <span>上传时间：{$resource->create_at}<span>
@@ -42,7 +43,7 @@
                 <a class="media" href="{$resource->src}"></a>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-3">
             <div class="the-teacher">
                 <div class="card" style="width: 18rem;">
                     <div class="teacher-main">
@@ -61,7 +62,7 @@
         </div>
         </div>
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-1"></div>
 </div>
 </div>
 {/block}

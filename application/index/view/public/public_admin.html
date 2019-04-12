@@ -18,7 +18,9 @@
             $('a.media').media({width:1050, height:800});
             $('a.mediase').media({width:800, height:800});
         });
+
     </script>
+
 </head>
 <body class="container">
 
@@ -30,7 +32,7 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="list-group">
+                    <div class="list-group" id="list-tab">
                         <a href="#" class="list-group-item list-group-item-action active">
                             菜单列表
                         </a>
@@ -58,6 +60,12 @@
     {include file="../application/index/view/public/footer.html"}
 </div>
 
-{block name="cur_js"}{/block}
+{block name="cur_js"}
+<script>
+    $(".list-list-group-item-action").click(function(){
+        alert('xxx');
+    });
+</script>
+{/block}
 </body>
 </html>

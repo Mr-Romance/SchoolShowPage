@@ -296,7 +296,7 @@ class Index extends Controller
 
         $this->assign("subject_id", $subject_id);
 
-        $list = Resources::where('subject', $subject_id)->paginate(10);
+        $list = Resources::where('subject', $subject_id)->paginate(10,false,['query'=>['subject_id'=>$subject_id]]);
         $this->assign('list', $list);
         return $this->fetch();
     }

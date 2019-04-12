@@ -1,10 +1,6 @@
 {extend name="public:public_index"}
 {block name="cur_css"}
     <script>
-        $(function() {
-            $('a.media').media({width:1150, height:800});
-            $('a.mediase').media({width:800, height:800});
-        });
     </script>
 <style>
     .resource_title{
@@ -16,6 +12,7 @@
     .panel-body{
         text-align:left;
         width:400px;
+        margin-bottom: 20px;
     }
 
     .title{
@@ -48,5 +45,11 @@
 {/block}
 
 {block name="cur_js"}
-
+<script>
+    var media_width=$('.resource_title').width();
+    $(function() {
+        $('a.media').media({width:media_width, height:800});
+        $('a.mediase').media({width:800, height:800});
+    });
+</script>
 {/block}
