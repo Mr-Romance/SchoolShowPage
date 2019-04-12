@@ -199,7 +199,9 @@ class Resource extends Controller
     /**
      *  展示用户已经发布资源的列表
      *
+     * @param Request $request
      * @return mixed
+     * @throws Exception
      * @throws \think\exception\DbException
      */
     public function showUserResourceList(Request $request) {

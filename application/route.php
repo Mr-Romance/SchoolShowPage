@@ -60,7 +60,6 @@ Route::get('show_add_category', 'index/resource/showAddCategory');
 Route::post('add_category', 'index/resource/addCategory');
 Route::post('get_second_categories', 'index/resource/getSecondCategories');
 Route::post('add_resource', 'index/resource/addResource');
-Route::get('user_resource_list','index/resource/showUserResourceList');
 Route::post('search_user_resource_list','index/index/searchUserResourceList');
 Route::get('delete_search_session','index/resource/deleteSearchSession');
 Route::get('show_user_resource_detail','index/resource/showUserResourceDetail');
@@ -68,7 +67,7 @@ Route::get('manage_resource_list','index/resource/manageResourceList');
 Route::post('delete_resource','index/resource/deleteResource');
 Route::post('delete_category','index/resource/deleteCategory');
 Route::get('category_list','index/resource/categoryList');
-
+Route::get('clear_search_session','index/index/clearSearchSession');
 Route::post('add_category', 'index/resource/addCategory');
 
 

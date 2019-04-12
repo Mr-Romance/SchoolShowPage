@@ -220,6 +220,9 @@ class Index extends Controller
         if (!empty($search_param['res_category'])) {
             $this->assign('category_checked', $search_param['res_category']);
         }
+        if(!empty($search_param['search_title'])){
+            $this->assign('search_title',$search_param['res_title']);
+        }
         $this->assign('list', $list);
 
         $page = $list->render();
@@ -238,7 +241,6 @@ class Index extends Controller
     {
         $param = $request->param();
         $search_param = [];
-
         if (!empty($param['search_cat_ids'])) {
             // 把字符串打散为数组
             $search_param['res_category'] = explode(',', $param['search_cat_ids']);
@@ -266,6 +268,7 @@ class Index extends Controller
         } else {
             Session::delete('order_type');
         }
+
     }
 
     /**
@@ -369,5 +372,12 @@ class Index extends Controller
         $this->assign('user', $user);
 
         return $this->fetch();
+    }
+
+    public function clearSearchSession(){
+        Session::delete('param.search_category');
+        Session::delete('param.search_type');
+        Session::delete('search_title');
+        Session::delete('order_type');
     }
 }

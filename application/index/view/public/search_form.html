@@ -6,11 +6,12 @@
             </tr>
             </thead>
             <tbody>
+
             {if condition="!empty($cat_groups)"}
             {volist name="cat_groups" id="vo"}
             <tr>
                 <th class="search_th">{$vo['first_cat_name']}</th>
-                <td>
+                <td id="category-box">
                     <div class="btn-group" data-toggle="buttons">
                         {php}$second_cat_arr=$vo['second_cat_arr']; {/php}
                         {volist name="second_cat_arr" id="category"}
@@ -29,6 +30,7 @@
             {/volist}
             {/if}
 
+            <div id="type">
             {if condition="!empty($res_type)"}
             <tr>
                 <th class="search_th">资源类型</th>
@@ -36,7 +38,7 @@
                     <div class="btn-group" data-toggle="buttons">
                         {volist name="res_type" id="type"}
                         <label class="btn btn-outline-danger">
-                            <input class="type_checkbox" type="checkbox" value="{$type['id']}" autocomplete="off"
+                            <input class="type_checkbox" name="type_checkbox" type="checkbox" value="{$type['id']}" autocomplete="off"
                             {if condition="!empty($type_checked)"}
                                 {if condition="in_array($type['id'],$type_checked)"} checked {/if} {/if}>
                             {$type['name']}
@@ -46,6 +48,7 @@
                 </td>
             </tr>
             {/if}
+            </div>
 
             <!--<tr>-->
                 <!--<th class="search_th">排序方式</th>-->
@@ -60,13 +63,16 @@
             <tr>
                 <th class="search_th">根据标题搜索</th>
                 <td>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="输入标题进行搜索">
+                    <input type="text" class="form-control" id="title" name="title"
+                           {if condition="!empty($search_title)"} value="{$search_title}"{/if}
+                           placeholder="输入标题进行搜索">
                 </td>
             </tr>
 
             <tr>
                 <td colspan="2">
                     <button type="button" id="search_btn" class="btn btn-primary btn-lg btn-block">点击查询</button>
+                    <button type="button" id="clear_btn" class="btn btn-secondary btn-lg btn-block">清空选项</button>
                 </td>
             </tr>
             </tbody>
@@ -85,43 +91,83 @@
         url='/user_resource_list';
     }
 
-    $('.cat_checkbox').change(function () {
-        var the_cat_id = $(this).val();
-        if ($(this).is(':checked')) {
-            cat_id_arr.push(the_cat_id);
-            cat_id_arr = unique_array(cat_id_arr);
-        } else {
-            var index = cat_id_arr.indexOf(the_cat_id);
-            cat_id_arr.splice(index, 1);
-        }
-    });
+    // $('.cat_checkbox').change(function () {
+    //     var the_cat_id = $(this).val();
+    //     if ($(this).is(':checked')) {
+    //         cat_id_arr.push(the_cat_id);
+    //         cat_id_arr = unique_array(cat_id_arr);
+    //     } else {
+    //         var index = cat_id_arr.indexOf(the_cat_id);
+    //         cat_id_arr.splice(index, 1);
+    //     }
+    //
+    // });
 
-    $('.type_checkbox').change(function () {
-        var the_type_id = $(this).val();
-        if ($(this).is(':checked')) {
-            type_id_arr.push(the_type_id);
-            type_id_arr = unique_array(type_id_arr);
-        } else {
-            var index = type_id_arr.indexOf(the_type_id);
-            type_id_arr.splice(index, 1);
-        }
-    });
+    // $('.type_checkbox').change(function () {
+    //     var the_type_id = $(this).val();
+    //     if ($(this).is(':checked')) {
+    //         type_id_arr.push(the_type_id);
+    //         type_id_arr = unique_array(type_id_arr);
+    //     } else {
+    //         var index = type_id_arr.indexOf(the_type_id);
+    //         type_id_arr.splice(index, 1);
+    //     }
+    // });
 
     $("#search_btn").click(function () {
         var search_title = $('#title').val();
         var order_type=$('#order_type').val();
-        $.post(
-            '/search_user_resource_list',
-            {
-                "search_cat_ids": cat_id_arr.toString(),
-                "search_title": search_title,
-                "search_type_ids":type_id_arr.toString(),
-                "order_type":order_type,
-            },
-            function (date) {
+        var form_data = new FormData();
+        //
+        $('.btn-outline-dark').find(':checkbox').each(function(){
+            if ($(this).is(':checked')) {
+                var the_cat_id = $(this).val();
+                cat_id_arr.push(the_cat_id);
+                cat_id_arr = unique_array(cat_id_arr);
+            }
+        });
+
+        $('.btn-outline-danger').find(':checkbox').each(function(){
+            if ($(this).is(':checked')) {
+                var the_type_id = $(this).val();
+                type_id_arr.push(the_type_id);
+                type_id_arr = unique_array(type_id_arr);
+            }
+        });
+
+        form_data.append('search_cat_ids',cat_id_arr.toString());
+        form_data.append('search_title',search_title);
+        form_data.append('search_type_ids',type_id_arr.toString());
+        form_data.append('order_type',order_type);
+        // $.post(
+        //     '/search_user_resource_list',
+        //     {
+        //         "search_cat_ids": cat_id_arr.toString(),
+        //         "search_title": search_title,
+        //         "search_type_ids":type_id_arr.toString(),
+        //         "order_type":order_type,
+        //     },
+        //     function (date) {
+        //         window.location.href = url;
+        //     }
+        // );
+
+        $.ajax({
+            url: "/search_user_resource_list",
+            processData: false,
+            contentType: false,
+            data: form_data,
+            type: "POST",
+            success: function () {
                 window.location.href = url;
             }
-        );
+        });
+    });
+
+    $("#clear_btn").click(function(){
+        $.get('/clear_search_session',function(){
+            window.location.href = url;
+        });
     });
 
     /**
