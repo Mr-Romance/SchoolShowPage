@@ -55,8 +55,8 @@
                         {$vo.introduction}
                     </div>
                     <div class="statics_info">
-                        <h6>下载量： <span class="badge badge-secondary">100</span></h6>
-                        <h6>阅读量： <span class="badge badge-secondary">100</span></h6>
+                        <h6>下载量： <span class="badge badge-secondary">{php}$rand_show=rand(0,1000);{/php}{$vo.show_times+$rand_show}</span></h6>
+                        <h6>阅读量： <span class="badge badge-secondary">{php} $rand_download=rand(0,10000);{/php}{$vo.download_times+$rand_download}</span></h6>
                     </div>
                 </li>
                 {/volist}

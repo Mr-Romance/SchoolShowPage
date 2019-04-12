@@ -356,6 +356,7 @@ class Resource extends Controller
 
         Session::set('menu_name','manage_resource_list');
         $this->assign('menu_name',Session::get('menu_name'));
+        Resources::addShowCount($res_id);
 
         return $this->fetch();
     }

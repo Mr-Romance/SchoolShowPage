@@ -345,6 +345,8 @@ class Index extends Controller
         $user = Users::getUserById($resource['user_id']);
         $this->assign('user', $user);
 
+        Resources::addShowCount($res_id);
+
         return $this->fetch();
     }
 

@@ -118,5 +118,15 @@ class Resources extends Model
 //        return $ret_data;
     }
 
+    public static function addShowCount($id)
+    {
+        $model = Resources::get($id);
+        if (!empty($model)) {
+            $old_show_times = $model->show_times;
+            $model->show_times = $old_show_times + 1;
+            $model->save();
+        }
+    }
+
 
 }
