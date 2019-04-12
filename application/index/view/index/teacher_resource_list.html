@@ -3,8 +3,9 @@
 {block name="cur_css"}
 <link rel="stylesheet" href="/static/css/resource_index.css">
 <script>
+    var media_width=$('.resource_title').width;
     $(function() {
-        $('a.media').media({width:800, height:800});
+        $('a.media').media({width:media_width, height:800});
         $('a.mediase').media({width:800, height:800});
     });
 </script>
@@ -33,25 +34,25 @@
         width:280px;
     }
 
+    .card img{
+        height:200px;
+        width:280px;
+    }
+
     .footer{
         position:fixed;
         bottom:0;
         left:0;
-    }
-
-    .card img{
-        height:200px;
-        width:280px;
     }
 </style>
 {/block}
 
 {block name="main"}
 <div class="row" style="margin-bottom: 120px;">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-1"></div>
+    <div class="col-10">
         <div class="row">
-            <div class="col-md-9 teacher_resource_list">
+            <div class="col-9 teacher_resource_list">
                 <div>
                     <ul class="list-unstyled">
                         {if condition="!empty($list)"}
@@ -76,12 +77,12 @@
 
 
                         {else/}
-                        暂无数据
+                        <p>暂无数据</p>
                         {/if}
                     </ul>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-3">
                 <div class="the-teacher">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="{$user->head_portrait}" alt="{$user->name}">
@@ -97,7 +98,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-1"></div>
 </div>
 {/block}
 

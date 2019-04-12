@@ -2,14 +2,34 @@
 
 {block name="cur_css"}
 <link rel="stylesheet" href="/static/css/resource_index.css">
-<script>
-    var media_width=$('.resource_title').width;
-    $(function() {
-        $('a.media').media({width:media_width, height:800});
-        $('a.mediase').media({width:800, height:800});
-    });
-</script>
 <style>
+    .the-teacher{
+        margin-top:10px;
+    }
+
+    .teacher_resource_list{
+        margin-top:10px;
+    }
+
+    .list-unstyled .mr-3{
+        width:200px;
+        height:200px;
+    }
+
+    .list-unstyled img{
+        width:200px;
+        height:200px;
+    }
+
+    .the-teacher img{
+        height:200px;
+        width:280px;
+    }
+
+    .card img{
+        height:200px;
+        width:280px;
+    }
     .resource_title{
         text-align: center;
         border-bottom: 10px;
@@ -44,21 +64,20 @@
             </div>
         </div>
         <div class="col-3">
+            {if condition="!empty($user)"}
             <div class="the-teacher">
                 <div class="card" style="width: 18rem;">
-                    <div class="teacher-main">
-                        <div class="teacher-img">
-                            <img class="card-img-top" src="{$user->head_portrait}">
-                        </div>
-                    </div>
+                    <img class="card-img-top" src="{$user->head_portrait}" alt="{$user->name}">
                     <div class="card-body">
-                        <h5>{$user->name}</h5>
-                        <h5 class="card-title">{$user->email}</h5>
-                        <p class="card-text">{$user->introduction}</p>
-                        <a href="#" class="btn btn-primary">教师资源</a>
+                        <h5 class="card-title">姓名：{$user->name}</h5>
+                        <h5 class="card-title">邮箱：{$user->email}</h5>
+                        <p class="card-text title_text">教师介绍：{$user->introduction}</p>
+                        <a href="/teacher_res_list?user_id={$user->id}" target="_blank"
+                           class="btn btn-primary">教师资源</a>
                     </div>
                 </div>
             </div>
+            {/if}
         </div>
         </div>
     </div>
@@ -68,5 +87,11 @@
 {/block}
 
 {block name="cur_js"}
-
+<script>
+    var media_width=$('.resource_title').width();
+    $(function() {
+        $('a.media').media({width:media_width, height:800});
+        $('a.mediase').media({width:800, height:800});
+    });
+</script>
 {/block}

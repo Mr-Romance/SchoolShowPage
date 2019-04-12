@@ -2,17 +2,24 @@
 
 {block name="cur_css"}
 <style>
-    .search_form{
+    .search_form {
         margin-bottom: 20px;
     }
-    .footer{
+
+    .footer {
         position: relative;
         bottom: 0;
-        left:0;
+        left: 0;
     }
-    .media img{
-        width:200px;
-        height:200px;
+
+    .user_opt_menu{
+        margin:5px 10px;
+    }
+
+
+    .media img {
+        width: 200px;
+        height: 200px;
     }
 </style>
 {/block}
@@ -22,7 +29,7 @@
     <button class="btn btn-outline-primary my-2 my-sm-0" id="add_user" type="button">添加用户</button>
     <form class="form-inline">
         <input class="form-control mr-sm-2" id="search_name" placeholder="输入用户名"
-               {if condition="(!empty($search_user_name))"} value={$search_user_name} {/if}>
+               {if condition="(!empty($search_user_name))" } value={$search_user_name} {/if}>
         <button class="btn btn-outline-success my-2 my-sm-0" id="search_user" type="button">点击查询</button>
     </form>
 </nav>
@@ -31,17 +38,21 @@
     {if condition="!empty($list)"}
     {volist name="list" id="vo"}
     <li class="media">
-        <a href="/show_user_resource_detail?id={$vo.id}">
-            <img class="mr-3" src="{$vo.head_portrait}">
-        </a>
+        <img class="mr-3" src="{$vo.head_portrait}">
         <div class="media-body">
             <h5 class="mt-0 mb-1">{$vo.name}</h5>
             <h6 class="mt-0 mb-1"><span>创建时间：</span>{$vo.create_at}</h6>
             {$vo.introduction}
         </div>
         <div>
-            <div>
+            <div class="user_opt_menu">
                 <button type="button" class="btn btn-danger delete_user" name="resource_id" value="{$vo.id}">删除</button>
+            </div>
+            <div class="user_opt_menu">
+                <a type="button" class="btn btn-info " name="resource_id" href="/show_edit_user?user_id={$vo.id}">编辑</a>
+            </div>
+            <div class="user_opt_menu">
+                <a type="button" class="btn btn-info " name="resource_id" href="/user_resource_list?id={$vo.id}">用户资源</a>
             </div>
         </div>
     </li>
@@ -56,41 +67,41 @@
 {/block}
 
 {block name="cur_js"}
- <script>
+<script>
 
-     // 添加用户
-     $("#add_user").click(function(){
-         window.location.href="/show_add_user";
-     });
+    // 添加用户
+    $("#add_user").click(function () {
+        window.location.href = "/show_add_user";
+    });
 
 
-     // 搜索用户
-     $("#search_user").click(function(){
-         var search_name=$("#search_name").val();
-         $.post(
-             '/user_list_search',
-             {"search_name":search_name},
-             function(){
-                 window.location.href="/user_list"
-             }
-         );
-     });
+    // 搜索用户
+    $("#search_user").click(function () {
+        var search_name = $("#search_name").val();
+        $.post(
+            '/user_list_search',
+            {"search_name": search_name},
+            function () {
+                window.location.href = "/user_list"
+            }
+        );
+    });
 
-     // 删除用户
-     $(".delete_user").click(function(){
-         var user_id=$(this).val();
-         $.post(
-             '/delete_user',
-             {'user_id':user_id},
-             function(date){
-                 if(100==date.code){
-                     dialog.successTo(date.msg,'/user_list');
-                 }else{
-                     dialog.showError(date.msg);
-                 }
-             }
-         );
-     });
+    // 删除用户
+    $(".delete_user").click(function () {
+        var user_id = $(this).val();
+        $.post(
+            '/delete_user',
+            {'user_id': user_id},
+            function (date) {
+                if (100 == date.code) {
+                    dialog.successTo(date.msg, '/user_list');
+                } else {
+                    dialog.showError(date.msg);
+                }
+            }
+        );
+    });
 
- </script>
+</script>
 {/block}

@@ -27,6 +27,7 @@
         margin-bottom: 100px;
     }
 </style>
+
 {/block}
 
 {block name="right-content"}
@@ -36,5 +37,11 @@
 {/block}
 
 {block name="cur_js"}
-
+<script>
+    var media_width=$('.resource_title').width() - 10;
+    $(function() {
+        $('a.media').media({width:media_width, height:800});
+        $('a.mediase').media({width:800, height:800});
+    });
+</script>
 {/block}

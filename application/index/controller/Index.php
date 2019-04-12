@@ -339,7 +339,7 @@ class Index extends Controller
         $resource = Resources::get($res_id);
         $this->assign('resource', $resource);
 
-        $user = Users::get($resource->user_id);
+        $user = Users::getUserById($resource['user_id']);
         $this->assign('user', $user);
 
         return $this->fetch();

@@ -49,6 +49,7 @@ Route::post('upd_head_portrait', 'index/admin/updHeadPortrait');
 Route::get('user_list','index/admin/userList');
 Route::post('user_list_search','index/admin/userListSearch');
 Route::post('delete_user','index/admin/deleteUser');
+Route::get('show_edit_user','index/admin/showEditUser');
 
 /**
  *  资源相关的操作

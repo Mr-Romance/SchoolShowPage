@@ -5,13 +5,14 @@
     .content label{
         font-size: 20px;
     }
-    .user_info{
-        margin-bottom: 100px;
-    }
     .footer{
         position:fixed;
         bottom: 0;
         left:0;
+    }
+
+    .user_info{
+        margin-bottom: 100px;
     }
 </style>
 {/block}
@@ -19,10 +20,19 @@
 {block name="right-content"}
 <form class="user_info" id="user_info">
     <div class="form-group">
+        <label>头像</label>
+        <div class="head_portrait">
+            <img src="{$user->head_portrait}">
+        </div>
+        <br>
+        <input type="file" id="head_portrait" name="head_portrait" class="form-control-file">
+    </div>
+
+    <div class="form-group">
         <label>用户名</label>
         <input type="email" class="form-control" id="name" name="name"
                aria-describedby="emailHelp"
-               placeholder="请输入用户名" value="">
+               placeholder="请输入用户名" value="{$user->name}">
         <small class="form-text text-muted">用户名不可以与其他用户相同
         </small>
     </div>
@@ -31,32 +41,29 @@
         <div class="form-group">
             <label>性别</label>
             <select class="form-control" name="sex" id="sex">
-                <option value="1">男</option>
-                <option value="2">女</option>
+                <option {if condition="1==$user->sex" } selected{
+                /if} value="1">男</option>
+                <option {if condition="2==$user->sex" } selected{
+                /if} value="2">女</option>
             </select>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="email">邮箱</label>
+        <label>邮箱</label>
         <input type="email" class="form-control" name="email" id="email"
-               aria-describedby="emailHelp" placeholder="输入邮箱" value="">
-        <small id="emailHelp" class="form-text text-muted">
+               aria-describedby="emailHelp" placeholder="输入邮箱" value="{$user->email}">
+        <small class="form-text text-muted">
             邮箱地址不可以与其他用户重复
         </small>
     </div>
     <div class="form-group">
-        <label for="password">密码</label>
-        <input type="text" class="form-control" id="password" name="password"
-               placeholder="请输入密码" value="">
-        <small  class="form-text text-muted">
-            输入要设置密码
+        <label>密码</label>
+        <input type="text" class="form-control" name="password" id="password"
+               placeholder="请输入密码" value="<?php echo think_decrypt($user->password); ?>">
+        <small class="form-text text-muted">
+            可在这里重新设置密码
         </small>
-    </div>
-
-    <div class="form-group">
-        <label>头像</label>
-        <input type="file" name="head_portrait" class="form-control-file" id="head_portrait">
     </div>
 
     <div class="form-group">
@@ -65,9 +72,10 @@
                 <span class="input-group-text">个人简介</span>
             </div>
             <textarea class="form-control" name="introduction" id="introduction"
-                      aria-label="With textarea"></textarea>
+                      aria-label="With textarea">{$user->introduction}</textarea>
         </div>
     </div>
+    <input type="hidden" id="user_id" name="id" value="{$user->id}">
     <button type="button" id="eidt_user" class="btn btn-primary">提交</button>
 </form>
 {/block}
@@ -79,12 +87,13 @@
         form_data.append('name', $("#name").val());
         form_data.append('sex', $("#sex").val());
         form_data.append('email', $("#email").val());
-        form_data.append('password', $("#cat_second").val());
         form_data.append('introduction', $("#introduction").val());
+        form_data.append('password', $("#password").val());
+        form_data.append('user_id',$('#user_id').val());
         form_data.append("head_portrait", $("#head_portrait").get(0).files[0]);
         var layer_load = layer.load(0);
         $.ajax({
-            url: "/add_user",
+            url: "/upd_user",
             processData: false,
             contentType: false,
             data: form_data,
@@ -92,7 +101,7 @@
             success: function (data) {
                 if (100 == data.code) {
                     layer.close(layer_load);
-                    dialog.successTo(data.msg, '/show_add_user');
+                    dialog.successTo(data.msg, '/user_list');
                 } else {
                     layer.close(layer_load);
                     dialog.showError(data.msg);

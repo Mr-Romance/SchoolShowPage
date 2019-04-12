@@ -4,6 +4,7 @@ namespace app\index\controller;
 
 use app\index\model\Categories;
 use app\index\model\Resources;
+use app\index\model\Users;
 use think\File;
 use think\Session;
 use think\Config;
@@ -32,6 +33,9 @@ class Resource extends Controller
         // 获取所有的一级分类信息
         $first_categories = Categories::getAllFirstCategories();
         $this->assign('first_categories', $first_categories);
+
+        Session::set('menu_name','category_list');
+        $this->assign('menu_name',Session::get('menu_name'));
 
         return $this->fetch();
     }
@@ -79,6 +83,8 @@ class Resource extends Controller
         $subject = Config::get('resource_subject');
         $this->assign('subject', $subject);
 
+        Session::set('menu_name','show_add_resource');
+        $this->assign('menu_name',Session::get('menu_name'));
         return $this->fetch();
     }
 
@@ -196,7 +202,7 @@ class Resource extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function showUserResourceList() {
+    public function showUserResourceList(Request $request) {
         $search_param = [];
 
         if (Session::has('param.search_category')) {
@@ -209,8 +215,12 @@ class Resource extends Controller
             $search_param['res_title'] = Session::get('search_title');
         }
 
-
-        $user = $this->getLoginUser();
+        $user_id=$request->param('id');
+        if(empty($user_id)){
+            $user = $this->getLoginUser();
+        }else{
+            $user = Users::getUserById($user_id);
+        }
 
         $list = Resources::getResourcesList($search_param, $user->id);
 
@@ -234,6 +244,9 @@ class Resource extends Controller
             $this->assign('category_checked', $search_param['res_category']);
         }
         $this->assign('list', $list);
+
+        Session::set('menu_name','manage_resource_list');
+        $this->assign('menu_name',Session::get('menu_name'));
 
         return $this->fetch('show_user_resource_list');
     }
@@ -298,6 +311,9 @@ class Resource extends Controller
     public function categoryList() {
         $category_list = Categories::getCategoriesGroup();
         $this->assign('category_list', $category_list);
+
+        Session::set('menu_name','category_list');
+        $this->assign('menu_name',Session::get('menu_name'));
         return $this->fetch();
     }
 
@@ -335,6 +351,9 @@ class Resource extends Controller
 
         $resource = Resources::get($res_id);
         $this->assign('resource', $resource);
+
+        Session::set('menu_name','manage_resource_list');
+        $this->assign('menu_name',Session::get('menu_name'));
 
         return $this->fetch();
     }
@@ -378,6 +397,9 @@ class Resource extends Controller
             $this->assign('category_checked', $search_param['res_category']);
         }
         $this->assign('list', $list);
+
+        Session::set('menu_name','manage_resource_list');
+        $this->assign('menu_name',Session::get('menu_name'));
 
         return $this->fetch('show_user_resource_list');
     }

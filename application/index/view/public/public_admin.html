@@ -14,12 +14,16 @@
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
     <script src="/static/jquery.media.js"></script>
     <script>
-        $(function() {
-            $('a.media').media({width:1050, height:800});
-            $('a.mediase').media({width:800, height:800});
-        });
-
     </script>
+    <style>
+        .active2{
+            background-color: #9fcdff;
+        }
+
+        .list-group a:hover{
+            background-color: #9fcdff;
+        }
+    </style>
 
 </head>
 <body class="container">
@@ -36,13 +40,13 @@
                         <a href="#" class="list-group-item list-group-item-action active">
                             菜单列表
                         </a>
-                        <a href="/user_page" class="list-group-item list-group-item-action">个人信息</a>
-                        <a href="/user_resource_list" class="list-group-item list-group-item-action">我的资源</a>
-                        <a href="/show_add_resource" class="list-group-item list-group-item-action">添加资源</a>
+                        <a href="/user_page" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_page' "} active2{/if}">个人信息</a>
+                        <a href="/user_resource_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_resource_list' "} active2{/if}">我的资源</a>
+                        <a href="/show_add_resource" class="list-group-item list-group-item-action {if condition="$menu_name eq 'show_add_resource' "} active2{/if}">添加资源</a>
                         {if condition="$user->type == 2"}
-                        <a href="/manage_resource_list" class="list-group-item list-group-item-action">资源列表</a>
-                        <a href="/user_list" class="list-group-item list-group-item-action">用户列表</a>
-                        <a href="/category_list" class="list-group-item list-group-item-action">分类管理</a>
+                        <a href="/manage_resource_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'manage_resource_list' "} active2{/if}">资源列表</a>
+                        <a href="/user_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_list' "} active2{/if}">用户列表</a>
+                        <a href="/category_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'category_list' "} active2{/if}">分类管理</a>
                         {/if}
                     </div>
                 </div>

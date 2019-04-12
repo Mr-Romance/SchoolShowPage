@@ -32,6 +32,9 @@ class Admin extends Controller
      */
     public function showAddUser()
     {
+        Session::set('menu_name','user_list');
+        $this->assign('menu_name',Session::get('menu_name'));
+
         return $this->fetch();
     }
 
@@ -203,6 +206,9 @@ class Admin extends Controller
         $this->assign('search_user_ids', $ids_arr);
         $this->assign('search_user_name', $search_name);
 
+        Session::set('menu_name','user_list');
+        $this->assign('menu_name',Session::get('menu_name'));
+
         return $this->fetch('user_list');
     }
 
@@ -213,6 +219,8 @@ class Admin extends Controller
      */
     public function userPage()
     {
+        Session::set('menu_name','user_page');
+        $this->assign('menu_name',Session::get('menu_name'));
         return $this->fetch();
     }
 
@@ -236,6 +244,27 @@ class Admin extends Controller
         }
 
         return $this->successResponse(100, '更新成功');
+    }
+
+    /**
+     *  显示编辑用户页面
+     * @param Request $request
+     * @return \think\response\Json
+     */
+    public function showEditUser(Request $request) {
+        $params = $request->param();
+
+        try {
+            $user = Users::getUserById($params['user_id']);
+        } catch (Exception $exception) {
+            return $this->errorResponse(200, $exception->getMessage());
+        }
+
+        $this->assign('user', $user);
+
+        Session::set('menu_name','user_list');
+        $this->assign('menu_name',Session::get('menu_name'));
+        return $this->fetch();
     }
 
     /**
