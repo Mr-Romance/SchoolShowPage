@@ -1,0 +1,173 @@
+{extend name="public:public_admin"}
+{block name="title"}
+添加资源
+{/block}
+
+{block name="cur_css"}
+<style rel="stylesheet" href="/static/css/show_add_resource.css"></style>
+<style>
+    .footer{
+        position:fixed;
+        bottom: 0;
+        left:0;
+    }
+
+    .form_add_resource{
+        margin-bottom: 100px;
+    }
+</style>
+{/block}
+
+{block name="right-content"}
+<form id="form_add_resource" class="form_add_resource">
+    <div class="form-group">
+        <label>标题</label>
+        <input type="text" id="title" name="title" class="form-control" value="{$resource->title}">
+        <input type="hidden" name="id" id="id" value="{$resource->id}">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">类型</label>
+        <select class="form-control" id="type" name="type" id="exampleFormControlSelect1">
+            <option value="1" {if condition="$resource->type eq 1"} selected{/if}>图片</option>
+            <option value="2" {if condition="$resource->type eq 2"} selected{/if}>PDF</option>
+            <option value="3" {if condition="$resource->type eq 3"} selected{/if}>压缩包</option>
+            <option value="4" {if condition="$resource->type eq 4"} selected{/if}>视频</option>
+            <option value="5" {if condition="$resource->type eq 5"} selected{/if}>音频</option>
+            <option value="6" {if condition="$resource->type eq 6"} selected{/if}>其他</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">选择分类</label>
+        <br>
+        <div class="btn-group" role="group">
+            <select class="form-control" id="cat_first" name="cat_first">
+                <option>一级分类</option>
+                {if condition="!empty($first_categories)"}
+                {volist name="first_categories" id= "vo"}
+                <option value="{$vo->id}">{$vo->name}</option>
+                {/volist}
+                {/if}
+            </select>
+
+            <select class="form-control" id="cat_second" name="cat_second">
+                <option>二级分类</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>归属主题</label>
+        <br>
+        <div class="btn-group" role="group">
+            <select class="form-control" id="subject" name="cat_first">
+                <option value="0">无主题</option>
+                {if condition="!empty($subject)"}
+                {volist name="subject" id ="vo"}
+                <option value="{$vo['id']}" {if condition="$resource->subject eq $vo['id']"}selected{/if}>{$vo['name']}</option>
+                {/volist}
+                {/if}
+
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>缩略图</label>
+        <input type="file" id="thumbnail" name="thumbnail" class="form-control-file" >
+    </div>
+
+    <div class="form-group">
+        <label>资源</label>
+        <input type="file" id="src" name="src" class="form-control-file">
+    </div>
+
+    <div class="form-group">
+        <label style="color:red">超过100M请联系管理员使用FTP工具上传，注意文件后缀名称(尽量使用数字+字母组合命名)</label>
+        <input class="form-control" name= "source_name"  id="source_name" placeholder="请输入资源的名称，已经上传的文件不需要重复填写">
+    </div>
+
+    <div class="form-group">
+        <!--<div class="input-group">-->
+        <!--<div class="input-group-prepend">-->
+        <!--<span class="input-group-text">资源介绍</span>-->
+        <!--</div>-->
+        <!--<textarea class="form-control" id="introduction" name="introduction"-->
+        <!--aria-label="With textarea"></textarea>-->
+        <!--</div>-->
+        <label>资源介绍</label>
+        <div>
+            <input type="hidden" id="introduction" value="{$resource->introduction}">
+        </div>
+        <div id="editor">
+
+        </div>
+    </div>
+    <button type="button" id="add_resource" class="btn btn-primary">提交</button>
+</form>
+{/block}
+
+{block name="cur_js"}
+<script>
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    // 或者 var editor = new E( document.getElementById('editor') );
+    editor.create();
+    editor.txt.html($('#introduction').val());
+
+
+    // 分类的2级联动
+    $("#cat_first").change(function () {
+        var parent_id = $(this).val();
+
+        $.post(
+            'get_second_categories',
+            {'parent_id': parent_id},
+            function (data) {
+                if (100 == data.code) {
+                    var res_data = data.data;
+                    var option = '';
+                    for (var i = 0; i < res_data.length; i++) {
+                        option += '<option value="' + res_data[i][0] + '">' + res_data[i][1] + '</option>';
+                    }
+                } else {
+                    dialog.showError(data.msg);
+                }
+
+                $('#cat_second').html(option);
+            }
+        );
+    });
+
+    // 添加资源
+    $('#add_resource').click(function () {
+        var form_data = new FormData();
+        form_data.append('title', $("#title").val());
+        form_data.append('id', $("#id").val());
+        form_data.append('type', $("#type").val());
+        form_data.append('cat_first', $("#cat_first").val());
+        form_data.append('cat_second', $("#cat_second").val());
+        form_data.append('introduction', editor.txt.text());
+        form_data.append('subject', $("#subject").val());
+        form_data.append('source_name',$('#source_name').val());
+        form_data.append("thumbnail", $("#thumbnail").get(0).files[0]);
+        form_data.append("src", $("#src").get(0).files[0]);
+        var layer_load = layer.load(0);
+        $.ajax({
+            url: "/edit_resource",
+            processData: false,
+            contentType: false,
+            data: form_data,
+            type: "POST",
+            success: function (data) {
+                if (100 == data.code) {
+                    layer.close(layer_load);
+                    dialog.successTo(data.msg, 'user_resource_list');
+                } else {
+                    layer.close(layer_load);
+                    dialog.showError(data.msg);
+                }
+            }
+        });
+    });
+
+</script>
+{/block}

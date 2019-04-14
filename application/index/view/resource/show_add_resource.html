@@ -85,12 +85,16 @@
     </div>
 
     <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">资源介绍</span>
-            </div>
-            <textarea class="form-control" id="introduction" name="introduction"
-                      aria-label="With textarea"></textarea>
+        <!--<div class="input-group">-->
+            <!--<div class="input-group-prepend">-->
+                <!--<span class="input-group-text">资源介绍</span>-->
+            <!--</div>-->
+            <!--<textarea class="form-control" id="introduction" name="introduction"-->
+                      <!--aria-label="With textarea"></textarea>-->
+        <!--</div>-->
+        <label>资源介绍</label>
+        <div id="editor">
+
         </div>
     </div>
     <button type="button" id="add_resource" class="btn btn-primary">提交</button>
@@ -99,6 +103,12 @@
 
 {block name="cur_js"}
 <script>
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create()
+
+
     // 分类的2级联动
     $("#cat_first").change(function () {
         var parent_id = $(this).val();
@@ -129,7 +139,7 @@
         form_data.append('type', $("#type").val());
         form_data.append('cat_first', $("#cat_first").val());
         form_data.append('cat_second', $("#cat_second").val());
-        form_data.append('introduction', $("#introduction").val());
+        form_data.append('introduction', editor.txt.text());
         form_data.append('subject', $("#subject").val());
         form_data.append('source_name',$('#source_name').val());
         form_data.append("thumbnail", $("#thumbnail").get(0).files[0]);

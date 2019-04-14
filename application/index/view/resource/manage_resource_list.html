@@ -1,0 +1,76 @@
+{extend name="public:public_admin"}
+{block name="cur_css"}
+<style>
+    .list-unstyled img{
+        width:240px;
+        height:130px;
+    }
+
+    .media{
+        margin-bottom: 5px;
+        border:1px #0c5460 solid;
+    }
+
+    .footer{
+        position:fixed;
+        bottom: 0;
+        left:0;
+    }
+</style>
+{/block}
+
+{block name="right-content"}
+<input type="hidden" id="jump_url" value="/manage_resource_list">
+{include file="../application/index/view/public/search_form.html"}
+
+<div style="margin-bottom:120px;">
+    <ul class="list-unstyled">
+        {if condition="!empty($list)"}
+        {volist name="list" id="vo"}
+        <li class="media">
+            <a href="/show_user_resource_detail?id={$vo.id}">
+                <img class="mr-3" src="{$vo.thumbnail}">
+            </a>
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">{$vo.title}</h5>
+                <h6 class="mt-0 mb-1"><span>创建时间：</span>{$vo.create_at}</h6>
+                {$vo.introduction}
+            </div>
+            <div>
+                <div>
+                    <button type="button" class="btn btn-danger" name="resource_id" value="{$vo.id}">删除</button>
+                </div>
+            </div>
+        </li>
+        {/volist}
+
+        {$list->render()}
+
+        {else /}
+        <p>暂无数据</p>
+        {/if}
+    </ul>
+</div>
+{/block}
+
+{block name="cur_js"}
+<script>
+    // 删除文章
+    $('.btn-danger').click(function(){
+        $.post(
+            '/delete_resource',
+            {'resource_id':$(this).val()},
+            function(data){
+                if(100==data.code){
+                    dialog.successTo(data.msg,'/manage_resource_list');
+                }else{
+                    dialog.showError(data.msg);
+                }
+            }
+        );
+    });
+
+
+</script>
+
+{/block}

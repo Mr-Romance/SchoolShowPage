@@ -92,7 +92,7 @@
             success: function (data) {
                 if (100 == data.code) {
                     layer.close(layer_load);
-                    dialog.successTo(data.msg, '/show_add_user');
+                    dialog.successTo(data.msg, '/user_list');
                 } else {
                     layer.close(layer_load);
                     dialog.showError(data.msg);

@@ -99,6 +99,8 @@
     });
 
     $("#delete_category").click(function () {
+        alert('xx');
+        return false;
         $.post(
             '/delete_category',
             {
@@ -107,9 +109,8 @@
             function (date) {
 
                 if(100==date.code){
-                    dialog.successAuto(date.msg,'/category_list')
-                }else{
-                    dialog.showError(date.msg);
+                    window.location.href="/category_list";
+                    // dialog.successTo(date.msg,'')
                 }
             }
         );

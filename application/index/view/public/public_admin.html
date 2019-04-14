@@ -13,6 +13,7 @@
     <script src="/static/dialog.js"></script>
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
     <script src="/static/jquery.media.js"></script>
+    <script src="/static/wangEditor.js"></script>
     <script>
     </script>
     <style>
@@ -41,7 +42,7 @@
                             菜单列表
                         </a>
                         <a href="/user_page" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_page' "} active2{/if}">个人信息</a>
-                        <a href="/user_resource_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_resource_list' "} active2{/if}">我的资源</a>
+                        <a href="/user_resource_list?id={$user->id}" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_resource_list' "} active2{/if}">我的资源</a>
                         <a href="/show_add_resource" class="list-group-item list-group-item-action {if condition="$menu_name eq 'show_add_resource' "} active2{/if}">添加资源</a>
                         {if condition="$user->type == 2"}
                         <a href="/manage_resource_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'manage_resource_list' "} active2{/if}">资源列表</a>

@@ -17,7 +17,7 @@ class Resource extends Controller
 {
     protected function _initialize() {
         if (!Session::get('login_user_id')) {
-            $this->success('请先登录', 'Common/showLogin');
+            $this->success('请先登录', '/login');
         }
         $user = $this->getLoginUser();
         $this->assign('user', $user);
@@ -245,9 +245,12 @@ class Resource extends Controller
         if (!empty($search_param['res_category'])) {
             $this->assign('category_checked', $search_param['res_category']);
         }
+        if(!empty($search_param['res_title'])){
+            $this->assign('search_title',$search_param['res_title']);
+        }
         $this->assign('list', $list);
 
-        Session::set('menu_name','manage_resource_list');
+        Session::set('menu_name','user_resource_list');
         $this->assign('menu_name',Session::get('menu_name'));
 
         return $this->fetch('show_user_resource_list');
@@ -399,12 +402,148 @@ class Resource extends Controller
         if (!empty($search_param['res_category'])) {
             $this->assign('category_checked', $search_param['res_category']);
         }
+        if(!empty($search_param['res_title'])){
+            $this->assign('search_title',$search_param['res_title']);
+        }
         $this->assign('list', $list);
 
         Session::set('menu_name','manage_resource_list');
         $this->assign('menu_name',Session::get('menu_name'));
 
-        return $this->fetch('show_user_resource_list');
+        return $this->fetch();
+    }
+
+    /**
+     *  显示编辑资源页面
+     *
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
+    public function showEditResource(Request $request)
+    {
+        $id = $request->param('res_id');
+        $resource = Resources::get($id);
+        $this->assign('resource', $resource);
+
+        // 获取所有的一级分类
+        $first_categories = Categories::getAllFirstCategories();
+        $this->assign('first_categories', $first_categories);
+
+        // 获取所有的主题配置
+        $subject = Config::get('resource_subject');
+        $this->assign('subject', $subject);
+
+        Session::set('menu_name','user_resource_list');
+        $this->assign('menu_name',Session::get('menu_name'));
+
+        return $this->fetch();
+    }
+
+    /**
+     *  编辑资源
+     * @param Request $request
+     * @return \think\response\Json
+     * @throws \Exception
+     */
+    public function editResource(Request $request){
+        // 这里有问题，不能统一获取参数
+        $params['id'] = $request->param('id');
+        $params['title'] = $request->param('title');
+        $params['type'] = $request->param('type');
+        $params['cat_first'] = $request->param('cat_first');
+        $params['cat_second'] = $request->param('cat_second');
+        $params['introduction'] = $request->param('introduction');
+        $params['subject'] = $request->param('subject');
+
+        $thumbnail_path = '';
+        $src_path = '';
+        $user = $this->getLoginUser();
+        $user_id = $user->id;
+
+        if (empty($params)) {
+            return $this->errorResponse(200, '参数格式不合法');
+        }
+
+        // 参数校验
+        $validate = new Validate(['title' => 'require', 'type' => 'require|number', 'cat_first' => 'require|number']);
+
+        if (!$validate->check($params)) {
+            $errors = $validate->getError();
+            return $this->errorResponse(200, $errors);
+        }
+
+        // 保存文件
+        $thumbnail = request()->file('thumbnail');
+        $src = request()->file('src');
+
+        if(!empty($thumbnail)){
+            $thumbnail_res = $thumbnail->validate([
+                'size' => 900000,
+                'ext' => 'jpg,png,gif'
+            ])->move(Config::get('src_thumbnail_move_path'));
+
+            if ($thumbnail_res) {
+                $thumbnail_save_name = $thumbnail_res->getSaveName();
+                $thumbnail_path = Config::get('src_thumbnail_save_path') . $thumbnail_save_name;
+            } else {
+                return $this->errorResponse(200, '保存缩略图失败');
+            }
+        }
+
+        $source_name = $request->param('source_name');
+        if(!empty($src) || !empty($source_name)){
+            if (empty($src)) {
+                $source_name = $request->param('source_name');
+                if (empty($source_name)) {
+                    return $this->errorResponse(200, '请上传资源或者填写资源名称');
+                }
+                $full_source_name=explode('.',$source_name);
+                if (count($full_source_name) < 2) {
+                    return $this->errorResponse(200,'请填写文件的后缀');
+                }
+
+                $file_date = date('Ymd');
+
+                $src_path = Config::get('src_source_save_path') . $file_date . DS . trim($source_name);
+                mkdir(Config::get('src_source_move_path') . $file_date );
+            } else {
+                $scr_res = $src->validate(['size' => 322122547,])->move(Config::get('src_source_move_path'));
+
+                if ($scr_res) {
+                    $scr_save_name = $scr_res->getSaveName();
+                    $src_path = Config::get('src_source_save_path') . $scr_save_name;
+                } else {
+                    return $this->errorResponse(200, '上传资料失败');
+                }
+            }
+        }
+
+        // 入库
+        $data = [];
+        $data['id'] = $params['id'];
+        $data['title'] = $params['title'];
+        $data['introduction'] = empty($params['introduction']) ? '暂无描述' : $params['introduction'];
+        $data['thumbnail'] = $thumbnail_path;
+        $data['src'] = $src_path;
+        $data['user_id'] = $user_id;
+        if (empty($params['cat_second'])) {
+            $data['category'] = $params['cat_first'];
+        } else {
+            $data['category'] = $params['cat_second'];
+        }
+        $data['status'] = 1;
+        $data['type'] = $params['type'];
+        $data['subject'] = $params['subject'];
+
+        $data=array_filter($data);
+
+        try {
+            Resources::updResource($data);
+        } catch (Exception $exception) {
+            return $this->errorResponse(200, $exception->getMessage());
+        }
+
+        return $this->successResponse(100, '编辑成功');
     }
 
 }

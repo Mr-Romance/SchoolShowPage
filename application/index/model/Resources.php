@@ -27,6 +27,22 @@ class Resources extends Model
     }
 
     /**
+     * @param $data
+     * @throws \think\exception\DbException
+     */
+    public static function updResource($data){
+        $model=Resources::get($data['id']);
+
+        if(empty($model)){
+            throw new Exception('未找到要更新的资源');
+        }
+
+        if(!$model->save($data,['id'=>$data['id']])){
+            throw new Exception('保存资源信息失败');
+        }
+    }
+
+    /**
      *  获取资源列表：所有|按条件
      *
      * @param array $search_data
@@ -37,7 +53,7 @@ class Resources extends Model
     public static function getResourcesList($search_data = [], $user_id = 0) {
         $base_query = Db::table('resources');
         if (!empty($search_data['res_title']) && isset($search_data['res_title'])) {
-            $base_query = $base_query->where('title', 'like', $search_data['res_title']);
+            $base_query = $base_query->where('title', 'like', '%'.$search_data['res_title'].'%');
         }
         if (!empty($search_data['res_category']) && isset($search_data['res_category'])) {
             $base_query = $base_query->where('category', 'in', $search_data['res_category']);

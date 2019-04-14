@@ -69,5 +69,9 @@ Route::post('delete_category','index/resource/deleteCategory');
 Route::get('category_list','index/resource/categoryList');
 Route::get('clear_search_session','index/index/clearSearchSession');
 Route::post('add_category', 'index/resource/addCategory');
+Route::get('show_edit_resource','index/resource/showEditResource');
+Route::post('edit_resource','index/resource/editResource');
+
+Route::get('test_search','index/index/resourceCategory');
 
 

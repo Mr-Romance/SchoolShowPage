@@ -19,7 +19,7 @@ class Admin extends Controller
     protected function _initialize()
     {
         if (!Session::get('login_user_id')) {
-            $this->success('请先登录', 'Common/showLogin');
+            $this->success('请先登录', '/login');
         }
         $user = $this->getLoginUser();
         $this->assign('user', $user);

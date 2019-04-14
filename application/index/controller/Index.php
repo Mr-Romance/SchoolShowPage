@@ -220,7 +220,7 @@ class Index extends Controller
         if (!empty($search_param['res_category'])) {
             $this->assign('category_checked', $search_param['res_category']);
         }
-        if(!empty($search_param['search_title'])){
+        if(!empty($search_param['res_title'])){
             $this->assign('search_title',$search_param['res_title']);
         }
         $this->assign('list', $list);
@@ -240,10 +240,7 @@ class Index extends Controller
     public function searchUserResourceList(Request $request)
     {
         $param = $request->param();
-        $search_param = [];
         if (!empty($param['search_cat_ids'])) {
-            // 把字符串打散为数组
-            $search_param['res_category'] = explode(',', $param['search_cat_ids']);
             // 这里存入的，其实是一个字符串，tp——session不支持3维数组
             Session::set('param.search_category', $param['search_cat_ids']);
         } else {
@@ -251,19 +248,16 @@ class Index extends Controller
         }
 
         if (!empty($param['search_type_ids'])) {
-            $search_param['res_type'] = explode(',', $param['search_type_ids']);
             Session::set('param.search_type', $param['search_type_ids']);
         } else {
             Session::delete('param.search_type');
         }
         if (!empty($param['search_title'])) {
-            $search_param['res_title'] = $param['search_title'];
             Session::set('search_title', $param['search_title']);
         } else {
             Session::delete('search_title');
         }
         if (!empty($param['order_type'])) {
-            $search_param['order_type'] = $param['order_type'];
             Session::set('order_type', $param['order_type']);
         } else {
             Session::delete('order_type');

@@ -37,7 +37,10 @@
         </div>
         <div>
             <div>
-                <button type="button" class="btn btn-danger" name="resource_id" id="delete_res" value="{$vo.id}">删除</button>
+                <button type="button" class="btn btn-danger" name="resource_id" value="{$vo.id}">删除</button>
+            </div>
+            <div>
+                <a type="button" class="btn btn-info" name="resource_id" href="/show_edit_resource?res_id={$vo.id}" >编辑</a>
             </div>
         </div>
     </li>
@@ -55,7 +58,7 @@
 {block name="cur_js"}
 <script>
     // 删除文章
-    $('#delete_res').click(function(){
+    $('.btn-danger').click(function(){
         $.post(
             '/delete_resource',
             {'resource_id':$(this).val()},
