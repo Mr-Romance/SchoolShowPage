@@ -275,6 +275,15 @@ a:hover {
     height:269px;
 }
 
+.res-show-media{
+    height:auto;
+    margin-bottom: 20px;
+}
+
+.res-show-media .m2{
+    height:auto;
+}
+
 .column-js li h3{
     float: left;
     padding: 0 18px 0 20px;
@@ -408,3 +417,4 @@ a:hover {
 .index-page-location a:hover{
     color:red;
 }
+

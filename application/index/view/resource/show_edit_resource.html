@@ -15,6 +15,17 @@
     .form_add_resource{
         margin-bottom: 100px;
     }
+
+    .thumbnail{
+        width:200px;
+        height:200px;
+    }
+
+    .thumbnail img{
+        width:200px;
+        height:200px;
+    }
+
 </style>
 {/block}
 
@@ -39,9 +50,11 @@
     <div class="form-group">
         <label for="exampleFormControlSelect1">选择分类</label>
         <br>
+        <label for="exampleFormControlSelect1">原有分类:{$cat_one}->{$cat_two}</label>
+        <br>
         <div class="btn-group" role="group">
             <select class="form-control" id="cat_first" name="cat_first">
-                <option>一级分类</option>
+                <option value="0">一级分类</option>
                 {if condition="!empty($first_categories)"}
                 {volist name="first_categories" id= "vo"}
                 <option value="{$vo->id}">{$vo->name}</option>
@@ -50,7 +63,7 @@
             </select>
 
             <select class="form-control" id="cat_second" name="cat_second">
-                <option>二级分类</option>
+                <option value="0">二级分类</option>
             </select>
         </div>
     </div>
@@ -72,16 +85,21 @@
     </div>
     <div class="form-group">
         <label>缩略图</label>
+        <div class="thumbnail">
+        <img src="{$resource->thumbnail}">
+        </div>
         <input type="file" id="thumbnail" name="thumbnail" class="form-control-file" >
     </div>
 
     <div class="form-group">
         <label>资源</label>
+        <br>
+        <label>已上传文件路径：{$resource->src}</label>
         <input type="file" id="src" name="src" class="form-control-file">
     </div>
 
     <div class="form-group">
-        <label style="color:red">超过100M请联系管理员使用FTP工具上传，注意文件后缀名称(尽量使用数字+字母组合命名)</label>
+        <label style="color:red">超过50M请联系管理员使用FTP工具上传，注意文件后缀名称(尽量使用数字+字母组合命名)</label>
         <input class="form-control" name= "source_name"  id="source_name" placeholder="请输入资源的名称，已经上传的文件不需要重复填写">
     </div>
 

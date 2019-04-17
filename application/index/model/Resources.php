@@ -37,9 +37,7 @@ class Resources extends Model
             throw new Exception('未找到要更新的资源');
         }
 
-        if(!$model->save($data,['id'=>$data['id']])){
-            throw new Exception('保存资源信息失败');
-        }
+        $model->save($data,['id'=>$data['id']]);
     }
 
     /**

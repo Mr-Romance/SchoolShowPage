@@ -96,6 +96,11 @@ class Resource extends Controller
      * @throws \Exception
      */
     public function addResource(Request $request) {
+//        $upd_files=$_FILES;
+//        var_dump($upd_files['src']);
+//        EXIT;
+//        $src=$upd_files['src'];
+
         // 这里有问题，不能统一获取参数
         $params['title'] = $request->param('title');
         $params['type'] = $request->param('type');
@@ -123,7 +128,17 @@ class Resource extends Controller
 
         // 保存文件
         $thumbnail = request()->file('thumbnail');
-        $src = request()->file('src');
+
+        // 视频音频需要单独处理
+        if(4==$request->param('type') || 5==$request->param('type')){
+            if(!isset($_FILES['src'])){
+                $scr = [];
+            }else{
+                $src=$_FILES['src'];
+            }
+        }else{
+            $src = request()->file('src');
+        }
 
         if (empty($thumbnail)) {
             return $this->errorResponse(200, '缩略图为空');
@@ -151,21 +166,22 @@ class Resource extends Controller
                 return $this->errorResponse(200,'请填写文件的后缀');
             }
 
-            $file_date = date('Ymd');
+            $src_path = Config::get('upd_src_save_path'). trim($source_name);
 
-            $src_path = Config::get('src_source_save_path') . $file_date . DS . trim($source_name);
-            mkdir(Config::get('src_source_move_path') . $file_date );
         } else {
-            $scr_res = $src->validate(['size' => 322122547,])->move(Config::get('src_source_move_path'));
+            if(4==$request->param('type') || 5==$request->param('type')){
+                move_uploaded_file($src['tmp_name'],Config::get('src_source_move_path'));
+            }else{
+                $scr_res = $src->validate(['size' => 322122547,])->move(Config::get('src_source_move_path'));
 
-            if ($scr_res) {
-                $scr_save_name = $scr_res->getSaveName();
-                $src_path = Config::get('src_source_save_path') . $scr_save_name;
-            } else {
-                return $this->errorResponse(200, '上传资料失败');
+                if ($scr_res) {
+                    $scr_save_name = $scr_res->getSaveName();
+                    $src_path = Config::get('src_source_save_path') . $scr_save_name;
+                } else {
+                    return $this->errorResponse(200, '上传资料失败');
+                }
             }
         }
-
 
         // 入库
         $data = [];
@@ -433,6 +449,14 @@ class Resource extends Controller
         $subject = Config::get('resource_subject');
         $this->assign('subject', $subject);
 
+        $cat_two_model=Categories::get($resource->category);
+        $cat_one_model=Categories::get($cat_two_model->parent_id);
+
+        if(!empty($cat_one_model) && !empty($cat_two_model)){
+            $this->assign('cat_one',$cat_one_model->name);
+            $this->assign('cat_two',$cat_two_model->name);
+        }
+
         Session::set('menu_name','user_resource_list');
         $this->assign('menu_name',Session::get('menu_name'));
 
@@ -465,7 +489,7 @@ class Resource extends Controller
         }
 
         // 参数校验
-        $validate = new Validate(['title' => 'require', 'type' => 'require|number', 'cat_first' => 'require|number']);
+        $validate = new Validate(['title' => 'require', 'type' => 'require|number']);
 
         if (!$validate->check($params)) {
             $errors = $validate->getError();
@@ -474,7 +498,17 @@ class Resource extends Controller
 
         // 保存文件
         $thumbnail = request()->file('thumbnail');
-        $src = request()->file('src');
+
+        // 视频音频需要单独处理
+        if(4==$request->param('type') || 5==$request->param('type')){
+            if(!isset($_FILES['src'])){
+                $scr = [];
+            }else{
+                $src=$_FILES['src'];
+            }
+        }else{
+            $src = request()->file('src');
+        }
 
         if(!empty($thumbnail)){
             $thumbnail_res = $thumbnail->validate([
@@ -502,18 +536,20 @@ class Resource extends Controller
                     return $this->errorResponse(200,'请填写文件的后缀');
                 }
 
-                $file_date = date('Ymd');
+                $src_path = Config::get('upd_src_save_path'). trim($source_name);
 
-                $src_path = Config::get('src_source_save_path') . $file_date . DS . trim($source_name);
-                mkdir(Config::get('src_source_move_path') . $file_date );
             } else {
-                $scr_res = $src->validate(['size' => 322122547,])->move(Config::get('src_source_move_path'));
+                if(4==$request->param('type') || 5==$request->param('type')){
+                    move_uploaded_file($src['tmp_name'],Config::get('src_source_move_path'));
+                }else{
+                    $scr_res = $src->validate(['size' => 322122547,])->move(Config::get('src_source_move_path'));
 
-                if ($scr_res) {
-                    $scr_save_name = $scr_res->getSaveName();
-                    $src_path = Config::get('src_source_save_path') . $scr_save_name;
-                } else {
-                    return $this->errorResponse(200, '上传资料失败');
+                    if ($scr_res) {
+                        $scr_save_name = $scr_res->getSaveName();
+                        $src_path = Config::get('src_source_save_path') . $scr_save_name;
+                    } else {
+                        return $this->errorResponse(200, '上传资料失败');
+                    }
                 }
             }
         }
@@ -526,10 +562,13 @@ class Resource extends Controller
         $data['thumbnail'] = $thumbnail_path;
         $data['src'] = $src_path;
         $data['user_id'] = $user_id;
-        if (empty($params['cat_second'])) {
-            $data['category'] = $params['cat_first'];
-        } else {
-            $data['category'] = $params['cat_second'];
+
+        if (isset($params['cat_first']) && !empty($params['cat_first'])) {
+            if (isset($params['cat_second']) && !empty($params['cat_second'])) {
+                $data['category'] = $params['cat_second'];
+            } else {
+                $data['category'] = $params['cat_first'];
+            }
         }
         $data['status'] = 1;
         $data['type'] = $params['type'];
@@ -545,5 +584,4 @@ class Resource extends Controller
 
         return $this->successResponse(100, '编辑成功');
     }
-
 }

@@ -37,6 +37,7 @@
                     首页 > <a href="/subject_index?subject_id={$subject_id}">{$subject_name}</a> > {$resource->title}
                 </div>
                 {include file="../application/index/view/public/pdf_show.html"}
+
             </div>
         </div>
     </div>
@@ -46,6 +47,8 @@
 
 {block name="cur_js"}
 <script>
+    plyr.setup();
+
     var media_width=$('.resource_title').width()- 10;
     $(function() {
         $('a.media').media({width:media_width, height:800});

@@ -16,6 +16,9 @@
         bottom: 0;
         left:0;
     }
+    .res-title{
+        color:black;
+    }
 </style>
 {/block}
 
@@ -31,7 +34,7 @@
         <img class="mr-3" src="{$vo.thumbnail}">
         </a>
         <div class="media-body">
-            <h5 class="mt-0 mb-1">{$vo.title}</h5>
+            <h5 class="mt-0 mb-1"><a class="res-title" href="/show_user_resource_detail?id={$vo.id}">{$vo.title}<a></a></h5>
             <h6 class="mt-0 mb-1"><span>创建时间：</span>{$vo.create_at}</h6>
             {$vo.introduction}
         </div>
