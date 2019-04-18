@@ -6,6 +6,7 @@
     <title>{block name="title"}呼和浩特市第三职业中等专业学校{/block}</title>
     <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/public.css">
+    <link rel="stylesheet" href="/static/plyr.css">
     {block name="cur_css"}{/block}
     <script src="/static/jQuery331.js"></script>
     <script src="/static/popper.js"></script>
@@ -14,8 +15,7 @@
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
     <script src="/static/jquery.media.js"></script>
     <script src="/static/wangEditor.js"></script>
-    <script>
-    </script>
+    <script src="/static/plyr.js"></script>
     <style>
         .active2{
             background-color: #9fcdff;
@@ -48,6 +48,7 @@
                         <a href="/manage_resource_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'manage_resource_list' "} active2{/if}">资源列表</a>
                         <a href="/user_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_list' "} active2{/if}">用户列表</a>
                         <a href="/category_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'category_list' "} active2{/if}">分类管理</a>
+                        <a href="/show_sys_config" class="list-group-item list-group-item-action {if condition="$menu_name eq 'show_sys_config' "} active2{/if}">全局设置</a>
                         {/if}
                     </div>
                 </div>

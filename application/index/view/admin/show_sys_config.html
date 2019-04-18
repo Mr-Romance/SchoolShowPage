@@ -1,0 +1,429 @@
+{extend name="public:public_admin"}
+
+{block name="cur_css"}
+<style>
+    .content label {
+        font-size: 20px;
+    }
+
+    .user_info {
+        margin-bottom: 100px;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+
+    .layui-upload-list img {
+        height: 200px;
+        width: 200px;
+    }
+
+    .top-lb {
+        float: left;
+        margin: 20px;
+    }
+
+    .ret-msg {
+        color: red;
+        font-size: 18px;
+        text-align: center;
+    }
+</style>
+<link rel="stylesheet" href="/static/layui/css/layui.css">
+<script src="/static/layui/layui.js"></script>
+
+{/block}
+
+{block name="right-content"}
+<div class="imgs-top-lb">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>上传头部轮播图</legend>
+    </fieldset>
+    <div class="row">
+        <div class="col">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="top-lb1">
+                    <i class="layui-icon">&#xe67c;</i>上传图一
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-top-lb1">
+                    <p class="ret-msg" id="demoText1"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="top-lb2">
+                    <i class="layui-icon">&#xe67c;</i>上传图二
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-top-lb2">
+                    <p class="ret-msg" id="demoText2"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="top-lb3">
+                    <i class="layui-icon">&#xe67c;</i>上传图三
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-top-lb3">
+                    <p class="ret-msg" id="demoText3"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="layui-bg-red">
+<div class="imgs-btm-lb">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>上传底部轮播图</legend>
+    </fieldset>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="btm-lb1">
+                    <i class="layui-icon">&#xe67c;</i>上传图一
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-btm-lb1">
+                    <p class="ret-msg" id="btmText1"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="btm-lb1">
+                    <i class="layui-icon">&#xe67c;</i>上传图一
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-btm-lb1">
+                    <p class="ret-msg" id="btmText1"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="btm-lb1">
+                    <i class="layui-icon">&#xe67c;</i>上传图一
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-btm-lb1">
+                    <p class="ret-msg" id="btmText1"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="btm-lb1">
+                    <i class="layui-icon">&#xe67c;</i>上传图一
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-btm-lb1">
+                    <p class="ret-msg" id="btmText1"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{/block}
+
+{block name="cur_js"}
+<script>
+
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb1'
+            , url: '/sys_static_config'
+            , field: 'top1'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb2'
+            , url: '/sys_static_config'
+            , field: 'top2'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb2').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb3'
+            , url: '/sys_static_config'
+            , field: 'top3'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb3').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb1'
+            , url: '/sys_static_config'
+            , field: 'top1'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb1'
+            , url: '/sys_static_config'
+            , field: 'top1'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb1'
+            , url: '/sys_static_config'
+            , field: 'top1'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb1'
+            , url: '/sys_static_config'
+            , field: 'top1'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb1'
+            , url: '/sys_static_config'
+            , field: 'top1'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb1'
+            , url: '/sys_static_config'
+            , field: 'top1'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb1'
+            , url: '/sys_static_config'
+            , field: 'top1'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload;
+        var layer = layui.layer;
+        //执行实例
+        upload.render({
+            elem: '#top-lb1'
+            , url: '/sys_static_config'
+            , field: 'top1'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#demoText1').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+    });
+
+</script>
+{/block}

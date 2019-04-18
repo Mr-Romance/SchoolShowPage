@@ -50,6 +50,8 @@ Route::get('user_list','index/admin/userList');
 Route::post('user_list_search','index/admin/userListSearch');
 Route::post('delete_user','index/admin/deleteUser');
 Route::get('show_edit_user','index/admin/showEditUser');
+Route::get('show_sys_config','index/admin/showSysConfig');
+Route::post('sys_static_config','index/admin/sysStaticConfig');
 
 /**
  *  资源相关的操作

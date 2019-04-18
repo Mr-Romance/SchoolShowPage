@@ -8,6 +8,7 @@ namespace app\index\controller;
 
 use app\index\model\Resources;
 use app\index\model\Users;
+use think\Config;
 use think\Controller;
 use think\Exception;
 use think\Request;
@@ -325,5 +326,43 @@ class Admin extends Controller
         }
 
         return $this->successResponse(100, '删除成功');
+    }
+
+    /**
+     *  展示系统配置页面
+     *
+     * @return mixed
+     */
+    public function showSysConfig(){
+        Session::set('menu_name','show_sys_config');
+        $this->assign('menu_name',Session::get('menu_name'));
+        return $this->fetch();
+    }
+
+    /**
+     *  上传首页静态图片
+     *
+     * @return \think\response\Json
+     */
+    public function sysStaticConfig(){
+        $upd_file = $_FILES;
+        $top_lb_arr = ['top1', 'top2', 'top3'];
+        $btm_lb_arr = ['btm1', 'btm2', 'btm3', 'btm4', 'btm5', 'btm6', 'btm7', 'btm8'];
+
+        $lb_arr = array_merge($top_lb_arr, $btm_lb_arr);
+
+        // 上传顶部的轮播图
+        foreach ($lb_arr as $lb) {
+            if (!empty($upd_file[$lb])) {
+                $upd_file[$lb]['name'] = $lb;
+                $move_res = move_uploaded_file($upd_file[$lb]['tmp_name'], Config::get('index_static_imgs') . $upd_file[$lb]['name'].'.jpg');
+            }
+        }
+
+        if(empty($move_res)){
+            return $this->errorResponse(200,'上传图片失败');
+        }
+
+        return $this->successResponse(100,'上传成功');
     }
 }
