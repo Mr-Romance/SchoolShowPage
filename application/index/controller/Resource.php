@@ -96,11 +96,6 @@ class Resource extends Controller
      * @throws \Exception
      */
     public function addResource(Request $request) {
-//        $upd_files=$_FILES;
-//        var_dump($upd_files['src']);
-//        EXIT;
-//        $src=$upd_files['src'];
-
         // 这里有问题，不能统一获取参数
         $params['title'] = $request->param('title');
         $params['type'] = $request->param('type');
@@ -170,7 +165,13 @@ class Resource extends Controller
 
         } else {
             if(4==$request->param('type') || 5==$request->param('type')){
-                move_uploaded_file($src['tmp_name'],Config::get('src_source_move_path'));
+                $file_full_path = Config::get('src_source_move_path') . date('Ymd').DS;
+                if (!file_exists($file_full_path)) {
+                    mkdir($file_full_path);
+                }
+                move_uploaded_file($src['tmp_name'],$file_full_path.$src['name']);
+                $src_path = Config::get('src_source_save_path').date('Ymd').DS.$src['name'];
+
             }else{
                 $scr_res = $src->validate(['size' => 322122547,])->move(Config::get('src_source_move_path'));
 
@@ -540,7 +541,12 @@ class Resource extends Controller
 
             } else {
                 if(4==$request->param('type') || 5==$request->param('type')){
-                    move_uploaded_file($src['tmp_name'],Config::get('src_source_move_path'));
+                    $file_full_path = Config::get('src_source_move_path') . date('Ymd').DS;
+                    if (!file_exists($file_full_path)) {
+                        mkdir($file_full_path);
+                    }
+                    move_uploaded_file($src['tmp_name'],$file_full_path.$src['name']);
+                    $src_path = Config::get('src_source_save_path').date('Ymd').DS.$src['name'];
                 }else{
                     $scr_res = $src->validate(['size' => 322122547,])->move(Config::get('src_source_move_path'));
 
