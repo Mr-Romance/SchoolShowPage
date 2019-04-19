@@ -15,7 +15,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 应用调试模式
-    'app_debug' => false,
+    'app_debug' => true,
     // 应用Trace
     'app_trace' => false,
     // 应用模式状态
@@ -283,4 +283,10 @@ return [
 
     // 资源的入库路径
     'src_source_save_path' => DS . 'uploads' . DS . 'src' . DS,
+
+    // 手动上传的资源保存目录
+    'upd_src_save_path' =>DS . 'ziyuan' . DS,
+
+    // 首页静态图片目录
+    'index_static_imgs' => 'index_rec' . DS,
 ];
