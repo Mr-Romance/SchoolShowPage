@@ -31,6 +31,10 @@
         font-size: 18px;
         text-align: center;
     }
+
+    .imgs-btm-lb{
+        margin-bottom: 120px;
+    }
 </style>
 <link rel="stylesheet" href="/static/layui/css/layui.css">
 <script src="/static/layui/layui.js"></script>
@@ -38,6 +42,24 @@
 {/block}
 
 {block name="right-content"}
+<div class="resource_bg">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>上传搜索页背景图</legend>
+    </fieldset>
+
+    <div class="top-lb">
+        <button type="button" class="layui-btn" id="resource-bg">
+            <i class="layui-icon">&#xe67c;</i>上传背景图
+        </button>
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" id="demo-resource-bg">
+            <p class="ret-msg" id="resource-bgText"></p>
+        </div>
+    </div>
+</div>
+
+<hr class="layui-bg-red">
+
 <div class="imgs-top-lb">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
         <legend>上传头部轮播图</legend>
@@ -78,6 +100,7 @@
         </div>
     </div>
 </div>
+<div>这里显示的仅为缩略图，尺寸和首页展示会有偏差</div>
 <hr class="layui-bg-red">
 <div class="imgs-btm-lb">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
@@ -97,40 +120,90 @@
         </div>
         <div class="col-md-3">
             <div class="top-lb">
-                <button type="button" class="layui-btn" id="btm-lb1">
-                    <i class="layui-icon">&#xe67c;</i>上传图一
+                <button type="button" class="layui-btn" id="btm-lb2">
+                    <i class="layui-icon">&#xe67c;</i>上传图二
                 </button>
                 <div class="layui-upload-list">
-                    <img class="layui-upload-img" id="demo-btm-lb1">
-                    <p class="ret-msg" id="btmText1"></p>
+                    <img class="layui-upload-img" id="demo-btm-lb2">
+                    <p class="ret-msg" id="btmText2"></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="top-lb">
-                <button type="button" class="layui-btn" id="btm-lb1">
-                    <i class="layui-icon">&#xe67c;</i>上传图一
+                <button type="button" class="layui-btn" id="btm-lb3">
+                    <i class="layui-icon">&#xe67c;</i>上传图三
                 </button>
                 <div class="layui-upload-list">
-                    <img class="layui-upload-img" id="demo-btm-lb1">
-                    <p class="ret-msg" id="btmText1"></p>
+                    <img class="layui-upload-img" id="demo-btm-lb3">
+                    <p class="ret-msg" id="btmText3"></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="top-lb">
-                <button type="button" class="layui-btn" id="btm-lb1">
-                    <i class="layui-icon">&#xe67c;</i>上传图一
+                <button type="button" class="layui-btn" id="btm-lb4">
+                    <i class="layui-icon">&#xe67c;</i>上传图四
                 </button>
                 <div class="layui-upload-list">
-                    <img class="layui-upload-img" id="demo-btm-lb1">
-                    <p class="ret-msg" id="btmText1"></p>
+                    <img class="layui-upload-img" id="demo-btm-lb4">
+                    <p class="ret-msg" id="btmText4"></p>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-3">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="btm-lb5">
+                    <i class="layui-icon">&#xe67c;</i>上传图五
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-btm-lb5">
+                    <p class="ret-msg" id="btmText5"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="btm-lb6">
+                    <i class="layui-icon">&#xe67c;</i>上传图六
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-btm-lb6">
+                    <p class="ret-msg" id="btmText6"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="btm-lb7">
+                    <i class="layui-icon">&#xe67c;</i>上传图七
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-btm-lb7">
+                    <p class="ret-msg" id="btmText7"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="top-lb">
+                <button type="button" class="layui-btn" id="btm-lb8">
+                    <i class="layui-icon">&#xe67c;</i>上传图八
+                </button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="demo-btm-lb8">
+                    <p class="ret-msg" id="btmText8"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>这里显示的仅为缩略图，尺寸和首页展示会有偏差</div>
+    <hr class="layui-bg-red">
 </div>
+
+
 {/block}
 
 {block name="cur_js"}
@@ -161,12 +234,6 @@
                 });
             },
         });
-    });
-
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
             elem: '#top-lb2'
             , url: '/sys_static_config'
@@ -178,7 +245,7 @@
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#demoText2').html(res['msg']);
             }
             , error: function () {
                 layer.open({
@@ -188,11 +255,6 @@
                 });
             },
         });
-    });
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
             elem: '#top-lb3'
             , url: '/sys_static_config'
@@ -204,7 +266,7 @@
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#demoText3').html(res['msg']);
             }
             , error: function () {
                 layer.open({
@@ -214,24 +276,19 @@
                 });
             },
         });
-    });
 
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
-            elem: '#top-lb1'
+            elem: '#btm-lb1'
             , url: '/sys_static_config'
-            , field: 'top1'
+            , field: 'btm1'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                    $('#demo-btm-lb1').attr('src', result); //图片链接（base64）
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#btmText1').html(res['msg']);
             }
             , error: function () {
                 layer.open({
@@ -241,23 +298,18 @@
                 });
             },
         });
-    });
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
-            elem: '#top-lb1'
+            elem: '#btm-lb2'
             , url: '/sys_static_config'
-            , field: 'top1'
+            , field: 'btm2'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                    $('#demo-btm-lb2').attr('src', result); //图片链接（base64）
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#btmText2').html(res['msg']);
             }
             , error: function () {
                 layer.open({
@@ -267,23 +319,18 @@
                 });
             },
         });
-    });
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
-            elem: '#top-lb1'
+            elem: '#btm-lb3'
             , url: '/sys_static_config'
-            , field: 'top1'
+            , field: 'btm3'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                    $('#demo-btm-lb3').attr('src', result); //图片链接（base64）
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#btmText3').html(res['msg']);
             }
             , error: function () {
                 layer.open({
@@ -293,23 +340,18 @@
                 });
             },
         });
-    });
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
-            elem: '#top-lb1'
+            elem: '#btm-lb4'
             , url: '/sys_static_config'
-            , field: 'top1'
+            , field: 'btm4'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                    $('#demo-btm-lb4').attr('src', result); //图片链接（base64）
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#btmText4').html(res['msg']);
             }
             , error: function () {
                 layer.open({
@@ -319,23 +361,18 @@
                 });
             },
         });
-    });
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
-            elem: '#top-lb1'
+            elem: '#btm-lb5'
             , url: '/sys_static_config'
-            , field: 'top1'
+            , field: 'btm5'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                    $('#demo-btm-lb5').attr('src', result); //图片链接（base64）
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#btmText5').html(res['msg']);
             }
             , error: function () {
                 layer.open({
@@ -345,23 +382,18 @@
                 });
             },
         });
-    });
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
-            elem: '#top-lb1'
+            elem: '#btm-lb6'
             , url: '/sys_static_config'
-            , field: 'top1'
+            , field: 'btm6'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                    $('#demo-btm-lb6').attr('src', result); //图片链接（base64）
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#btmText6').html(res['msg']);
             }
             , error: function () {
                 layer.open({
@@ -371,23 +403,18 @@
                 });
             },
         });
-    });
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
-            elem: '#top-lb1'
+            elem: '#btm-lb7'
             , url: '/sys_static_config'
-            , field: 'top1'
+            , field: 'btm7'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                    $('#demo-btm-lb7').attr('src', result); //图片链接（base64）
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#btmText7').html(res['msg']);
             }
             , error: function () {
                 layer.open({
@@ -397,23 +424,40 @@
                 });
             },
         });
-    });
-    layui.use(['upload', 'layer'], function () {
-        var upload = layui.upload;
-        var layer = layui.layer;
-        //执行实例
         upload.render({
-            elem: '#top-lb1'
+            elem: '#btm-lb8'
             , url: '/sys_static_config'
-            , field: 'top1'
+            , field: 'btm8'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    $('#demo-top-lb1').attr('src', result); //图片链接（base64）
+                    $('#demo-btm-lb8').attr('src', result); //图片链接（base64）
                 });
             }
             , done: function (res) {
-                $('#demoText1').html(res['msg']);
+                $('#btmText8').html(res['msg']);
+            }
+            , error: function () {
+                layer.open({
+                    title: '上传结果',
+                    icon: 2
+                    , content: '上传失败，请重新上传或联系管理员'
+                });
+            },
+        });
+
+        upload.render({
+            elem: '#resource-bg'
+            , url: '/sys_static_config'
+            , field: 'search_index_bg'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo-resource-bg').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                $('#resource-bgText').html(res['msg']);
             }
             , error: function () {
                 layer.open({

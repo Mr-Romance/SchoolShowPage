@@ -346,16 +346,21 @@ class Admin extends Controller
      */
     public function sysStaticConfig(){
         $upd_file = $_FILES;
-        $top_lb_arr = ['top1', 'top2', 'top3'];
+        $top_lb_arr = ['top1', 'top2', 'top3','search_index_bg'];
         $btm_lb_arr = ['btm1', 'btm2', 'btm3', 'btm4', 'btm5', 'btm6', 'btm7', 'btm8'];
 
-        $lb_arr = array_merge($top_lb_arr, $btm_lb_arr);
-
         // 上传顶部的轮播图
-        foreach ($lb_arr as $lb) {
+        foreach ($top_lb_arr as $lb) {
             if (!empty($upd_file[$lb])) {
                 $upd_file[$lb]['name'] = $lb;
                 $move_res = move_uploaded_file($upd_file[$lb]['tmp_name'], Config::get('index_static_imgs') . $upd_file[$lb]['name'].'.jpg');
+            }
+        }
+
+        foreach($btm_lb_arr as $lb){
+            if(!empty($upd_file[$lb])){
+                $upd_file[$lb]['name'] = $lb;
+                $move_res = move_uploaded_file($upd_file[$lb]['tmp_name'], Config::get('index_static_imgs') . $upd_file[$lb]['name'].'.png');
             }
         }
 
