@@ -6,6 +6,14 @@
     min-width: 100% !important;
 }
 
+.school-name-img{
+    float:right;
+    position:absolute;
+    z-index:100;
+    top:20px;
+    right:100px;
+}
+
 li {
     list-style: none;
 }
@@ -155,6 +163,7 @@ ul.line2 li {
 }
 
 .title_text {
+    font-size:15px;
     color: #fff;
     font-family: "Arial Black";
     width: 220px;
@@ -192,12 +201,24 @@ a:hover {
     line-height: 40px;
 }
 
+.ul_content{
+    height:132px;
+}
+
 .column-news .more {
     float: right;
     position: relative;
     right: 30px;
-    top: 10px;
+    bottom: 10px;
     color: #fff;
+    display: block;
+    font-size:13px;
+    border:1px solid white;
+    width: 95px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .column-news .zheng-ce {
@@ -276,12 +297,13 @@ a:hover {
 }
 
 .res-show-media{
+    min-height:400px;
     height:auto;
     margin-bottom: 20px;
 }
 
 .res-show-media .m2{
-    height:auto;
+    height:400px;
 }
 
 .column-js li h3{
