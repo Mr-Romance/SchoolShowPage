@@ -1,3 +1,7 @@
+<?php
+ include "app/index/model/Users";
+ use app\index\model\Users;
+?>
 {extend name="public:public"}
 
 {block name="cur_css"}
@@ -5,7 +9,7 @@
 
 {block name="main"}
     <div class="bg-img">
-        <img src="/index_rec/search_index_bg.jpg">
+        <img src="/index_rec/resource_index.jpg">
 
         <div class="total-statics">
             <span class="total-statics-text">资源数数：{$total_resource_count}</span>
@@ -24,22 +28,32 @@
                     <img src="{$vo->thumbnail}">
                 </a>
                 <p class="title_text">{$vo->title}</p>
+                <p class="title_show_times">{$vo->show_times}人浏览</p>
             </div>
             {/volist}
         </div>
 
         <div class="newest">
             <div><h3 class="column-title">最新上传</h3></div>
-            <div class="newest-rec">
-                <ul class="list-group">
-                    {volist name="new_resource_info" id="vo"}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a href="/zyk_resource_show?id={$vo->id}" class="title_text"> {$vo->title}</a>
-                        <span class="badge badge-primary badge-pill">{php}echo substr($vo->create_at,0,11){/php}</span>
-                    </li>
-                    {/volist}
-                </ul>
+            {volist name="new_resource_info" id="vo"}
+            <div class="newest-media">
+                <div class="media-left">
+                    <div class="time">{php}echo substr($vo->create_at,5,5){/php}</div>
+                    <div class="year">{php}echo substr($vo->create_at,0,4){/php}</div>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a href="/zyk_resource_show?id={$vo->id}" target="_blank">
+                        {$vo->title}
+                        </a>
+                    </h4>
+                    <div class="media-footer">上传者:{$vo->user_id|get_user_name}  &nbsp&nbsp 格式:{$vo->type|res_type_str}</div>
+                </div>
             </div>
+            <div class="clear-float"></div>
+            <div style="height: 10px;width:200px;"></div>
+            {/volist}
+
         </div>
     </div>
     <div class="clear-float"></div>
@@ -54,6 +68,7 @@
                     <img src="{$vo->thumbnail}">
                 </a>
                 <p class="title_text">{$vo->title}</p>
+                <p class="title_show_times">{$vo->show_times}人浏览</p>
             </div>
         </div>
         {/volist}
@@ -65,44 +80,60 @@
         <div><h3 class="column-title">热门专区</h3></div>
         <div class="row">
             <div class="col">
-                <ul class="list-group">
-                    <li class="list-group-item cat_name active">{$cat_one_name}</li>
-                    {volist name="cat_one" id="vo"}
-                    <li class="list-group-item"><a href="/zyk_resource_show?id={$vo->id}"
-                                                   class="hot_title_text">{$vo->title}</a>
-                    </li>
-                    {/volist}
-                </ul>
+                <div class="hot-cat">
+                    <div class="hot-cat-title">{$cat_one_name}</div>
+                    <ul class="list-unstyled">
+                        {volist name="cat_one" id="vo"}
+                        <li >
+                            <a href="/zyk_resource_show?id={$vo->id}">
+                            {$vo->title}
+                            </a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
             </div>
             <div class="col">
-                <ul class="list-group">
-                    <li class="list-group-item active">{$cat_two_name}</li>
-                    {volist name="cat_two" id="vo"}
-                    <li class="list-group-item"><a href="/zyk_resource_show?id={$vo->id}"
-                                                   class="hot_title_text">{$vo->title}</a>
-                    </li>
-                    {/volist}
-                </ul>
+                <div class="hot-cat">
+                    <div class="hot-cat-title">{$cat_two_name}</div>
+                    <ul class="list-unstyled">
+                        {volist name="cat_two" id="vo"}
+                        <li >
+                            <a href="/zyk_resource_show?id={$vo->id}">
+                                {$vo->title}
+                            </a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
             </div>
             <div class="col">
-                <ul class="list-group">
-                    <li class="list-group-item active">{$cat_three_name}</li>
-                    {volist name="cat_three" id="vo"}
-                    <li class="list-group-item"><a href="/zyk_resource_show?id={$vo->id}"
-                                                   class="hot_title_text">{$vo->title}</a>
-                    </li>
-                    {/volist}
-                </ul>
+                <div class="hot-cat">
+                    <div class="hot-cat-title">{$cat_three_name}</div>
+                    <ul class="list-unstyled">
+                        {volist name="cat_three" id="vo"}
+                        <li >
+                            <a href="/zyk_resource_show?id={$vo->id}">
+                                {$vo->title}
+                            </a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
             </div>
             <div class="col">
-                <ul class="list-group">
-                    <li class="list-group-item active">{$cat_four_name}</li>
-                    {volist name="cat_four" id="vo"}
-                    <li class="list-group-item"><a href="/zyk_resource_show?id={$vo->id}"
-                                                   class="hot_title_text">{$vo->title}</a>
-                    </li>
-                    {/volist}
-                </ul>
+                <div class="hot-cat">
+                    <div class="hot-cat-title">{$cat_four_name}</div>
+                    <ul class="list-unstyled">
+                        {volist name="cat_four" id="vo"}
+                        <li >
+                            <a href="/zyk_resource_show?id={$vo->id}">
+                                {$vo->title}
+                            </a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -116,10 +147,14 @@
                 <div class="col-3">
                     <div class="card" style="width: 18rem;">
                         <div class="teacher-img">
-                        <img class="card-img-top" src="{$vo->head_portrait}" alt="{$vo->name}">
+                                <div class="the-teacher-img">
+                                <img src="{$vo->head_portrait}" alt="{$vo->name}">
+                                </div>
+                                <div class="teacher-name">
+                                    <h5 >{$vo->name}</h5>
+                                </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">姓名：{$vo->name}</h5>
                             <h5 class="card-title">邮箱：{$vo->email}</h5>
                             <p class="card-text title_text">教师介绍：{$vo->introduction}</p>
                             <a href="/teacher_res_list?user_id={$vo->id}" target="_blank"

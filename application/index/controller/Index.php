@@ -168,9 +168,10 @@ class Index extends Controller
         }
         $this->assign('counter_subject', $subjects_arr);
 
-        // 页面的统计信息
-        $this->assign('total_resource_count',3256);
-        $this->assign('total_resource_size',281);
+        // 页面的统计信息 二维数组
+        $static_count = Db::query('select count(*) as total_count from resources');
+        $this->assign('total_resource_count', 3000 + $static_count[0]['total_count']);
+        $this->assign('total_resource_size', 281);
 
         return $this->fetch();
     }

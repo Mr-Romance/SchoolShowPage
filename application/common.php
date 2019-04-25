@@ -10,6 +10,9 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+use app\index\model\Users;
+use think\Config;
+
 /**
  * 系统加密方法
  * @param string $data 要加密的字符串
@@ -72,4 +75,17 @@ function think_decrypt($data, $key = '123456'){
         }
     }
     return base64_decode($str);
+}
+
+function res_type_str($type){
+    return Config::get('resource_str')[$type];
+}
+
+function get_user_name($user_id){
+    $user=Users::get($user_id);
+    if($user){
+        return $user->name;
+    }else{
+        return '佚名';
+    }
 }
