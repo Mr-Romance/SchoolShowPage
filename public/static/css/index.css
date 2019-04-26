@@ -6,29 +6,29 @@
     min-width: 100% !important;
 }
 
-.school-name-img{
-    float:right;
-    position:absolute;
-    z-index:100;
-    top:20px;
-    right:100px;
+.school-name-img {
+    float: right;
+    position: absolute;
+    z-index: 100;
+    top: 20px;
+    right: 100px;
 }
 
 li {
     list-style: none;
 }
 
-.wrap{
-    width:1000px;
-    margin:0 auto;
+.wrap {
+    width: 1000px;
+    margin: 0 auto;
 }
 
-.clear-float{
-    clear:both;
+.clear-float {
+    clear: both;
 }
 
-.subject-title-menu{
-margin-top: 10px;
+.subject-title-menu {
+    margin-top: 10px;
 }
 
 .no-gutters {
@@ -52,22 +52,22 @@ margin-top: 10px;
     height: 318px;
 }
 
-.nav{
+.nav {
     background: url("/static/imgs/nav_bg.png");
     height: 56px;
-    text-align:center;
-    padding:10px;
+    text-align: center;
+    padding: 10px;
 }
 
-.nav li{
-    float:left;
+.nav li {
+    float: left;
     display: inline-block;
     width: 101px;
-    height:36px;
-    line-height:36px;
+    height: 36px;
+    line-height: 36px;
 }
 
-.nav li.active{
+.nav li.active {
     background-color: #2D93CA;
 }
 
@@ -75,13 +75,13 @@ margin-top: 10px;
     background-color: #2D93CA;
 }
 
-.nav li a{
-    color:#fff;
+.nav li a {
+    color: #fff;
     text-decoration: none;
 }
 
-a:hover{
-    text-decoration:none;
+a:hover {
+    text-decoration: none;
 }
 
 .top-news {
@@ -92,52 +92,37 @@ a:hover{
 
 .news-left {
     text-align: left;
-    width:700px;
+    width: 700px;
 }
 
 ul.line {
-    height: 50px;
-    width: 700px;
-    overflow: hidden;
-}
-
-ul.line2 {
-    height: 50px;
-    width: 330px;
-    overflow: hidden;
+height: 50px;
+width: 700px;
+overflow: hidden;
 }
 
 ul.line li {
-    height: 50px;
-    text-indent: 15px;
-    font-size: 18px;
-    color: black;
-    line-height: 50px;
-    list-style: none
+height: 50px;
+text-indent: 15px;
+font-size: 18px;
+color: black;
+line-height: 50px;
+list-style: none
 }
 
-ul.line2 li {
-    height: 50px;
-    text-indent: 15px;
-    font-size: 18px;
-    color: black;
-    line-height: 50px;
-    list-style: none
-}
-
-.lb-right-news{
+.lb-right-news {
     text-align: right;
     margin-left: 250px;
 }
 
 .news-left .lb-news-title {
-    float:left;
+    float: left;
     padding: 25px 0 1px 0;
     font-size: 16px;
     color: #474747;
     line-height: 20px;
     font-weight: normal;
-    width:300px;
+    width: 300px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -163,7 +148,7 @@ ul.line2 li {
 }
 
 .title_text {
-    font-size:15px;
+    font-size: 15px;
     color: #fff;
     font-family: "Arial Black";
     width: 220px;
@@ -189,20 +174,20 @@ a:hover {
     color: #fff;
 }
 
-.column-news h5{
-    margin-left:50px;
+.column-news h5 {
+    margin-left: 50px;
     line-height: 35px;
 }
 
 .column-new title {
-    text-align:left;
+    text-align: left;
     font-size: 20px;
     margin-top: 15px;
     line-height: 40px;
 }
 
-.ul_content{
-    height:132px;
+.ul_content {
+    height: 132px;
 }
 
 .column-news .more {
@@ -212,8 +197,8 @@ a:hover {
     bottom: 10px;
     color: #fff;
     display: block;
-    font-size:13px;
-    border:1px solid white;
+    font-size: 13px;
+    border: 1px solid white;
     width: 95px;
     height: 28px;
     line-height: 28px;
@@ -254,23 +239,23 @@ a:hover {
     float: left;
 }
 
-.top-news .mr-3{
-    margin-left:40px;
+.top-news .mr-3 {
+    margin-left: 40px;
 }
 
-.column-js{
-    height:269px;
+.column-js {
+    height: 269px;
 }
 
 /* 建设成果*/
-.js-main{
-    float:left;
-    width:625px;
-    height:269px;
+.js-main {
+    float: left;
+    width: 625px;
+    height: 269px;
     background-color: #f4f4f4;
 }
 
-.column-js .jian_she_title{
+.column-js .jian_she_title {
     padding: 14px 0 10px 10px;
     color: #3156a3;
     font-size: 25px;
@@ -278,35 +263,35 @@ a:hover {
     text-align: left;
 }
 
-.js-main img{
-    float:left;
+.js-main img {
+    float: left;
     width: 198px;
     height: 184px;
     margin: 7px 0 0 22px;
 }
 
-.js-media{
-    float:right;
-    width:364px;
-    height:269px;
+.js-media {
+    float: right;
+    width: 364px;
+    height: 269px;
 }
 
-.js-media .m{
-    width:364px;
-    height:269px;
+.js-media .m {
+    width: 364px;
+    height: 269px;
 }
 
-.res-show-media{
-    min-height:400px;
-    height:auto;
+.res-show-media {
+    min-height: 400px;
+    height: auto;
     margin-bottom: 20px;
 }
 
-.res-show-media .m2{
-    height:400px;
+.res-show-media .m2 {
+    height: 400px;
 }
 
-.column-js li h3{
+.column-js li h3 {
     float: left;
     padding: 0 18px 0 20px;
     border-right: 1px solid #cbcbcb;
@@ -316,7 +301,7 @@ a:hover {
     font-weight: normal;
 }
 
-.column-js .li-con h4{
+.column-js .li-con h4 {
     padding: 0 0 1px 0;
     font-size: 13px;
     color: #474747;
@@ -324,12 +309,12 @@ a:hover {
     font-weight: normal;
 }
 
-.column-js .li-con{
+.column-js .li-con {
     float: left;
     margin-left: 16px;
     width: 275px;
     text-align: left;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 .zi_yuan_ku {
@@ -370,7 +355,7 @@ a:hover {
     text-align: left;
 }
 
-.column-lb-title{
+.column-lb-title {
     padding: 14px 0 10px 10px;
     color: #3156a3;
     font-size: 25px;
@@ -378,8 +363,8 @@ a:hover {
     text-align: left;
 }
 
-.column-fixed .source_title{
-    text-align:center;
+.column-fixed .source_title {
+    text-align: center;
 }
 
 .column-fixed img {
@@ -408,21 +393,21 @@ a:hover {
 }
 
 .footer .footer-school-name {
-    line-height:40px;
+    line-height: 40px;
     text-align: center;
     font-size: 16px;
     color: #dee2e6;
 }
 
 .footer-address {
-    line-height:0;
+    line-height: 0;
     text-align: center;
     font-size: 14px;
     color: #dee2e6;
 }
 
 .subject-content {
-    margin-top:20px;
+    margin-top: 20px;
     height: 800px;
 }
 
@@ -430,13 +415,13 @@ a:hover {
     color: black;
 }
 
-.index-page-location{
+.index-page-location {
     display: inline-block;
     font: 12px/31px "\5b8b\4f53";
     color: #6f6f6f;
 }
 
-.index-page-location a:hover{
-    color:red;
+.index-page-location a:hover {
+    color: red;
 }
 

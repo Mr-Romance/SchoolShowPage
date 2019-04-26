@@ -149,23 +149,25 @@
     height: 200px;
 }
 
-.list-unstyled{
-    text-align:center;
+.hot .hot-list{
+    text-align:left;
 }
 
-.list-unstyled li{
+.hot-list li{
     height:30px;
     line-height: 30px;
+    list-style:none;
 }
 
-.hot .list-unstyled a {
-    text-align:center;
+.hot .hot-list a {
+    text-align:left;
     font-size: 14px;
     font-weight: normal;
     color: #434343;
     max-width: 220px;
     height: 30px;
     line-height: 30px;
+
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
