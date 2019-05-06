@@ -8,25 +8,26 @@
     <link rel="stylesheet" href="/static/plyr.css">
     <link rel="stylesheet" href="/static/lrtk.css">
     <script src="/static/jQuery331.js"></script>
+    <script src="/static/jquery.min.js"></script>
     <script src="/static/layer/layer.js"></script>
     <script src="/static/dialog.js"></script>
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
     <script src="/static/myslideup.js"></script>
-    <script src="/static/myslideup2.js"></script>
     <script src="/static/plyr.js"></script>
-    <script src="/static/jquery.min.js"></script>
     <script src="/static/responsiveslides.min.js"></script>
     <script src="/static/slide.js"></script>
 
     <script>
         $(function () {
             $(".line").slideUp();
-            $(".line2").slideUp();
         })
     </script>
 </head>
 <body>
 <div class="container">
+    <!--<div class="school-name-img">-->
+        <!--<img src="/index_rec/school_name.png">-->
+    <!--</div>-->
     <div class="banner">
         <div class="slide_container">
             <ul class="rslides" id="slider">
@@ -106,40 +107,46 @@
     <div class="column-news">
         <div class="zheng-ce">
             <h5>政策指导</h5>
+            <div class="ul_content">
             <ul>
                 {volist name="zheng_ce_info" id="vo"}
                 <li>
                     <a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$zc_subject_id}">
-                        <span> ></span>{$vo->title}
+                        <span> &nbsp ></span>{$vo->title}
                     </a>
                 </li>
                 {/volist}
             </ul>
-            <button class="more" style="background-color:#41b3e5;">查看更多</button>
+            </div>
+            <a class="more" href= "/subject_index?subject_id={$zc_subject_id}" style="background-color:#41b3e5;">查看更多</a>
         </div>
         <div class="zong-jie">
             <h5>总结报告</h5>
+            <div class="ul_content">
             <ul>
                 {volist name="zong_jie_info" id="vo"}
                 <li><a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$zj_subject_id}">
-                    <span> ></span> {$vo->title}
+                    <span>&nbsp ></span> {$vo->title}
                 </a>
                 </li>
                 {/volist}
             </ul>
-            <button class="more" style="background-color: #0484cf;">查看更多</button>
+                </div>
+            <a class="more" href="/subject_index?subject_id={$zj_subject_id}" style="background-color: #0484cf;">查看更多</a>
         </div>
         <div class="dian-xing">
             <h5>典型案例</h5>
+            <div class="ul_content">
             <ul>
                 {volist name="dian_xing_info" id="vo"}
                 <li><a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$dx_subject_id}">
-                    <span> ></span>{$vo->title}
+                    <span>&nbsp ></span>{$vo->title}
                 </a>
                 </li>
                 {/volist}
             </ul>
-            <button class="more" style="background-color:#3156a4;">查看更多</button>
+            </div>
+            <a class="more" href="/subject_index?subject_id={$dx_subject_id}" style="background-color:#3156a4;">查看更多</a>
         </div>
     </div>
 

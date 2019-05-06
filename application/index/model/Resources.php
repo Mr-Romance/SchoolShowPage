@@ -11,6 +11,10 @@ class Resources extends Model
 {
     protected $table = 'resources';
 
+    public function user(){
+        return $this->hasOne('Users','user_id','id');
+    }
+
     /**
      * 保存资源信息
      *

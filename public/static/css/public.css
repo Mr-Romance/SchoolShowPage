@@ -16,8 +16,8 @@
 
 .total-statics{
     position:absolute;
-    right:200px;
-    top:400px;
+    right:100px;
+    top:285px;
     color:#fff;
     font-weight: bold;
     font-size:30px;
@@ -27,15 +27,24 @@
     color: #434343;
     font-family: "Arial Black";
     width: 175px;
+    font-size:15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     padding-top: 10px;
 }
 
+.title_show_times{
+    font-size: 12px;
+    color: #959494;
+}
+
 .column-title{
     font-size: 18px;
     color: #33485d;
+
+    border-left: 6px solid #33485d;
+    padding-left: 15px;
 }
 
 .wrap{
@@ -46,11 +55,6 @@
 .clear-float{
     clear:both;
 }
-
-.public-top{
-    margin-bottom: 5px;
-}
-
 .school-name{
     font-size:28px;
 }
@@ -136,8 +140,49 @@
 }
 
 /**热门专区**/
-.hot .cat_name{
+.hot{
+    margin-top:20px;
+    background-color: #F5F5F5;
+}
+
+.hot-cat{
+    height: 200px;
+}
+
+.hot .hot-list{
     text-align:left;
+}
+
+.hot-list li{
+    height:30px;
+    line-height: 30px;
+    list-style:none;
+}
+
+.hot .hot-list a {
+    text-align:left;
+    font-size: 14px;
+    font-weight: normal;
+    color: #434343;
+    max-width: 220px;
+    height: 30px;
+    line-height: 30px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 1s;
+}
+
+.hot .hot-cat-title{
+    text-align:center;
+    width:263px;
+    height:52px;
+    background-color: #337AB7;
+    line-height:52px;
+    font-size:20px;
+    color:#fff;
+
 }
 
 .hot .hot_title_text{
@@ -153,6 +198,7 @@
 .recommend{
     margin-top:10px;
     height:375px;
+    background-color: #F5F5F5;
 }
 .recommend-left{
     width:862px;
@@ -162,6 +208,67 @@
 .newest{
     float:right;
     width:278px;
+}
+
+.newest .newest-media{
+    width:278px;
+}
+
+.media-left{
+    float:left;
+    width:60px;
+    height:48px;
+}
+
+.media-left .time{
+    background: #d5d5d5;
+    color:#818181;
+    font-style: normal;
+    font-size: 12px;
+    height: 23px;
+    line-height: 23px;
+    text-align:center;
+}
+
+.media-left .year{
+    background-color: #0071bf;
+    color:#fff;
+    text-align:center;
+}
+
+.media-body{
+    float:right;
+    max-width: 218px;
+    color: #33485d;
+    height: 21px;
+}
+
+.media-body .media-heading{
+    width:218px;
+    height:20px;
+    font-size:14px;
+    line-height:20px;
+    margin-left:10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.media-body .media-heading a{
+    color:#33485d;
+}
+
+.media-body .media-footer{
+    width:218px;
+    height:20px;
+    font-size:12px;
+    color:#959494;
+    line-height:20px;
+    margin-left:10px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .recommend .recommend-rec{
@@ -234,16 +341,31 @@
     height:300px;
 }
 
-.teacher-img {
+.teachers{
+    margin-top:20px;
+}
+
+.the-teacher-img {
+    float:left;
     text-align: center;
-    height:200px;
-    width:280px;
+    height:60px;
+    width:60px;
+    margin:10px 10px 5px 10px;
+}
+
+.teacher-name{
+    margin:30px 0 0 10px;
+    float:left;
+    width:100px;
+    font-size: 16px;
+    color: #33485d;
+    font-weight: bold;
 }
 
 .teachers img {
-    width:200px;
-    height:200px;
-    border-radius: 50px;
+    height:60px;
+    width:60px;
+    border-radius: 60px;
 }
 
 .btn-search{
