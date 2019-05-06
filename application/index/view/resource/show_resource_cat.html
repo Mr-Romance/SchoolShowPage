@@ -1,0 +1,58 @@
+{extend name="public:public_admin"}
+
+{block name="cur_css"}
+<link rel="stylesheet" href="/static/layui/css/layui.css">
+<script  src="/static/layui/layui.js"></script>
+<style>
+    .footer{
+        position:fixed;
+        bottom:0;
+        left:0;
+
+    }
+</style>
+{/block}
+
+{block name="right-content"}
+<form id="form_add_resource_cat" class="form-add-category">
+    <div class="form-group">
+        <div class="form-group">
+            <input name="name" id="name" placeholder="输入目录名称">
+        </div>
+        <label>资源主题</label>
+        <select class="form-control" name="subject_id">
+            <option value="0">请选择</option>
+            {if condition ="!empty($subject_info)"}
+            {volist name="subject_info" id = "vo"}
+            <option value="{$vo->id}">{$vo['name']}</option>
+            {/volist}
+            {/if}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>请选择目录</label>
+        <div id="treeview-checkable" class=""></div>
+    </div>
+    <div class="form-group">
+        <label>排序</label>
+        <input type="text" name="sort" placeholder="数字越大，排名越前面" value="1">
+    </div>
+    <button type="button" id="add_categories" class="btn btn-primary">添加</button>
+</form>
+{/block}
+
+{block name="cur_js"}
+    <script>
+        var $checkableTree = $('#treeview-checkable').treeview({
+            data: defaultData,
+            showIcon: false,
+            showCheckbox: true,
+            onNodeChecked: function(event, node) {
+                $('#checkable-output').prepend('<p>' + node.text + ' was checked</p>');
+            },
+            onNodeUnchecked: function (event, node) {
+                $('#checkable-output').prepend('<p>' + node.text + ' was unchecked</p>');
+            }
+        });
+    </script>
+{/block}

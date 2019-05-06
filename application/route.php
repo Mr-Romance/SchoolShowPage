@@ -73,6 +73,7 @@ Route::get('clear_search_session','index/index/clearSearchSession');
 Route::post('add_category', 'index/resource/addCategory');
 Route::get('show_edit_resource','index/resource/showEditResource');
 Route::post('edit_resource','index/resource/editResource');
+Route::get('show_resource_cat','index/resource/showResourceCat');
 
 Route::get('test_search','index/index/resourceCategory');
 Route::get('test','index/index/test');

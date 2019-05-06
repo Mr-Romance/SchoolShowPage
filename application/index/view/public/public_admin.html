@@ -47,7 +47,8 @@
                         {if condition="$user->type == 2"}
                         <a href="/manage_resource_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'manage_resource_list' "} active2{/if}">资源列表</a>
                         <a href="/user_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_list' "} active2{/if}">用户列表</a>
-                        <a href="/category_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'category_list' "} active2{/if}">分类管理</a>
+                        <a href="/category_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'category_list' "} active2{/if}">学科分类</a>
+                        <a href="/resource_cat_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'resource_cat_list' "} active2{/if}">资源主题目录</a>
                         <a href="/show_sys_config" class="list-group-item list-group-item-action {if condition="$menu_name eq 'show_sys_config' "} active2{/if}">全局设置</a>
                         {/if}
                     </div>
@@ -69,7 +70,6 @@
 {block name="cur_js"}
 <script>
     $(".list-list-group-item-action").click(function(){
-        alert('xxx');
     });
 </script>
 {/block}

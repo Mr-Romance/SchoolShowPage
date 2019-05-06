@@ -282,7 +282,7 @@ class Index extends Controller
 
         if (empty($subject_id)) {
             return $this->fetch();
-        }
+    }
 
         $subject_info = Config::get('subject_info');
 
@@ -384,6 +384,9 @@ class Index extends Controller
             ['name'=>'jake2','children'=>[['name'=>'chi-12'],['name'=>'chi-22']]]
         ];
         $res_data=json_encode($js_data);
+
+        var_dump($res_data);
+        exit;
 
         $this->assign('res_data',$res_data);
         return $this->fetch();

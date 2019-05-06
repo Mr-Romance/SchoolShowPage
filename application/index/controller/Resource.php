@@ -590,4 +590,10 @@ class Resource extends Controller
 
         return $this->successResponse(100, '编辑成功');
     }
+
+    public function showResourceCat() {
+        Session::set('menu_name', 'resource_cat_list');
+        $this->assign('menu_name',Session::get('menu_name'));
+        return $this->fetch();
+    }
 }

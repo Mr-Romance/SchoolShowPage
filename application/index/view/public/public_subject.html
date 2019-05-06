@@ -14,11 +14,13 @@
             </div>
 
             <ul class="list-group list-group-flush">
+                {if condition="!empty(list)"}
                 {volist name="list" id="vo"}
                 <a class="list-group-item" href="/index_resource_show?id={$vo->id}&subject_id={$vo->subject}">
                     {$vo->title} &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; {$vo->create_at}
                 </a>
                 {/volist}
+                {/if}
             </ul>
 
             {$list->render()}
