@@ -75,5 +75,7 @@ Route::get('show_edit_resource','index/resource/showEditResource');
 Route::post('edit_resource','index/resource/editResource');
 
 Route::get('test_search','index/index/resourceCategory');
+Route::get('test','index/index/test');
+Route::get('testjson','index/index/testJson');
 
 

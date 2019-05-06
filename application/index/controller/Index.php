@@ -376,4 +376,27 @@ class Index extends Controller
         Session::delete('search_title');
         Session::delete('order_type');
     }
+
+    public function test(){
+        $js_data=[
+            ['name'=>'jake','children'=>[['name'=>'chi-1'],'children'=>['name'=>'chi-2']]],
+            ['name'=>'jake2','children'=>[['name'=>'chi-12'],['name'=>'chi-22']]]
+        ];
+        $res_data=json_encode($js_data);
+
+        $this->assign('res_data',$res_data);
+        return $this->fetch();
+    }
+
+    public function testJson(){
+        $js_data=[
+            ['name'=>'jake',
+                'children'=>[['name'=>'chi-1'],
+                'children'=>['name'=>'chi-2']
+            ]],
+            ['name'=>'jake','children'=>[['name'=>'chi-1'],['name'=>'chi-2']]]
+        ];
+        $res_data=json_encode($js_data);
+        return $this->successResponse(100,'success',$res_data);
+    }
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/jQuery331.js"></script>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script src="/static/layui/layui.js"> </script>
+    <style>
+        .layui-tree-skin-shihuang .layui-tree-branch{color: #EDCA50;}
+
+    </style>
+</head>
+<body>
+<ul id="demo"></ul>
+</body>
+<script>
+   // var treedata;
+
+   // function getNodels(){
+   //     $.get('/jsontest',function(data){
+   //         treedata=data.data;
+   //     });
+   //     return treedata;
+   // }
+
+   // console.log(<?php echo $res_data;?>);
+
+   // layui.use(['tree','code'],function(){
+   //     layui.tree({
+   //         elem: '#demo' //传入元素选择器
+   //         ,nodes:    layui.code({
+   //             nodes: <?php echo $res_data;?> //默认值为.layui-code
+   //         })
+   //     });
+   // });
+
+
+   var treedata;
+
+   // function getNodels(){
+   //     $.get('/jsontest',function(data){
+   //         treedata=data.data;
+   //     });
+   //     return treedata;
+   // }
+
+   // console.log([{"name":"jake","children":[{"name":"chi-1"},{"name":"chi-2"}]},{"name":"jake2","children":[{"name":"chi-12"},{"name":"chi-22"}]}]);
+
+   layui.use(['tree','code'],function(){
+       layui.tree({
+           elem: '#demo',//传入元素选择器
+           skin: 'shihuang'
+           ,nodes: <?php echo $res_data;?>
+       });
+   });
+
+
+
+</script>
+</html>
