@@ -5,57 +5,309 @@
     <title>Title</title>
     <script src="/static/jQuery331.js"></script>
     <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
     <script src="/static/layui/layui.js"> </script>
+    <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
+    <!--<script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <script src="/static/bootstrap-treeview.js"></script>
     <style>
-        .layui-tree-skin-shihuang .layui-tree-branch{color: #EDCA50;}
 
     </style>
 </head>
 <body>
-<ul id="demo"></ul>
-</body>
-<script>
-   // var treedata;
+<div class="jq22-container">
 
-   // function getNodels(){
-   //     $.get('/jsontest',function(data){
-   //         treedata=data.data;
-   //     });
-   //     return treedata;
-   // }
+    <div class="container">
+        <h1>Bootstrap Tree View</h1>
+        <div class="row">
+            <hr>
+            <h2>Checkable Tree</h2>
+            <div class="col-sm-4">
+                <h2>Input</h2>
+                <div class="form-group">
+                    <label for="input-check-node" class="sr-only">Search Tree:</label>
+                    <input type="input" class="form-control" id="input-check-node" placeholder="Identify node..." value="Parent 1">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" class="checkbox" id="chk-check-silent" value="false">
+                        Silent (No events)
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-success check-node" id="btn-check-node">Check Node</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-danger check-node" id="btn-uncheck-node">Uncheck Node</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary check-node" id="btn-toggle-checked">Toggle Node</button>
+                </div>
+                <hr>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-success" id="btn-check-all">Check All</button>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger" id="btn-uncheck-all">Uncheck All</button>
+            </div>
 
-   // console.log(<?php echo $res_data;?>);
+            <div class="col-sm-4">
+                <h2>Tree</h2>
+                <div id="treeview-checkable" class=""></div>
+            </div>
 
-   // layui.use(['tree','code'],function(){
-   //     layui.tree({
-   //         elem: '#demo' //传入元素选择器
-   //         ,nodes:    layui.code({
-   //             nodes: <?php echo $res_data;?> //默认值为.layui-code
-   //         })
-   //     });
-   // });
+            <div class="col-sm-4">
+                <h2>Events</h2>
+                <div id="checkable-output"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <iframe id="my-iframe">
+
+                </iframe>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function() {
+        var defaultData= <?php echo $res_data;?>
+        // var defaultData = [
+        //     {
+        //         text: 'Parent 1',
+        //         id:'100',
+        //         href: '#parent1',
+        //         // tags: '4',
+        //         nodes: [
+        //             {
+        //                 text: 'Child 1',
+        //                 href: '#child1',
+        //                 // tags: '2',
+        //                 nodes: [
+        //                     {
+        //                         text: 'Grandchild 1',
+        //                         href: '#grandchild1',
+        //                         // tags: '0'
+        //                     },
+        //                     {
+        //                         text: 'Grandchild 2',
+        //                         href: '#grandchild2',
+        //                         // tags: '0'
+        //                     }
+        //                 ]
+        //             },
+        //             {
+        //                 text: 'Child 2',
+        //                 href: '#child2',
+        //                 // tags: '0'
+        //             }
+        //         ]
+        //     }
+        // ];
 
 
-   var treedata;
+        // var initSelectableTree = function() {
+        //     return $('#treeview-selectable').treeview({
+        //         data: defaultData,
+        //         multiSelect: $('#chk-select-multi').is(':checked'),
+        //         onNodeSelected: function(event, node) {
+        //             $('#selectable-output').prepend('<p>' + node.text + ' was selected</p>');
+        //         },
+        //         onNodeUnselected: function (event, node) {
+        //             $('#selectable-output').prepend('<p>' + node.text + ' was unselected</p>');
+        //         }
+        //     });
+        // };
+        // var $selectableTree = initSelectableTree();
+        //
+        // var findSelectableNodes = function() {
+        //     return $selectableTree.treeview('search', [ $('#input-select-node').val(), { ignoreCase: false, exactMatch: false } ]);
+        // };
+        // var selectableNodes = findSelectableNodes();
+        //
+        // $('#chk-select-multi:checkbox').on('change', function () {
+        //     console.log('multi-select change');
+        //     $selectableTree = initSelectableTree();
+        //     selectableNodes = findSelectableNodes();
+        // });
+        //
+        // // Select/unselect/toggle nodes
+        // $('#input-select-node').on('keyup', function (e) {
+        //     selectableNodes = findSelectableNodes();
+        //     $('.select-node').prop('disabled', !(selectableNodes.length >= 1));
+        // });
+        //
+        // $('#btn-select-node.select-node').on('click', function (e) {
+        //     $selectableTree.treeview('selectNode', [ selectableNodes, { silent: $('#chk-select-silent').is(':checked') }]);
+        // });
+        //
+        // $('#btn-unselect-node.select-node').on('click', function (e) {
+        //     $selectableTree.treeview('unselectNode', [ selectableNodes, { silent: $('#chk-select-silent').is(':checked') }]);
+        // });
+        //
+        // $('#btn-toggle-selected.select-node').on('click', function (e) {
+        //     $selectableTree.treeview('toggleNodeSelected', [ selectableNodes, { silent: $('#chk-select-silent').is(':checked') }]);
+        // });
+        //
+        //
+        //
+        // var $expandibleTree = $('#treeview-expandible').treeview({
+        //     data: defaultData,
+        //     onNodeCollapsed: function(event, node) {
+        //         $('#expandible-output').prepend('<p>' + node.text + ' was collapsed</p>');
+        //     },
+        //     onNodeExpanded: function (event, node) {
+        //         $('#expandible-output').prepend('<p>' + node.text + ' was expanded</p>');
+        //     }
+        // });
+        //
+        // var findExpandibleNodess = function() {
+        //     return $expandibleTree.treeview('search', [ $('#input-expand-node').val(), { ignoreCase: false, exactMatch: false } ]);
+        // };
+        // var expandibleNodes = findExpandibleNodess();
+        //
+        // // Expand/collapse/toggle nodes
+        // $('#input-expand-node').on('keyup', function (e) {
+        //     expandibleNodes = findExpandibleNodess();
+        //     $('.expand-node').prop('disabled', !(expandibleNodes.length >= 1));
+        // });
+        //
+        // $('#btn-expand-node.expand-node').on('click', function (e) {
+        //     var levels = $('#select-expand-node-levels').val();
+        //     $expandibleTree.treeview('expandNode', [ expandibleNodes, { levels: levels, silent: $('#chk-expand-silent').is(':checked') }]);
+        // });
+        //
+        // $('#btn-collapse-node.expand-node').on('click', function (e) {
+        //     $expandibleTree.treeview('collapseNode', [ expandibleNodes, { silent: $('#chk-expand-silent').is(':checked') }]);
+        // });
+        //
+        // $('#btn-toggle-expanded.expand-node').on('click', function (e) {
+        //     $expandibleTree.treeview('toggleNodeExpanded', [ expandibleNodes, { silent: $('#chk-expand-silent').is(':checked') }]);
+        // });
+        //
+        // // Expand/collapse all
+        // $('#btn-expand-all').on('click', function (e) {
+        //     var levels = $('#select-expand-all-levels').val();
+        //     $expandibleTree.treeview('expandAll', { levels: levels, silent: $('#chk-expand-silent').is(':checked') });
+        // });
+        //
+        // $('#btn-collapse-all').on('click', function (e) {
+        //     $expandibleTree.treeview('collapseAll', { silent: $('#chk-expand-silent').is(':checked') });
+        // });
 
-   // function getNodels(){
-   //     $.get('/jsontest',function(data){
-   //         treedata=data.data;
-   //     });
-   //     return treedata;
-   // }
+        var $checkableTree = $('#treeview-checkable').treeview({
+            data: defaultData,
+            showIcon: false,
+            showCheckbox: true,
+            onNodeChecked: function(event, node) {
+                $('#checkable-output').prepend('<p>' + node.id + ' was checked</p>');
+            },
+            onNodeUnchecked: function (event, node) {
+                $('#checkable-output').prepend('<p>' + node.text + ' was unchecked</p>');
+            }
+        });
 
-   // console.log([{"name":"jake","children":[{"name":"chi-1"},{"name":"chi-2"}]},{"name":"jake2","children":[{"name":"chi-12"},{"name":"chi-22"}]}]);
+        // var findCheckableNodess = function() {
+        //     return $checkableTree.treeview('search', [ $('#input-check-node').val(), { ignoreCase: false, exactMatch: false } ]);
+        // };
+        // var checkableNodes = findCheckableNodess();
 
-   layui.use(['tree','code'],function(){
-       layui.tree({
-           elem: '#demo',//传入元素选择器
-           skin: 'shihuang'
-           ,nodes: <?php echo $res_data;?>
-       });
-   });
+        // Check/uncheck/toggle nodes
+        // $('#input-check-node').on('keyup', function (e) {
+        //     checkableNodes = findCheckableNodess();
+        //     $('.check-node').prop('disabled', !(checkableNodes.length >= 1));
+        // });
+
+        // $('#btn-check-node.check-node').on('click', function (e) {
+        //     $checkableTree.treeview('checkNode', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
+        // });
+
+        // $('#btn-uncheck-node.check-node').on('click', function (e) {
+        //     $checkableTree.treeview('uncheckNode', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
+        // });
+        //
+        // $('#btn-toggle-checked.check-node').on('click', function (e) {
+        //     $checkableTree.treeview('toggleNodeChecked', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
+        // });
+
+        // Check/uncheck all
+        $('#btn-check-all').on('click', function (e) {
+            $checkableTree.treeview('checkAll', { silent: $('#chk-check-silent').is(':checked') });
+        });
+
+        $('#btn-uncheck-all').on('click', function (e) {
+            $checkableTree.treeview('uncheckAll', { silent: $('#chk-check-silent').is(':checked') });
+        });
 
 
 
+        // var $disabledTree = $('#treeview-disabled').treeview({
+        //     data: defaultData,
+        //     onNodeDisabled: function(event, node) {
+        //         $('#disabled-output').prepend('<p>' + node.text + ' was disabled</p>');
+        //     },
+        //     onNodeEnabled: function (event, node) {
+        //         $('#disabled-output').prepend('<p>' + node.text + ' was enabled</p>');
+        //     },
+        //     onNodeCollapsed: function(event, node) {
+        //         $('#disabled-output').prepend('<p>' + node.text + ' was collapsed</p>');
+        //     },
+        //     onNodeUnchecked: function (event, node) {
+        //         $('#disabled-output').prepend('<p>' + node.text + ' was unchecked</p>');
+        //     },
+        //     onNodeUnselected: function (event, node) {
+        //         $('#disabled-output').prepend('<p>' + node.text + ' was unselected</p>');
+        //     }
+        // });
+        //
+        // var findDisabledNodes = function() {
+        //     return $disabledTree.treeview('search', [ $('#input-disable-node').val(), { ignoreCase: false, exactMatch: false } ]);
+        // };
+        // var disabledNodes = findDisabledNodes();
+        //
+        // // Expand/collapse/toggle nodes
+        // $('#input-disable-node').on('keyup', function (e) {
+        //     disabledNodes = findDisabledNodes();
+        //     $('.disable-node').prop('disabled', !(disabledNodes.length >= 1));
+        // });
+        //
+        // $('#btn-disable-node.disable-node').on('click', function (e) {
+        //     $disabledTree.treeview('disableNode', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
+        // });
+        //
+        // $('#btn-enable-node.disable-node').on('click', function (e) {
+        //     $disabledTree.treeview('enableNode', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
+        // });
+        //
+        // $('#btn-toggle-disabled.disable-node').on('click', function (e) {
+        //     $disabledTree.treeview('toggleNodeDisabled', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
+        // });
+        //
+        // // Expand/collapse all
+        // $('#btn-disable-all').on('click', function (e) {
+        //     $disabledTree.treeview('disableAll', { silent: $('#chk-disable-silent').is(':checked') });
+        // });
+        //
+        // $('#btn-enable-all').on('click', function (e) {
+        //     $disabledTree.treeview('enableAll', { silent: $('#chk-disable-silent').is(':checked') });
+        // });
+        //
+        //
+        //
+        // var $tree = $('#treeview12').treeview({
+        //     data: json
+        // });
+    });
 </script>
+</body>
 </html>

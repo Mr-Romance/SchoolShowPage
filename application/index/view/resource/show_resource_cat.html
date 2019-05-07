@@ -1,8 +1,8 @@
 {extend name="public:public_admin"}
 
 {block name="cur_css"}
-<link rel="stylesheet" href="/static/layui/css/layui.css">
-<script  src="/static/layui/layui.js"></script>
+<link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+<script src="/static/bootstrap-treeview.js"></script>
 <style>
     .footer{
         position:fixed;
@@ -22,37 +22,62 @@
         <label>资源主题</label>
         <select class="form-control" name="subject_id">
             <option value="0">请选择</option>
-            {if condition ="!empty($subject_info)"}
-            {volist name="subject_info" id = "vo"}
-            <option value="{$vo->id}">{$vo['name']}</option>
+            {if condition ="!empty($subjects)"}
+            {volist name="subjects" id = "vo"}
+            <option value="{$vo['id']}">{$vo['name']}</option>
             {/volist}
             {/if}
         </select>
     </div>
+    {if condition="!empty($tree)"}
     <div class="form-group">
         <label>请选择目录</label>
         <div id="treeview-checkable" class=""></div>
     </div>
+    {/if}
     <div class="form-group">
         <label>排序</label>
         <input type="text" name="sort" placeholder="数字越大，排名越前面" value="1">
     </div>
-    <button type="button" id="add_categories" class="btn btn-primary">添加</button>
+    <button type="button" id="add_cat" class="btn btn-primary">添加</button>
 </form>
 {/block}
 
 {block name="cur_js"}
     <script>
+        var cats_arr=new Array();
+        // var defaultData= <?php echo $tree;?>;
         var $checkableTree = $('#treeview-checkable').treeview({
             data: defaultData,
             showIcon: false,
             showCheckbox: true,
             onNodeChecked: function(event, node) {
-                $('#checkable-output').prepend('<p>' + node.text + ' was checked</p>');
+                cats_arr.push(node.id);
             },
             onNodeUnchecked: function (event, node) {
-                $('#checkable-output').prepend('<p>' + node.text + ' was unchecked</p>');
+                var index=cats_arr.indexOf(node.id);
+                if (index > -1) {
+                    array.splice(index, 1);
+                }
             }
+        });
+
+        // 点击添加
+        $('#add_cat').click(function(){
+            var post_data=$('#form_add_resource_cat').serializeArray();
+            post_data['cat_ids']=cats_arr.toString();
+
+            $.post(
+                '/add_resource_cat',
+                post_data,
+                function(data){
+                    if(100==data.code){
+                        dialog.successTo('show_resource_cat');
+                    }else{
+                        dialog.showError(data.msg);
+                    }
+                }
+            );
         });
     </script>
 {/block}

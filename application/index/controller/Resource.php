@@ -34,8 +34,8 @@ class Resource extends Controller
         $first_categories = Categories::getAllFirstCategories();
         $this->assign('first_categories', $first_categories);
 
-        Session::set('menu_name','category_list');
-        $this->assign('menu_name',Session::get('menu_name'));
+        Session::set('menu_name', 'category_list');
+        $this->assign('menu_name', Session::get('menu_name'));
 
         return $this->fetch();
     }
@@ -83,8 +83,8 @@ class Resource extends Controller
         $subject = Config::get('resource_subject');
         $this->assign('subject', $subject);
 
-        Session::set('menu_name','show_add_resource');
-        $this->assign('menu_name',Session::get('menu_name'));
+        Session::set('menu_name', 'show_add_resource');
+        $this->assign('menu_name', Session::get('menu_name'));
         return $this->fetch();
     }
 
@@ -125,13 +125,13 @@ class Resource extends Controller
         $thumbnail = request()->file('thumbnail');
 
         // 视频音频需要单独处理
-        if(4==$request->param('type') || 5==$request->param('type')){
-            if(!isset($_FILES['src'])){
+        if (4 == $request->param('type') || 5 == $request->param('type')) {
+            if (!isset($_FILES['src'])) {
                 $scr = [];
-            }else{
-                $src=$_FILES['src'];
+            } else {
+                $src = $_FILES['src'];
             }
-        }else{
+        } else {
             $src = request()->file('src');
         }
 
@@ -156,23 +156,23 @@ class Resource extends Controller
             if (empty($source_name)) {
                 return $this->errorResponse(200, '请上传资源或者填写资源名称');
             }
-            $full_source_name=explode('.',$source_name);
+            $full_source_name = explode('.', $source_name);
             if (count($full_source_name) < 2) {
-                return $this->errorResponse(200,'请填写文件的后缀');
+                return $this->errorResponse(200, '请填写文件的后缀');
             }
 
-            $src_path = Config::get('upd_src_save_path'). trim($source_name);
+            $src_path = Config::get('upd_src_save_path') . trim($source_name);
 
         } else {
-            if(4==$request->param('type') || 5==$request->param('type')){
-                $file_full_path = Config::get('src_source_move_path') . date('Ymd').DS;
+            if (4 == $request->param('type') || 5 == $request->param('type')) {
+                $file_full_path = Config::get('src_source_move_path') . date('Ymd') . DS;
                 if (!file_exists($file_full_path)) {
                     mkdir($file_full_path);
                 }
-                move_uploaded_file($src['tmp_name'],$file_full_path.$src['name']);
-                $src_path = Config::get('src_source_save_path').date('Ymd').DS.$src['name'];
+                move_uploaded_file($src['tmp_name'], $file_full_path . $src['name']);
+                $src_path = Config::get('src_source_save_path') . date('Ymd') . DS . $src['name'];
 
-            }else{
+            } else {
                 $scr_res = $src->validate(['size' => 322122547,])->move(Config::get('src_source_move_path'));
 
                 if ($scr_res) {
@@ -234,10 +234,10 @@ class Resource extends Controller
             $search_param['res_title'] = Session::get('search_title');
         }
 
-        $user_id=$request->param('id');
-        if(empty($user_id)){
+        $user_id = $request->param('id');
+        if (empty($user_id)) {
             $user = $this->getLoginUser();
-        }else{
+        } else {
             $user = Users::getUserById($user_id);
         }
 
@@ -262,13 +262,13 @@ class Resource extends Controller
         if (!empty($search_param['res_category'])) {
             $this->assign('category_checked', $search_param['res_category']);
         }
-        if(!empty($search_param['res_title'])){
-            $this->assign('search_title',$search_param['res_title']);
+        if (!empty($search_param['res_title'])) {
+            $this->assign('search_title', $search_param['res_title']);
         }
         $this->assign('list', $list);
 
-        Session::set('menu_name','user_resource_list');
-        $this->assign('menu_name',Session::get('menu_name'));
+        Session::set('menu_name', 'user_resource_list');
+        $this->assign('menu_name', Session::get('menu_name'));
 
         return $this->fetch('show_user_resource_list');
     }
@@ -334,8 +334,8 @@ class Resource extends Controller
         $category_list = Categories::getCategoriesGroup();
         $this->assign('category_list', $category_list);
 
-        Session::set('menu_name','category_list');
-        $this->assign('menu_name',Session::get('menu_name'));
+        Session::set('menu_name', 'category_list');
+        $this->assign('menu_name', Session::get('menu_name'));
         return $this->fetch();
     }
 
@@ -374,8 +374,8 @@ class Resource extends Controller
         $resource = Resources::get($res_id);
         $this->assign('resource', $resource);
 
-        Session::set('menu_name','manage_resource_list');
-        $this->assign('menu_name',Session::get('menu_name'));
+        Session::set('menu_name', 'manage_resource_list');
+        $this->assign('menu_name', Session::get('menu_name'));
         Resources::addShowCount($res_id);
 
         return $this->fetch();
@@ -419,13 +419,13 @@ class Resource extends Controller
         if (!empty($search_param['res_category'])) {
             $this->assign('category_checked', $search_param['res_category']);
         }
-        if(!empty($search_param['res_title'])){
-            $this->assign('search_title',$search_param['res_title']);
+        if (!empty($search_param['res_title'])) {
+            $this->assign('search_title', $search_param['res_title']);
         }
         $this->assign('list', $list);
 
-        Session::set('menu_name','manage_resource_list');
-        $this->assign('menu_name',Session::get('menu_name'));
+        Session::set('menu_name', 'manage_resource_list');
+        $this->assign('menu_name', Session::get('menu_name'));
 
         return $this->fetch();
     }
@@ -436,8 +436,7 @@ class Resource extends Controller
      * @return mixed
      * @throws \think\exception\DbException
      */
-    public function showEditResource(Request $request)
-    {
+    public function showEditResource(Request $request) {
         $id = $request->param('res_id');
         $resource = Resources::get($id);
         $this->assign('resource', $resource);
@@ -450,16 +449,16 @@ class Resource extends Controller
         $subject = Config::get('resource_subject');
         $this->assign('subject', $subject);
 
-        $cat_two_model=Categories::get($resource->category);
-        $cat_one_model=Categories::get($cat_two_model->parent_id);
+        $cat_two_model = Categories::get($resource->category);
+        $cat_one_model = Categories::get($cat_two_model->parent_id);
 
-        if(!empty($cat_one_model) && !empty($cat_two_model)){
-            $this->assign('cat_one',$cat_one_model->name);
-            $this->assign('cat_two',$cat_two_model->name);
+        if (!empty($cat_one_model) && !empty($cat_two_model)) {
+            $this->assign('cat_one', $cat_one_model->name);
+            $this->assign('cat_two', $cat_two_model->name);
         }
 
-        Session::set('menu_name','user_resource_list');
-        $this->assign('menu_name',Session::get('menu_name'));
+        Session::set('menu_name', 'user_resource_list');
+        $this->assign('menu_name', Session::get('menu_name'));
 
         return $this->fetch();
     }
@@ -470,7 +469,7 @@ class Resource extends Controller
      * @return \think\response\Json
      * @throws \Exception
      */
-    public function editResource(Request $request){
+    public function editResource(Request $request) {
         // 这里有问题，不能统一获取参数
         $params['id'] = $request->param('id');
         $params['title'] = $request->param('title');
@@ -501,17 +500,17 @@ class Resource extends Controller
         $thumbnail = request()->file('thumbnail');
 
         // 视频音频需要单独处理
-        if(4==$request->param('type') || 5==$request->param('type')){
-            if(!isset($_FILES['src'])){
+        if (4 == $request->param('type') || 5 == $request->param('type')) {
+            if (!isset($_FILES['src'])) {
                 $scr = [];
-            }else{
-                $src=$_FILES['src'];
+            } else {
+                $src = $_FILES['src'];
             }
-        }else{
+        } else {
             $src = request()->file('src');
         }
 
-        if(!empty($thumbnail)){
+        if (!empty($thumbnail)) {
             $thumbnail_res = $thumbnail->validate([
                 'size' => 900000,
                 'ext' => 'jpg,png,gif'
@@ -526,28 +525,28 @@ class Resource extends Controller
         }
 
         $source_name = $request->param('source_name');
-        if(!empty($src) || !empty($source_name)){
+        if (!empty($src) || !empty($source_name)) {
             if (empty($src)) {
                 $source_name = $request->param('source_name');
                 if (empty($source_name)) {
                     return $this->errorResponse(200, '请上传资源或者填写资源名称');
                 }
-                $full_source_name=explode('.',$source_name);
+                $full_source_name = explode('.', $source_name);
                 if (count($full_source_name) < 2) {
-                    return $this->errorResponse(200,'请填写文件的后缀');
+                    return $this->errorResponse(200, '请填写文件的后缀');
                 }
 
-                $src_path = Config::get('upd_src_save_path'). trim($source_name);
+                $src_path = Config::get('upd_src_save_path') . trim($source_name);
 
             } else {
-                if(4==$request->param('type') || 5==$request->param('type')){
-                    $file_full_path = Config::get('src_source_move_path') . date('Ymd').DS;
+                if (4 == $request->param('type') || 5 == $request->param('type')) {
+                    $file_full_path = Config::get('src_source_move_path') . date('Ymd') . DS;
                     if (!file_exists($file_full_path)) {
                         mkdir($file_full_path);
                     }
-                    move_uploaded_file($src['tmp_name'],$file_full_path.$src['name']);
-                    $src_path = Config::get('src_source_save_path').date('Ymd').DS.$src['name'];
-                }else{
+                    move_uploaded_file($src['tmp_name'], $file_full_path . $src['name']);
+                    $src_path = Config::get('src_source_save_path') . date('Ymd') . DS . $src['name'];
+                } else {
                     $scr_res = $src->validate(['size' => 322122547,])->move(Config::get('src_source_move_path'));
 
                     if ($scr_res) {
@@ -580,7 +579,7 @@ class Resource extends Controller
         $data['type'] = $params['type'];
         $data['subject'] = $params['subject'];
 
-        $data=array_filter($data);
+        $data = array_filter($data);
 
         try {
             Resources::updResource($data);
@@ -591,9 +590,105 @@ class Resource extends Controller
         return $this->successResponse(100, '编辑成功');
     }
 
+    /**
+     *  展示主题目录树页面
+     *
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
     public function showResourceCat() {
         Session::set('menu_name', 'resource_cat_list');
-        $this->assign('menu_name',Session::get('menu_name'));
+        $this->assign('menu_name', Session::get('menu_name'));
+
+        // 获取所有已经添加的目录树
+        $tree=[];
+        $tree_datas=Categories::all(['type'=>2]);
+        if(!empty($tree_datas)){
+            $tree_arr=[];
+            foreach ($tree_datas as $tree){
+                $tree_arr[]=$tree->toArray();
+            }
+
+            // 获取目录树
+            $tree=$this->generateTree($tree_arr);
+        }
+        // 返回目录树json
+        $this->assign('tree',json_encode($tree));
+
+        // 返回主题信息
+        $subjects = Config::get('resource_subject');
+        if (!empty($subjects)) {
+            foreach ($subjects as $key => $subject) {
+                if (in_array($subject['id'], [1, 2, 6])) {
+                    unset($subjects[$key]);
+                }
+            }
+
+            $this->assign('subjects',$subjects);
+        }
+
         return $this->fetch();
     }
+
+    /**
+     *  添加主题目录
+     *
+     * @param Request $request
+     * @return \think\response\Json
+     */
+    public function addResourceCat(Request $request) {
+        $params = $request->param();
+        if (empty($params)) {
+            return $this->errorResponse(200, '保存数据为空');
+        }
+
+        if (empty($params['subject_id'])) {
+            return $this->errorResponse(200, '请选择所属主题');
+        }
+        if (empty($params['name'])) {
+            return $this->errorResponse(200, '请输入名称信息');
+        }
+
+        $catModel = new Categories();
+        $catModel->parent_id = $params['parent_id'];
+        $catModel->name = $params['name'];
+        $catModel->type = 2;
+        $catModel->sort = $params['sort'];
+        if (!$catModel->save()) {
+            return $this->errorResponse(200, '保存数据失败');
+        }
+
+        return $this->successResponse(100, '添加成功');
+    }
+
+    /**
+     *  返回目录树指定的数据结构
+     *
+     * @param $array
+     * @return array
+     */
+    private function generateTree($array) {
+        if(empty($array)){
+            return [];
+        }
+
+        $items = [];
+        // 先构造数据结构
+        foreach ($array as $value) {
+            $items[$value['id']] = $value;
+        }
+
+        // 遍历，添加节点数据
+        $tree = array();
+        foreach ($items as $key => $value) {
+            if (isset($items[$items['parent_id']])) {
+                $items[$items['parent_id']]['nodes'][] = &$items[$key];
+            } else {
+                $tree[] = &$items[$key];
+            }
+        }
+
+        return $tree;
+    }
+
 }

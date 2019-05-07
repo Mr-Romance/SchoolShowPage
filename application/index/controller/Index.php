@@ -380,13 +380,16 @@ class Index extends Controller
 
     public function test(){
         $js_data=[
-            ['name'=>'jake','children'=>[['name'=>'chi-1'],'children'=>['name'=>'chi-2']]],
-            ['name'=>'jake2','children'=>[['name'=>'chi-12'],['name'=>'chi-22']]]
+            [
+                'text'=>'One','href'=>'href','nodes'=>[
+                ['text'=>'One-1','href'=>'href','nodes'=>[
+                    ['text'=>'One-1-1','href'=>'xxx']
+                ]
+                ],
+                ['text'=>'One-2','href'=>'href']]
+            ],
         ];
         $res_data=json_encode($js_data);
-
-        var_dump($res_data);
-        exit;
 
         $this->assign('res_data',$res_data);
         return $this->fetch();
