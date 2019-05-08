@@ -2,6 +2,7 @@
 
 {block name="cur_css"}
 <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+<script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
 <script src="/static/bootstrap-treeview.js"></script>
 <style>
     .footer{
@@ -46,7 +47,7 @@
 {block name="cur_js"}
     <script>
         var cats_arr=new Array();
-        // var defaultData= <?php echo $tree;?>;
+        var defaultData= <?php echo $tree;?>;
         var $checkableTree = $('#treeview-checkable').treeview({
             data: defaultData,
             showIcon: false,
@@ -64,6 +65,8 @@
 
         // 点击添加
         $('#add_cat').click(function(){
+            alert('xxx');
+            return false;
             var post_data=$('#form_add_resource_cat').serializeArray();
             post_data['cat_ids']=cats_arr.toString();
 

@@ -25,9 +25,9 @@
 </head>
 <body>
 <div class="container">
-    <!--<div class="school-name-img">-->
-        <!--<img src="/index_rec/school_name.png">-->
-    <!--</div>-->
+    <div class="school-name-img">
+        <img src="/index_rec/logo_title.png">
+    </div>
     <div class="banner">
         <div class="slide_container">
             <ul class="rslides" id="slider">
@@ -112,7 +112,7 @@
                 {volist name="zheng_ce_info" id="vo"}
                 <li>
                     <a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$zc_subject_id}">
-                        <span> &nbsp ></span>{$vo->title}
+                        <span> &nbsp&nbsp > &nbsp</span>{$vo->title}
                     </a>
                 </li>
                 {/volist}
@@ -126,7 +126,7 @@
             <ul>
                 {volist name="zong_jie_info" id="vo"}
                 <li><a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$zj_subject_id}">
-                    <span>&nbsp ></span> {$vo->title}
+                    <span>&nbsp&nbsp > &nbsp</span> {$vo->title}
                 </a>
                 </li>
                 {/volist}
@@ -140,7 +140,7 @@
             <ul>
                 {volist name="dian_xing_info" id="vo"}
                 <li><a class="title_text" href="/index_resource_show&id={$vo->id}&subject_id={$dx_subject_id}">
-                    <span>&nbsp ></span>{$vo->title}
+                    <span>&nbsp&nbsp > &nbsp</span>{$vo->title}
                 </a>
                 </li>
                 {/volist}
@@ -196,7 +196,7 @@
     <div class="clear-float"></div>
 
     <div class="column-fixed">
-        <h3 class="tui_jian_title">推荐资源</h3>
+        <h3 class="tui_jian_title">重点专业</h3>
         <div class="row">
             {volist name="tui_jian_resource" id="vo"}
             <div class="col-md-3">
@@ -211,7 +211,7 @@
 
     <!--新闻分类，轮播模式的-->
     <div class="column-lb">
-        <h3 class="column-lb-title">校园风采</h3>
+        <h3 class="column-lb-title">重点项目建设</h3>
         <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-interval="2000">

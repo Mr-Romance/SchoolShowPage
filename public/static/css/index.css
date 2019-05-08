@@ -11,7 +11,14 @@
     position: absolute;
     z-index: 100;
     top: 20px;
-    right: 100px;
+    right: 50px;
+    width:400px;
+    height:93px;
+}
+
+.school-name-img img{
+    width:400px;
+    height:93px;
 }
 
 li {
@@ -64,6 +71,7 @@ li {
     display: inline-block;
     width: 101px;
     height: 36px;
+    border-radius: 10px;
     line-height: 36px;
 }
 
@@ -80,9 +88,9 @@ li {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: none;
-}
+/*a:hover {*/
+    /*text-decoration: none;*/
+/*}*/
 
 .top-news {
     height: 60px;
@@ -148,7 +156,7 @@ list-style: none
 }
 
 .title_text {
-    font-size: 15px;
+    font-size: 13px;
     color: #fff;
     font-family: "Arial Black";
     width: 220px;
@@ -175,7 +183,7 @@ a:hover {
 }
 
 .column-news h5 {
-    margin-left: 50px;
+    margin-left: 30px;
     line-height: 35px;
 }
 
@@ -253,6 +261,10 @@ a:hover {
     width: 625px;
     height: 269px;
     background-color: #f4f4f4;
+}
+
+.js-main a:hover{
+
 }
 
 .column-js .jian_she_title {
@@ -423,5 +435,17 @@ a:hover {
 
 .index-page-location a:hover {
     color: red;
+}
+
+.index_sub_title{
+    float:left;
+    text-align: left;
+    padding-left: 20px;
+    width:300px;
+}
+
+.index_sub_time{
+    text-align: right;
+    float: right;
 }
 

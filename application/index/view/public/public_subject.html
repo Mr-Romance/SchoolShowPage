@@ -16,9 +16,14 @@
             <ul class="list-group list-group-flush">
                 {if condition = "!empty($list)"}
                 {volist name="list" id="vo"}
-                <a class="list-group-item" href="/index_resource_show?id={$vo->id}&subject_id={$vo->subject}">
-                    {$vo->title} &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; {$vo->create_at}
+                <div class="list-group-item">
+                    <div>
+                <a  href="/index_resource_show?id={$vo->id}&subject_id={$vo->subject}">
+                    {$vo->title}
                 </a>
+                <div class="index_sub_time">{$vo->create_at}</div>
+                        </div>
+                </div>
                 {/volist}
                 {/if}
             </ul>
