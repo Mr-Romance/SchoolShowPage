@@ -1,56 +1,119 @@
-{extend name="public:public_admin"}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>{block name="title"}呼和浩特市第三职业中等专业学校{/block}</title>
+    <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/public.css">
+    <script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/static/layer/layer.js"></script>
+    <script src="/static/dialog.js"></script>
+    <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+    <script src="/static/bootstrap-treeview.js"></script>
+    <style>
+        .active2{
+            background-color: #9fcdff;
+        }
 
-{block name="cur_css"}
-<link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
-<script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
-<script src="/static/bootstrap-treeview.js"></script>
-<style>
-    .footer{
-        position:fixed;
-        bottom:0;
-        left:0;
+        .list-group a:hover{
+            background-color: #9fcdff;
+        }
 
-    }
-</style>
-{/block}
+        .footer{
+            position:fixed;
+            bottom:0;
+            left:0;
+        }
 
-{block name="right-content"}
-<form id="form_add_resource_cat" class="form-add-category">
-    <div class="form-group">
-        <div class="form-group">
-            <input name="name" id="name" placeholder="输入目录名称">
+        .school-title {
+            margin-left: 100px;
+            height:68px;
+            width:700px;
+        }
+
+        .school-title img{
+            width:700px;
+            height:46px;
+        }
+    </style>
+
+</head>
+<body class="container">
+
+{include file="../application/index/view/public/public_top.html"}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-group" id="list-tab">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            菜单列表
+                        </a>
+                        <a href="/user_page" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_page' "} active2{/if}">个人信息</a>
+                        <a href="/user_resource_list?id={$user->id}" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_resource_list' "} active2{/if}">我的资源</a>
+                        <a href="/show_add_resource" class="list-group-item list-group-item-action {if condition="$menu_name eq 'show_add_resource' "} active2{/if}">添加资源</a>
+                        {if condition="$user->type == 2"}
+                        <a href="/manage_resource_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'manage_resource_list' "} active2{/if}">资源列表</a>
+                        <a href="/user_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'user_list' "} active2{/if}">用户列表</a>
+                        <a href="/category_list" class="list-group-item list-group-item-action {if condition="$menu_name eq 'category_list' "} active2{/if}">学科分类</a>
+                        <a href="/show_resource_cat" class="list-group-item list-group-item-action {if condition="$menu_name eq 'resource_cat_list' "} active2{/if}">资源主题目录</a>
+                        <a href="/show_sys_config" class="list-group-item list-group-item-action {if condition="$menu_name eq 'show_sys_config' "} active2{/if}">全局设置</a>
+                        {/if}
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <form id="form_add_resource_cat" class="form-add-category">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <input name="name" id="name" placeholder="输入目录名称">
+                            </div>
+                            <label>资源主题</label>
+                            <select class="form-control" id="subject_id" name="subject_id">
+                                <option value="0">请选择</option>
+                                {if condition ="!empty($subjects)"}
+                                {volist name="subjects" id = "vo"}
+                                <option value="{$vo['id']}">{$vo['name']}</option>
+                                {/volist}
+                                {/if}
+                            </select>
+                        </div>
+                        {if condition="!empty($tree)"}
+                        <div class="form-group">
+                            <label>请选择目录</label>
+                            <div id="treeview-checkable" class=""></div>
+                        </div>
+                        {/if}
+                        <div class="form-group">
+                            <label>排序</label>
+                            <input type="text" id="sort" name="sort" placeholder="数字越大，排名越前面" value="1">
+                        </div>
+                        <div>
+                        <button type="button" id="add_cat" class="btn btn-primary add_cat">添加</button>
+                        <button type="button" id="del_cat" class="btn btn-danger del_cat">删除选中目录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <label>资源主题</label>
-        <select class="form-control" name="subject_id">
-            <option value="0">请选择</option>
-            {if condition ="!empty($subjects)"}
-            {volist name="subjects" id = "vo"}
-            <option value="{$vo['id']}">{$vo['name']}</option>
-            {/volist}
-            {/if}
-        </select>
+        <div class="col-md-1"></div>
     </div>
-    {if condition="!empty($tree)"}
-    <div class="form-group">
-        <label>请选择目录</label>
-        <div id="treeview-checkable" class=""></div>
-    </div>
-    {/if}
-    <div class="form-group">
-        <label>排序</label>
-        <input type="text" name="sort" placeholder="数字越大，排名越前面" value="1">
-    </div>
-    <button type="button" id="add_cat" class="btn btn-primary">添加</button>
-</form>
-{/block}
 
-{block name="cur_js"}
-    <script>
+    {include file="../application/index/view/public/footer.html"}
+</div>
+
+<script>
+    $(function(){
         var cats_arr=new Array();
         var defaultData= <?php echo $tree;?>;
         var $checkableTree = $('#treeview-checkable').treeview({
             data: defaultData,
-            showIcon: false,
+            showIcon: true,
             showCheckbox: true,
             onNodeChecked: function(event, node) {
                 cats_arr.push(node.id);
@@ -58,29 +121,55 @@
             onNodeUnchecked: function (event, node) {
                 var index=cats_arr.indexOf(node.id);
                 if (index > -1) {
-                    array.splice(index, 1);
+                    cats_arr.splice(index, 1);
                 }
             }
         });
 
         // 点击添加
         $('#add_cat').click(function(){
-            alert('xxx');
-            return false;
-            var post_data=$('#form_add_resource_cat').serializeArray();
-            post_data['cat_ids']=cats_arr.toString();
+            var post_data={
+                "name":$('#name').val(),
+                "sort":$('#sort').val(),
+                "subject_id":$('#subject_id').val(),
+                "cat_ids":cats_arr.toString(),
+            };
 
             $.post(
                 '/add_resource_cat',
                 post_data,
                 function(data){
                     if(100==data.code){
-                        dialog.successTo('show_resource_cat');
+                        dialog.successTo(data.msg,'show_resource_cat');
                     }else{
                         dialog.showError(data.msg);
                     }
                 }
             );
         });
-    </script>
-{/block}
+
+        // 点击删除
+        $('#del_cat').click(function(){
+            var cat_str=cats_arr.toString();
+            layer.confirm('如果父节点下有没有选中的子节点,父节点不会被删除!', {icon: 3, title:'提示'}, function(index){
+                $.post(
+                    '/del_resource_cat',
+                    {"cat_str":cat_str},
+                    function(data){
+                        if(100==data.code){
+                        window.location.href="/show_resource_cat";
+                        }else{
+                            dialog.showError(data.msg);
+                        }
+                    }
+                );
+
+                layer.close(index);
+            });
+        });
+
+    })
+
+</script>
+</body>
+</html>

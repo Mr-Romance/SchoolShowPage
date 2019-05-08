@@ -50,7 +50,7 @@ class Categories extends Model
      */
     public static function getAllFirstCategories()
     {
-        $categories = Categories::all(['parent_id' => 0]);
+        $categories = Categories::all(['parent_id' => 0,'type'=>1]);
 
         if (!$categories) {
             return [];

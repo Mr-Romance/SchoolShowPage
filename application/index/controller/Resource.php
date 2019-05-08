@@ -83,6 +83,10 @@ class Resource extends Controller
         $subject = Config::get('resource_subject');
         $this->assign('subject', $subject);
 
+        // 获取主题文件目录树
+        $tree = $this->generateTree();
+        $this->assign('tree', json_encode($tree));
+
         Session::set('menu_name', 'show_add_resource');
         $this->assign('menu_name', Session::get('menu_name'));
         return $this->fetch();
@@ -601,17 +605,8 @@ class Resource extends Controller
         $this->assign('menu_name', Session::get('menu_name'));
 
         // 获取所有已经添加的目录树
-        $tree=[];
-        $tree_datas=Categories::all(['type'=>2]);
-        if(!empty($tree_datas)){
-            $tree_arr=[];
-            foreach ($tree_datas as $tree){
-                $tree_arr[]=$tree->toArray();
-            }
+        $tree=$this->generateTree();
 
-            // 获取目录树
-            $tree=$this->generateTree($tree_arr);
-        }
         // 返回目录树json
         $this->assign('tree',json_encode($tree));
 
@@ -642,19 +637,23 @@ class Resource extends Controller
             return $this->errorResponse(200, '保存数据为空');
         }
 
-        if (empty($params['subject_id'])) {
-            return $this->errorResponse(200, '请选择所属主题');
-        }
         if (empty($params['name'])) {
             return $this->errorResponse(200, '请输入名称信息');
         }
+        if (empty($params['subject_id'])) {
+            return $this->errorResponse(200, '请选择所属主题');
+        }
+        if(!empty($params['cat_ids'])){
+            if(strlen($params['cat_ids'])>2){
+                return $this->errorResponse(200,'添加目录只能选择一个父级');
+            }
+            $params['parent_id']=$params['cat_ids'];
+            unset($params['cat_ids']);
+        }
 
         $catModel = new Categories();
-        $catModel->parent_id = $params['parent_id'];
-        $catModel->name = $params['name'];
-        $catModel->type = 2;
-        $catModel->sort = $params['sort'];
-        if (!$catModel->save()) {
+        $params['type']=2;
+        if (!$catModel->save($params)) {
             return $this->errorResponse(200, '保存数据失败');
         }
 
@@ -664,31 +663,68 @@ class Resource extends Controller
     /**
      *  返回目录树指定的数据结构
      *
-     * @param $array
      * @return array
+     * @throws \think\exception\DbException
      */
-    private function generateTree($array) {
-        if(empty($array)){
-            return [];
+    private function generateTree() {
+        $tree_arr=[];
+        $tree_datas=Categories::all(['type'=>2]);
+        if(!empty($tree_datas)){
+            $tree_arr=[];
+            foreach ($tree_datas as $tree){
+                $tree_arr[]=$tree->toArray();
+            }
         }
 
         $items = [];
         // 先构造数据结构
-        foreach ($array as $value) {
+        foreach ($tree_arr as $value) {
             $items[$value['id']] = $value;
+            $items[$value['id']]['text'] = $value['name'];
+            $items[$value['id']]['nodes'] = [];
         }
+
 
         // 遍历，添加节点数据
         $tree = array();
         foreach ($items as $key => $value) {
-            if (isset($items[$items['parent_id']])) {
-                $items[$items['parent_id']]['nodes'][] = &$items[$key];
+            if (!empty($items[$value['parent_id']])) {
+                $items[$value['parent_id']]['nodes'][] = &$items[$key];
             } else {
                 $tree[] = &$items[$key];
             }
         }
-
         return $tree;
     }
 
+    /**
+     *  删除目录节点
+
+     * @param Request $request
+     * @return \think\response\Json
+     * @throws \think\exception\DbException
+     */
+    public function delResourceCat(Request $request){
+        $cat_str=$request->param('cat_str');
+
+        if(empty($cat_str)){
+            return $this->errorResponse(200,'请选择要删除的目录');
+        }
+
+        $cats_arr=explode(',',$cat_str);
+
+        // 降序排序
+        rsort($cats_arr);
+
+        // 从最后一个节点开始删除，如果没有子节点就删除
+        foreach($cats_arr as $cat_id){
+            $catModel=Categories::get(['parent_id'=>$cat_id]);
+            if(empty($catModel)){
+                $delModel=Categories::get($cat_id);
+                $delModel->delete();
+            }
+        }
+
+        return $this->successResponse(100,'删除成功');
+    }
 }
