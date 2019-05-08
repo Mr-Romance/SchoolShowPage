@@ -2,312 +2,329 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="/static/jQuery331.js"></script>
-    <link rel="stylesheet" href="/static/layui/css/layui.css">
-    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
-    <script src="/static/layui/layui.js"> </script>
-    <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
-    <script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
-    <script src="/static/bootstrap-treeview.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="hsiangleev,layui扩展">
+    <title>layui扩展树示例</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/zTree/eleTree.css" media="all">
+    <script src="/static/layui/layui.js"></script>
     <style>
+        html,body{
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 15px 0px 30px 0px;
+        }
+        .nav{
+            position: fixed;
+            right: 25px;
+            top: calc(50% - 90px);
+            border: 1px solid #d2d2d2;
+            background-color:#fff;
+            z-index: 100000;
+        }
+        .nav-title{
+            background-color: #F8F8F8;
+            padding:0 80px 0 20px;
+            margin: 0px;
+            height: 42px;
+            line-height: 42px;
+            border-bottom: 1px solid #eee;
+        }
+        .nav ul{
+            padding:10px 0px 10px 35px;
+        }
+        .nav ul li{
+            padding: 5px 0px;
+            list-style-type: decimal;
+        }
+        .nav ul a{
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+        }
 
+        .eleTree{
+            width: 350px;
+            height: 500px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .inp{
+            width: 100%;
+            line-height: 30px;
+        }
+        .slideTest{
+            margin: 0 10px;
+        }
+        .met{
+            display: none;
+            width: 100%;
+        }
+        .ele4{
+            height: 200px;
+        }
+        .blue{
+            color: #01AAED;
+        }
+        a:hover{
+            color: #01AAED;
+        }
+        .ele5{
+            height: auto;
+            width: 100%;
+            display: none;
+            position: absolute;
+            top:100%;
+            background-color: #fff;
+            z-index: 100;
+        }
     </style>
 </head>
 <body>
-<div class="jq22-container">
+<div class="nav">
+    <h5 class="nav-title">目录</h5>
+    <ul>
+        <li><a href="#property">属性示例</a></li>
+        <li><a href="#methodEx">方法示例</a></li>
+        <li><a href="#eventEx">事件示例</a></li>
+        <li><a href="#lazyLoad">懒加载示例</a></li>
+        <li><a href="#dropdown">下拉树示例</a></li>
+        <li><a href="#search">节点搜索</a></li>
+    </ul>
+</div>
+<a href="/static/zTree/index.html" class="blue" style="line-height: 60px;font-size: 30px;">文档链接</a>
 
-    <div class="container">
-        <h1>Bootstrap Tree View</h1>
-        <div class="row">
-            <hr>
-            <h2>Checkable Tree</h2>
-            <div class="col-sm-4">
-                <h2>Input</h2>
-                <div class="form-group">
-                    <label for="input-check-node" class="sr-only">Search Tree:</label>
-                    <input type="input" class="form-control" id="input-check-node" placeholder="Identify node..." value="Parent 1">
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" class="checkbox" id="chk-check-silent" value="false">
-                        Silent (No events)
-                    </label>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <button type="button" class="btn btn-success check-node" id="btn-check-node">Check Node</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-danger check-node" id="btn-uncheck-node">Uncheck Node</button>
-                </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-primary check-node" id="btn-toggle-checked">Toggle Node</button>
-                </div>
-                <hr>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <button type="button" class="btn btn-success" id="btn-check-all">Check All</button>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-danger" id="btn-uncheck-all">Uncheck All</button>
-            </div>
 
-            <div class="col-sm-4">
-                <h2>Tree</h2>
-                <div id="treeview-checkable" class=""></div>
-            </div>
+<fieldset class="layui-elem-field layui-field-title site-title">
+    <legend>
+        <a name="eventEx">事件示例</a>
+    </legend>
+</fieldset>
+<div class="eleTree ele3" lay-filter="data3"></div>
+<div class="eleTree layui-form">
+    <h3 style="line-height: 50px;text-align:center;color: #ff4200">请在触发动作时查看控制台数据</h3>
+</div>
 
-            <div class="col-sm-4">
-                <h2>Events</h2>
-                <div id="checkable-output"></div>
-            </div>
+
+<pre class="layui-code lazy">
+var el4=eleTree.render({
+    elem: '.ele4',
+    data: [
+        {
+            "id": 1,
+            "label": "安徽省"
+        },
+        {
+            "id": 11,
+            "label": "江苏省"
+        }
+    ],
+    showCheckbox: true,
+    lazy: true,
+    load: function(data,callback) {
+        console.log(data);
+        var newData;
+        switch (data.id) {
+            case 1:
+                newData=[
+                    {
+                        "id": 2,
+                        "label": "马鞍山市"
+                    }
+                ]
+                break;
+            case 2:
+                newData=[
+                    {
+                        "id": 3,
+                        "label": "和县",
+                        "isLeaf": true
+                    }
+                ]
+                break;
+            case 11:
+                newData=[
+                    {
+                        "id": 12,
+                        "label": "苏州市",
+                        "disabled": true,
+                        "isLeaf": true
+                    }
+                ]
+                break;
+
+            default:
+                break;
+        }
+        setTimeout(function() {
+            callback(newData);
+        },500);
+
+    }
+});
+</pre>
+
+<fieldset class="layui-elem-field layui-field-title site-title">
+    <legend>
+        <a name="dropdown">下拉选择</a>
+    </legend>
+</fieldset>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入框</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" readonly autocomplete="off" class="layui-input">
+            <div class="eleTree ele5" lay-filter="data5"></div>
         </div>
-
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
-                <iframe id="my-iframe">
-
-                </iframe>
-            </div>
-            <div class="col-1"></div>
-        </div>
-
     </div>
 </div>
 
-<script type="text/javascript">
+<pre class="layui-code lazy">
+<!-- 对应的html -->
+<div class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入框</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" readonly autocomplete="off" class="layui-input">
+            <div class="eleTree ele5" lay-filter="data5"></div>
+        </div>
+    </div>
+</div>
+//---------------------------------------------------------
+// 对应的js
+var el5;
+$("[name='title']").on("click",function (e) {
+    e.stopPropagation();
+    if(!el5){
+        el5=eleTree.render({
+            elem: '.ele5',
+            data: data,
+            defaultExpandAll: true,
+            expandOnClickNode: false,
+            highlightCurrent: true
+        });
+    }
+    $(".ele5").toggle();
+})
+eleTree.on("nodeClick(data5)",function(d) {
+    $("[name='title']").val(d.data.currentData.label)
+    $(".ele5").hide();
+})
+$(document).on("click",function() {
+    $(".ele5").hide();
+})
+</pre>
 
-    $(function() {
-        var defaultData= <?php echo $res_data;?>
-        // var defaultData = [
-        //     {
-        //         text: 'Parent 1',
-        //         id:'100',
-        //         href: '#parent1',
-        //         // tags: '4',
-        //         nodes: [
-        //             {
-        //                 text: 'Child 1',
-        //                 href: '#child1',
-        //                 // tags: '2',
-        //                 nodes: [
-        //                     {
-        //                         text: 'Grandchild 1',
-        //                         href: '#grandchild1',
-        //                         // tags: '0'
-        //                     },
-        //                     {
-        //                         text: 'Grandchild 2',
-        //                         href: '#grandchild2',
-        //                         // tags: '0'
-        //                     }
-        //                 ]
-        //             },
-        //             {
-        //                 text: 'Child 2',
-        //                 href: '#child2',
-        //                 // tags: '0'
-        //             }
-        //         ]
-        //     }
-        // ];
+<script>
 
+    layui.config({
+        base: "../static/layui/lay/mymodules/"
+    }).use(['jquery','table','eleTree','code','form','slider'], function(){
+        var $ = layui.jquery;
+        var eleTree = layui.eleTree;
 
-        // var initSelectableTree = function() {
-        //     return $('#treeview-selectable').treeview({
-        //         data: defaultData,
-        //         multiSelect: $('#chk-select-multi').is(':checked'),
-        //         onNodeSelected: function(event, node) {
-        //             $('#selectable-output').prepend('<p>' + node.text + ' was selected</p>');
-        //         },
-        //         onNodeUnselected: function (event, node) {
-        //             $('#selectable-output').prepend('<p>' + node.text + ' was unselected</p>');
-        //         }
-        //     });
-        // };
-        // var $selectableTree = initSelectableTree();
-        //
-        // var findSelectableNodes = function() {
-        //     return $selectableTree.treeview('search', [ $('#input-select-node').val(), { ignoreCase: false, exactMatch: false } ]);
-        // };
-        // var selectableNodes = findSelectableNodes();
-        //
-        // $('#chk-select-multi:checkbox').on('change', function () {
-        //     console.log('multi-select change');
-        //     $selectableTree = initSelectableTree();
-        //     selectableNodes = findSelectableNodes();
-        // });
-        //
-        // // Select/unselect/toggle nodes
-        // $('#input-select-node').on('keyup', function (e) {
-        //     selectableNodes = findSelectableNodes();
-        //     $('.select-node').prop('disabled', !(selectableNodes.length >= 1));
-        // });
-        //
-        // $('#btn-select-node.select-node').on('click', function (e) {
-        //     $selectableTree.treeview('selectNode', [ selectableNodes, { silent: $('#chk-select-silent').is(':checked') }]);
-        // });
-        //
-        // $('#btn-unselect-node.select-node').on('click', function (e) {
-        //     $selectableTree.treeview('unselectNode', [ selectableNodes, { silent: $('#chk-select-silent').is(':checked') }]);
-        // });
-        //
-        // $('#btn-toggle-selected.select-node').on('click', function (e) {
-        //     $selectableTree.treeview('toggleNodeSelected', [ selectableNodes, { silent: $('#chk-select-silent').is(':checked') }]);
-        // });
-        //
-        //
-        //
-        // var $expandibleTree = $('#treeview-expandible').treeview({
-        //     data: defaultData,
-        //     onNodeCollapsed: function(event, node) {
-        //         $('#expandible-output').prepend('<p>' + node.text + ' was collapsed</p>');
-        //     },
-        //     onNodeExpanded: function (event, node) {
-        //         $('#expandible-output').prepend('<p>' + node.text + ' was expanded</p>');
-        //     }
-        // });
-        //
-        // var findExpandibleNodess = function() {
-        //     return $expandibleTree.treeview('search', [ $('#input-expand-node').val(), { ignoreCase: false, exactMatch: false } ]);
-        // };
-        // var expandibleNodes = findExpandibleNodess();
-        //
-        // // Expand/collapse/toggle nodes
-        // $('#input-expand-node').on('keyup', function (e) {
-        //     expandibleNodes = findExpandibleNodess();
-        //     $('.expand-node').prop('disabled', !(expandibleNodes.length >= 1));
-        // });
-        //
-        // $('#btn-expand-node.expand-node').on('click', function (e) {
-        //     var levels = $('#select-expand-node-levels').val();
-        //     $expandibleTree.treeview('expandNode', [ expandibleNodes, { levels: levels, silent: $('#chk-expand-silent').is(':checked') }]);
-        // });
-        //
-        // $('#btn-collapse-node.expand-node').on('click', function (e) {
-        //     $expandibleTree.treeview('collapseNode', [ expandibleNodes, { silent: $('#chk-expand-silent').is(':checked') }]);
-        // });
-        //
-        // $('#btn-toggle-expanded.expand-node').on('click', function (e) {
-        //     $expandibleTree.treeview('toggleNodeExpanded', [ expandibleNodes, { silent: $('#chk-expand-silent').is(':checked') }]);
-        // });
-        //
-        // // Expand/collapse all
-        // $('#btn-expand-all').on('click', function (e) {
-        //     var levels = $('#select-expand-all-levels').val();
-        //     $expandibleTree.treeview('expandAll', { levels: levels, silent: $('#chk-expand-silent').is(':checked') });
-        // });
-        //
-        // $('#btn-collapse-all').on('click', function (e) {
-        //     $expandibleTree.treeview('collapseAll', { silent: $('#chk-expand-silent').is(':checked') });
-        // });
-
-        var $checkableTree = $('#treeview-checkable').treeview({
-            data: defaultData,
-            showIcon: false,
-            showCheckbox: true,
-            onNodeChecked: function(event, node) {
-                $('#checkable-output').prepend('<p>' + node.id + ' was checked</p>');
+        var data=[
+            {
+                "id": 1,
+                "label": "安徽省",
+                "children": [
+                    {
+                        "id": 2,
+                        "label": "马鞍山市",
+                        "disabled": true,
+                        "children": [
+                            {
+                                "id": 3,
+                                "label": "和县"
+                            },
+                            {
+                                "id": 4,
+                                "label": "花山区",
+                                "checked": true
+                            }
+                        ]
+                    },
+                    {
+                        "id": 22,
+                        "label": "淮北市",
+                        "children": [
+                            {
+                                "id": 23,
+                                "label": "濉溪县"
+                            },
+                            {
+                                "id": 24,
+                                "label": "相山区",
+                                "checked": true
+                            }
+                        ]
+                    }
+                ]
             },
-            onNodeUnchecked: function (event, node) {
-                $('#checkable-output').prepend('<p>' + node.text + ' was unchecked</p>');
+            {
+                "id": 5,
+                "label": "河南省",
+                "children": [
+                    {
+                        "id": 6,
+                        "label": "郑州市"
+                    }
+                ]
+            },
+            {
+                "id": 10,
+                "label": "江苏省",
+                "children": [
+                    {
+                        "id": 11,
+                        "label": "苏州市"
+                    },
+                    {
+                        "id": 12,
+                        "label": "南京市",
+                        "children": [
+                            {
+                                "id": 13,
+                                "label": "姑苏区"
+                            },
+                            {
+                                "id": 14,
+                                "label": "相城区"
+                            }
+                        ]
+                    }
+                ]
             }
+        ];
+
+        var el5;
+        $("[name='title']").on("click",function (e) {
+            e.stopPropagation();
+            if(!el5){
+                el5=eleTree.render({
+                    elem: '.ele5',
+                    data: data,
+                    // url: "../eleTree/tree.json",
+                    defaultExpandAll: true,
+                    expandOnClickNode: false,
+                    highlightCurrent: true
+                });
+            }
+            $(".ele5").toggle();
+        });
+        eleTree.on("nodeClick(data5)",function(d) {
+            $("[name='title']").val(d.data.currentData.label)
+            $(".ele5").hide();
+        });
+        $(document).on("click",function() {
+            $(".ele5").hide();
         });
 
-        // var findCheckableNodess = function() {
-        //     return $checkableTree.treeview('search', [ $('#input-check-node').val(), { ignoreCase: false, exactMatch: false } ]);
-        // };
-        // var checkableNodes = findCheckableNodess();
-
-        // Check/uncheck/toggle nodes
-        // $('#input-check-node').on('keyup', function (e) {
-        //     checkableNodes = findCheckableNodess();
-        //     $('.check-node').prop('disabled', !(checkableNodes.length >= 1));
-        // });
-
-        // $('#btn-check-node.check-node').on('click', function (e) {
-        //     $checkableTree.treeview('checkNode', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
-        // });
-
-        // $('#btn-uncheck-node.check-node').on('click', function (e) {
-        //     $checkableTree.treeview('uncheckNode', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
-        // });
-        //
-        // $('#btn-toggle-checked.check-node').on('click', function (e) {
-        //     $checkableTree.treeview('toggleNodeChecked', [ checkableNodes, { silent: $('#chk-check-silent').is(':checked') }]);
-        // });
-
-        // Check/uncheck all
-        $('#btn-check-all').on('click', function (e) {
-            $checkableTree.treeview('checkAll', { silent: $('#chk-check-silent').is(':checked') });
-        });
-
-        $('#btn-uncheck-all').on('click', function (e) {
-            $checkableTree.treeview('uncheckAll', { silent: $('#chk-check-silent').is(':checked') });
-        });
-
-
-
-        // var $disabledTree = $('#treeview-disabled').treeview({
-        //     data: defaultData,
-        //     onNodeDisabled: function(event, node) {
-        //         $('#disabled-output').prepend('<p>' + node.text + ' was disabled</p>');
-        //     },
-        //     onNodeEnabled: function (event, node) {
-        //         $('#disabled-output').prepend('<p>' + node.text + ' was enabled</p>');
-        //     },
-        //     onNodeCollapsed: function(event, node) {
-        //         $('#disabled-output').prepend('<p>' + node.text + ' was collapsed</p>');
-        //     },
-        //     onNodeUnchecked: function (event, node) {
-        //         $('#disabled-output').prepend('<p>' + node.text + ' was unchecked</p>');
-        //     },
-        //     onNodeUnselected: function (event, node) {
-        //         $('#disabled-output').prepend('<p>' + node.text + ' was unselected</p>');
-        //     }
-        // });
-        //
-        // var findDisabledNodes = function() {
-        //     return $disabledTree.treeview('search', [ $('#input-disable-node').val(), { ignoreCase: false, exactMatch: false } ]);
-        // };
-        // var disabledNodes = findDisabledNodes();
-        //
-        // // Expand/collapse/toggle nodes
-        // $('#input-disable-node').on('keyup', function (e) {
-        //     disabledNodes = findDisabledNodes();
-        //     $('.disable-node').prop('disabled', !(disabledNodes.length >= 1));
-        // });
-        //
-        // $('#btn-disable-node.disable-node').on('click', function (e) {
-        //     $disabledTree.treeview('disableNode', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
-        // });
-        //
-        // $('#btn-enable-node.disable-node').on('click', function (e) {
-        //     $disabledTree.treeview('enableNode', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
-        // });
-        //
-        // $('#btn-toggle-disabled.disable-node').on('click', function (e) {
-        //     $disabledTree.treeview('toggleNodeDisabled', [ disabledNodes, { silent: $('#chk-disable-silent').is(':checked') }]);
-        // });
-        //
-        // // Expand/collapse all
-        // $('#btn-disable-all').on('click', function (e) {
-        //     $disabledTree.treeview('disableAll', { silent: $('#chk-disable-silent').is(':checked') });
-        // });
-        //
-        // $('#btn-enable-all').on('click', function (e) {
-        //     $disabledTree.treeview('enableAll', { silent: $('#chk-disable-silent').is(':checked') });
-        // });
-        //
-        //
-        //
-        // var $tree = $('#treeview12').treeview({
-        //     data: json
-        // });
     });
 </script>
+
 </body>
 </html>

@@ -84,7 +84,7 @@ class Resource extends Controller
         $this->assign('subject', $subject);
 
         // 获取主题文件目录树
-        $tree = $this->generateTree();
+        $tree = $this->generateTree2();
         $this->assign('tree', json_encode($tree));
 
         Session::set('menu_name', 'show_add_resource');
@@ -105,6 +105,7 @@ class Resource extends Controller
         $params['type'] = $request->param('type');
         $params['cat_first'] = $request->param('cat_first');
         $params['cat_second'] = $request->param('cat_second');
+        $params['res_cat_id'] = $request->param('res_cat_id');
         $params['introduction'] = $request->param('introduction');
         $params['subject'] = $request->param('subject');
 
@@ -200,6 +201,7 @@ class Resource extends Controller
         } else {
             $data['category'] = $params['cat_second'];
         }
+        $data['category_2'] = empty($params['res_cat_id']) ? 0 : $params['res_cat_id'];
         $data['status'] = 1;
         $data['type'] = $params['type'];
         $data['subject'] = $params['subject'];
@@ -661,7 +663,44 @@ class Resource extends Controller
     }
 
     /**
-     *  返回目录树指定的数据结构
+     *  返回目录树指定的数据结构(第二个版本--添加、编辑资源)
+     *
+     * @return array
+     * @throws \think\exception\DbException
+     */
+    private function generateTree2() {
+        $tree_arr=[];
+        $tree_datas=Categories::all(['type'=>2]);
+        if(!empty($tree_datas)){
+            $tree_arr=[];
+            foreach ($tree_datas as $tree){
+                $tree_arr[]=$tree->toArray();
+            }
+        }
+
+        $items = [];
+        // 先构造数据结构
+        foreach ($tree_arr as $value) {
+            $items[$value['id']] = $value;
+            $items[$value['id']]['label'] = $value['name'];
+            $items[$value['id']]['children'] = [];
+        }
+
+
+        // 遍历，添加节点数据
+        $tree = array();
+        foreach ($items as $key => $value) {
+            if (!empty($items[$value['parent_id']])) {
+                $items[$value['parent_id']]['children'][] = &$items[$key];
+            } else {
+                $tree[] = &$items[$key];
+            }
+        }
+        return $tree;
+    }
+
+    /**
+     *  返回目录树指定的数据结构(第一个版本--添加资源分类目录哪里)
      *
      * @return array
      * @throws \think\exception\DbException

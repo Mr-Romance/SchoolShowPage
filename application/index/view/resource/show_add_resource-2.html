@@ -4,10 +4,29 @@
 {/block}
 
 {block name="cur_css"}
+<link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/public.css">
+<link rel="stylesheet" href="/static/plyr.css">
+{block name="cur_css"}{/block}
+<script src="/static/jQuery331.js"></script>
+<script src="/static/popper.js"></script>
+<script src="/static/layer/layer.js"></script>
+<script src="/static/dialog.js"></script>
+<script src="/static/bootstrap4.2/js/bootstrap.js"></script>
+<script src="/static/jquery.media.js"></script>
+<script src="/static/wangEditor.js"></script>
+<script src="/static/plyr.js"></script>
+<style>
+    .active2{
+        background-color: #9fcdff;
+    }
+
+    .list-group a:hover{
+        background-color: #9fcdff;
+    }
+</style>
+
 <style rel="stylesheet" href="/static/css/show_add_resource.css"></style>
-<link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
-<link rel="stylesheet" href="/static/zTree/eleTree.css" media="all">
-<script src="/static/layui/layui.js"></script>
 <style>
     .footer{
         position:fixed;
@@ -72,15 +91,6 @@
             </select>
         </div>
     </div>
-
-    <div class="form-group">
-        <label>主题目录分类</label>
-        <br>
-            <input type="text" name="res_cat_title" required  lay-verify="required" placeholder="点击选择" readonly autocomplete="off" class="layui-input">
-            <input type="hidden" name="res_cat_id" id="res_cat_id" value="0">
-            <div class="eleTree ele5" lay-filter="data5"></div>
-    </div>
-
     <div class="form-group">
         <label>缩略图</label>
         <input type="file" id="thumbnail" name="thumbnail" class="form-control-file" s>
@@ -98,11 +108,11 @@
 
     <div class="form-group">
         <!--<div class="input-group">-->
-            <!--<div class="input-group-prepend">-->
-                <!--<span class="input-group-text">资源介绍</span>-->
-            <!--</div>-->
-            <!--<textarea class="form-control" id="introduction" name="introduction"-->
-                      <!--aria-label="With textarea"></textarea>-->
+        <!--<div class="input-group-prepend">-->
+        <!--<span class="input-group-text">资源介绍</span>-->
+        <!--</div>-->
+        <!--<textarea class="form-control" id="introduction" name="introduction"-->
+        <!--aria-label="With textarea"></textarea>-->
         <!--</div>-->
         <label>资源介绍</label>
         <div id="editor">
@@ -154,7 +164,6 @@
         form_data.append('introduction', editor.txt.text());
         form_data.append('subject', $("#subject").val());
         form_data.append('source_name',$('#source_name').val());
-        form_data.append('res_cat_id',$('#res_cat_id').val());
         form_data.append("thumbnail", $("#thumbnail").get(0).files[0]);
         form_data.append("src", $("#src").get(0).files[0]);
         var layer_load = layer.load(0);
@@ -176,40 +185,6 @@
                 }
             }
         });
-    });
-
-    // 选择资源文件目录
-    layui.config({
-        base: "../static/layui/lay/mymodules/"
-    }).use(['jquery','table','eleTree','code','form','slider'], function(){
-        var $ = layui.jquery;
-        var eleTree = layui.eleTree;
-
-        var data=<?php echo $tree;?>
-
-        var el5;
-        $("[name='res_cat_title']").on("click",function (e) {
-            e.stopPropagation();
-            if(!el5){
-                el5=eleTree.render({
-                    elem: '.ele5',
-                    data: data,
-                    defaultExpandAll: true,
-                    expandOnClickNode: false,
-                    highlightCurrent: true
-                });
-            }
-            $(".ele5").toggle();
-        });
-        eleTree.on("nodeClick(data5)",function(d) {
-            $("[name='res_cat_title']").val(d.data.currentData.label);
-            $("[name='res_cat_id']").val(d.data.currentData.id);
-            $(".ele5").hide();
-        });
-        $(document).on("click",function() {
-            $(".ele5").hide();
-        });
-
     });
 
 </script>
