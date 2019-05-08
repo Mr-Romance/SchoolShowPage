@@ -19,6 +19,12 @@
     .res-title{
         color:black;
     }
+
+    .opt-btns{
+        float:left;
+        text-align: right;
+        margin-left:300px;
+    }
 </style>
 {/block}
 
@@ -38,7 +44,7 @@
             <h6 class="mt-0 mb-1"><span>创建时间：</span>{$vo.create_at}</h6>
             {$vo.introduction}
         </div>
-        <div>
+        <div class="opt-btns">
             <div>
                 <button type="button" class="btn btn-danger" name="resource_id" value="{$vo.id}">删除</button>
             </div>
@@ -47,6 +53,7 @@
             </div>
         </div>
     </li>
+
         {/volist}
 
     {$list->render()}

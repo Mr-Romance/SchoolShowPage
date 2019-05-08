@@ -143,4 +143,73 @@ class Categories extends Model
         Db::commit();
     }
 
+
+    /**
+     *  返回目录树指定的数据结构(第一个版本--添加资源分类目录哪里，bt3)
+     *
+     * @return array
+     * @throws \think\exception\DbException
+     */
+    public static function generateTree() {
+        $tree_arr=[];
+        $tree_datas=Categories::all(['type'=>2]);
+        if(!empty($tree_datas)){
+            $tree_arr=[];
+            foreach ($tree_datas as $tree){
+                $tree_arr[]=$tree->toArray();
+            }
+        }
+
+        $items = [];
+        // 先构造数据结构
+        foreach ($tree_arr as $value) {
+            $tem=[];
+            // 添加分类下的资源
+            $nodes_recs=Resources::all(['category_2'=>$value['id']]);
+            if(!empty($nodes_recs)){
+                foreach($nodes_recs as $rec){
+                    $tem['id']=$rec->id;
+                    $tem['text']=$rec->title;
+                    $tem['href']='/index_resource_show?id='.$rec->id.'&subject_id='.$rec->subject;
+                }
+            }
+
+            $items[$value['id']] = $value;
+            $items[$value['id']]['text'] = $value['name'];
+            if(!empty($tem)){
+                $items[$value['id']]['nodes'][]= $tem;
+            }
+        }
+
+        // 遍历，添加节点数据
+        $tree = array();
+        foreach ($items as $key => $value) {
+            if (!empty($items[$value['parent_id']])) {
+                $items[$value['parent_id']]['nodes'][] = &$items[$key];
+            } else {
+                $tree[] = &$items[$key];
+            }
+        }
+        return $tree;
+    }
+
+    public static function getCatTreeNames($id){
+        static $names='';
+        $ret_name='';
+        $model=Categories::get($id);
+        if($model){
+            $names.=$model['name'];
+            $names.='>';
+            self::getCatTreeNames($model->parent_id);
+        }
+
+        $names_arr=explode('>',$names);
+        unset($names_arr[count($names_arr)-1]);
+        $names_arr=array_reverse($names_arr);
+
+        foreach ($names_arr as $name){
+            $ret_name.=$name.'>';
+        }
+        return substr($ret_name,0,strlen($ret_name)-1);
+    }
 }

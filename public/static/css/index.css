@@ -81,6 +81,8 @@ li {
 
 .nav li:hover {
     background-color: #2D93CA;
+
+    -moz-transition: all 1s ease 0s; -webkit-transition:all 1s ease 0s; transition:all 1s ease 0s; -o-transition:all 1s ease 0s;
 }
 
 .nav li a {
@@ -263,8 +265,8 @@ a:hover {
     background-color: #f4f4f4;
 }
 
-.js-main a:hover{
-
+.js-main h4:hover{
+    text-decoration: underline;
 }
 
 .column-js .jian_she_title {

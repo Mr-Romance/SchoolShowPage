@@ -463,6 +463,16 @@ class Resource extends Controller
             $this->assign('cat_two', $cat_two_model->name);
         }
 
+        // 获取已经添加文件目录信息
+        if(!empty($resource->category_2)){
+            $cat2Model=Categories::get($resource->category_2);
+            $this->assign('cat2_name',$cat2Model->name);
+        }
+
+        // 获取主题文件目录树
+        $tree = $this->generateTree2();
+        $this->assign('tree', json_encode($tree));
+
         Session::set('menu_name', 'user_resource_list');
         $this->assign('menu_name', Session::get('menu_name'));
 
@@ -581,6 +591,7 @@ class Resource extends Controller
                 $data['category'] = $params['cat_first'];
             }
         }
+        $data['category_2'] = empty($params['res_cat_id']) ? 0 : $params['res_cat_id'];
         $data['status'] = 1;
         $data['type'] = $params['type'];
         $data['subject'] = $params['subject'];
@@ -642,16 +653,15 @@ class Resource extends Controller
         if (empty($params['name'])) {
             return $this->errorResponse(200, '请输入名称信息');
         }
-        if (empty($params['subject_id'])) {
-            return $this->errorResponse(200, '请选择所属主题');
-        }
+
         if(!empty($params['cat_ids'])){
             if(strlen($params['cat_ids'])>2){
                 return $this->errorResponse(200,'添加目录只能选择一个父级');
             }
             $params['parent_id']=$params['cat_ids'];
-            unset($params['cat_ids']);
         }
+
+        unset($params['cat_ids']);
 
         $catModel = new Categories();
         $params['type']=2;

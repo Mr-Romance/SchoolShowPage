@@ -1,7 +1,158 @@
-{extend name="public:public_index"}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>呼和浩特市第三职业中等专业学校</title>
+    <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/plyr.css">
+    <link rel="stylesheet" href="/static/lrtk.css">
+    <script src="/static/jQuery331.js"></script>
+    <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
+    <script src="/static/jquery.media.js"></script>
+    <script src="/static/plyr.js"></script>
+    <script src="/static/popper.js"></script>
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/responsiveslides.min.js"></script>
+    <script src="/static/slide.js"></script>
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+    <script src="/static/bootstrap-treeview.js"></script>
+    <style>
+        .footer{
+            position:fixed;
+            bottom:0;
+            left:0;
+        }
 
-{block name="main"}
-<!--展示主题及部分-->
+        .top-school-logo{
+            width:400px;
+            height:93px;
+            margin:10px 0;
+            float:left;
+        }
 
-{include file="../application/index/view/public/public_subject.html"}
+        .top-school-logo img{
+            width:400px;
+            height:93px;
+            float:right;
+        }
+
+        .school-dec{
+            float:left;
+            padding-left:20px;
+            margin-top:50px;
+            font-size: 28px;
+            font-family: "Arial Black";
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="top-school-logo">
+                <img src="/index_rec/logo_title.png">
+            </div>
+            <div class="school-dec">
+                改革发展示范学校
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <!--导航部分-->
+    <div class="nav">
+        <div class="wrap">
+            <ul>
+                <li>
+                    <a href="/">首页</a>
+                </li>
+                {if condition="!empty($subject)"}
+                {volist name="subject" id="vo"}
+                <li {if condition="$subject_id==$vo['id']" }class="active" {/if}>
+                <a href="/subject_index?subject_id={$vo['id']}">{$vo['name']}</a>
+                </li>
+                {/volist}
+                {/if}
+
+                <li>
+                    <a href="/resource_index">资源库</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-3 subject-title-menu">
+                    {if condition="!empty($tree)"}
+                    <div id="treeview-checkable" class=""></div>
+                    {else/}
+                    <ul class="list-group">
+                        <li class="list-group-item active">{$subject_name}</li>
+                        <li class="list-group-item">{$subject_name}</li>
+                    </ul>
+                    {/if}
+                </div>
+
+                {if condition="$subject_id neq 7"}
+                <div class="col-md-9 subject-content">
+                    <div class="index-page-location">
+                        首页 > {$subject_name}
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        {if condition = "!empty($list)"}
+                        {volist name="list" id="vo"}
+                        <div class="list-group-item">
+                            <div>
+                                <a  href="/index_resource_show?id={$vo->id}&subject_id={$vo->subject}">
+                                    {$vo->title}
+                                </a>
+                                <div class="index_sub_time">{$vo->create_at}</div>
+                            </div>
+                        </div>
+                        {/volist}
+                        {/if}
+                    </ul>
+
+                    {$list->render()}
+                </div>
+                {else/}
+                {include file="../application/index/view/public/pdf_show.html"}
+                {/if}
+
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+    {include file="../application/index/view/public/footer.html"}
+
+</div>
+{block name="cur_js"}
+<script>
+    var defaultData= <?php echo $tree;?>;
+    var $checkableTree = $('#treeview-checkable').treeview({
+        data: defaultData,
+        showIcon: true,
+        showCheckbox: false,
+        onNodeSelected: function(event, node) {
+            var href_url=node.href;
+            if(href_url){
+             window.location.href=href_url;
+            }
+        },
+        onNodeUnchecked: function (event, node) {
+            var index=cats_arr.indexOf(node.id);
+            if (index > -1) {
+                cats_arr.splice(index, 1);
+            }
+        }
+    });
+</script>
 {/block}
+</body>
+</html>

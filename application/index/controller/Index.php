@@ -282,7 +282,7 @@ class Index extends Controller
 
         if (empty($subject_id)) {
             return $this->fetch();
-    }
+        }
 
         $subject_info = Config::get('subject_info');
 
@@ -294,8 +294,17 @@ class Index extends Controller
 
         $this->assign("subject_id", $subject_id);
 
-        $list = Resources::where('subject', $subject_id)->paginate(10,false,['query'=>['subject_id'=>$subject_id]]);
+        $list = Resources::where('subject', $subject_id)->paginate(10, false, ['query' => ['subject_id' => $subject_id]]);
         $this->assign('list', $list);
+
+        // 获取资源文件目录信息
+        if($subject_id==7){
+            $tree=Categories::generateTree();
+            $this->assign('tree',json_encode($tree));
+        }else{
+            $this->assign('tree','');
+        }
+
         return $this->fetch();
     }
 
@@ -317,9 +326,21 @@ class Index extends Controller
         $this->assign('subject_name', empty($subject_name) ? '无主题' : $subject_name);
         $this->assign('subject_id', $subject_id);
 
-
         $resource = Resources::get($id);
         $this->assign('resource', $resource);
+
+        // 获取资源文件目录信息
+        if($subject_id==7){
+            $tree=Categories::generateTree();
+            $this->assign('has_tree','yes');
+            $this->assign('tree',json_encode($tree));
+
+            $cat_tree_names=Categories::getCatTreeNames($resource->category_2);
+            $this->assign('subject_name',$cat_tree_names);
+
+        }else{
+            $this->assign('tree',json_encode([]));
+        }
         return $this->fetch();
     }
 

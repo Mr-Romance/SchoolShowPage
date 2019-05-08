@@ -5,6 +5,7 @@
 
 {block name="cur_css"}
 <style rel="stylesheet" href="/static/css/show_add_resource.css"></style>
+<link rel="stylesheet" href="/static/zTree/eleTree.css" media="all">
 <style>
     .footer{
         position:fixed;
@@ -83,6 +84,15 @@
             </select>
         </div>
     </div>
+
+    <div class="form-group">
+        <label>主题目录分类</label>
+        <br>
+        <input type="text" name="res_cat_title" required  lay-verify="required" placeholder={if condition="!empty($cat2_name)"}{$cat2_name} {else/}"点击选择"{/if} readonly autocomplete="off" class="layui-input">
+        <input type="hidden" name="res_cat_id" id="res_cat_id" value="{$resource->category_2}">
+        <div class="eleTree ele5" lay-filter="data5"></div>
+    </div>
+
     <div class="form-group">
         <label>缩略图</label>
         <div class="thumbnail">
@@ -166,6 +176,7 @@
         form_data.append('introduction', editor.txt.text());
         form_data.append('subject', $("#subject").val());
         form_data.append('source_name',$('#source_name').val());
+        form_data.append('res_cat_id',$('#res_cat_id').val());
         form_data.append("thumbnail", $("#thumbnail").get(0).files[0]);
         form_data.append("src", $("#src").get(0).files[0]);
         var layer_load = layer.load(0);
@@ -185,6 +196,41 @@
                 }
             }
         });
+    });
+
+
+    // 选择资源文件目录
+    layui.config({
+        base: "../static/layui/lay/mymodules/"
+    }).use(['jquery','table','eleTree','code','form','slider'], function(){
+        var $ = layui.jquery;
+        var eleTree = layui.eleTree;
+
+        var data=<?php echo $tree;?>
+
+        var el5;
+        $("[name='res_cat_title']").on("click",function (e) {
+            e.stopPropagation();
+            if(!el5){
+                el5=eleTree.render({
+                    elem: '.ele5',
+                    data: data,
+                    defaultExpandAll: true,
+                    expandOnClickNode: false,
+                    highlightCurrent: true
+                });
+            }
+            $(".ele5").toggle();
+        });
+        eleTree.on("nodeClick(data5)",function(d) {
+            $("[name='res_cat_title']").val(d.data.currentData.label);
+            $("[name='res_cat_id']").val(d.data.currentData.id);
+            $(".ele5").hide();
+        });
+        $(document).on("click",function() {
+            $(".ele5").hide();
+        });
+
     });
 
 </script>
