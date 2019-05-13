@@ -40,13 +40,13 @@
 }
 
 .column-title{
-    margin-top:10px;
-    padding-top:10px;
+    margin-top:20px;
     font-size: 18px;
     color: #33485d;
 
+    line-height:31px;
     border-left: 6px solid #33485d;
-    padding-left: 15px;
+    padding-left: 10px;
 }
 
 .wrap{
@@ -198,8 +198,7 @@
 
 /**最新推荐**/
 .recommend{
-    margin-top:10px;
-    height:375px;
+    height:410px;
     background-color: #F5F5F5;
 }
 .recommend-left{
@@ -352,8 +351,9 @@
     margin-top:20px;
 }
 
-.teachers .card{
-    margin-left: 8px;
+.teacher-img{
+    width:280px;
+    margin:0 auto;
 }
 
 .the-teacher-img {
@@ -361,7 +361,7 @@
     text-align: center;
     height:60px;
     width:60px;
-    margin:10px 0 5px 0;
+    margin:10px auto;
 }
 
 .teacher-name{

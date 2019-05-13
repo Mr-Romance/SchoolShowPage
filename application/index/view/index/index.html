@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="stylesheet" href="/static/plyr.css">
-    <link rel="stylesheet" href="/static/lrtk.css">
+    <!--<link rel="stylesheet" href="/static/lrtk.css">-->
     <script src="/static/jQuery331.js"></script>
     <script src="/static/jquery.min.js"></script>
-    <script src="/static/layer/layer.js"></script>
+    <!--<script src="/static/layer/layer.js"></script>-->
     <script src="/static/dialog.js"></script>
     <script src="/static/bootstrap4.2/js/bootstrap.js"></script>
     <script src="/static/myslideup.js"></script>
@@ -63,7 +63,7 @@
                 {/if}
 
                 <li>
-                    <a href="/resource_index">资源库</a>
+                    <a href="/resource_index" target="_blank">资源库</a>
                 </li>
             </ul>
         </div>
@@ -215,57 +215,28 @@
     <!--新闻分类，轮播模式的-->
     <div class="column-lb">
         <h3 class="column-lb-title">重点项目建设</h3>
-        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-interval="2000">
-                    <div class="row">
-                        <div class="col">
-                            <img src="/index_rec/btm1.png" class="d-block w-100">
-                        </div>
-                        <div class="col">
-                            <img src="/index_rec/btm2.png" class="d-block w-100"
-                            >
-                        </div>
-                        <div class="col">
-                            <img src="/index_rec/btm3.png" class="d-block w-100"
-                                 >
-                        </div>
-                        <div class="col">
-                            <img src="/index_rec/btm4.png" class="d-block w-100"
-                                >
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="column-lb-img">
+                    <img src="/index_rec/btm1.png">
                 </div>
-                <div class="carousel-item" data-interval="2000">
-                    <div class="row">
-                        <div class="col">
-                            <img src="/index_rec/btm5.png" class="d-block w-100"
-                                 >
-                        </div>
-                        <div class="col">
-                            <img src="/index_rec/btm6.png" class="d-block w-100"
-                                 >
-                        </div>
-                        <div class="col">
-                            <img src="/index_rec/btm7.png" class="d-block w-100"
-                                 >
-                        </div>
-                        <div class="col">
-                            <img src="/index_rec/btm8.png" class="d-block w-100"
-                                 >
-                        </div>
-                    </div>
-                </div>
-
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <div class="col-3">
+                <div class="column-lb-img">
+                    <img src="/index_rec/btm2.png">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="column-lb-img">
+                    <img src="/index_rec/btm3.png">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="column-lb-img">
+                    <img src="/index_rec/btm4.png">
+                </div>
+            </div>
+            </div>
         </div>
     </div>
 

@@ -369,12 +369,28 @@ a:hover {
     text-align: left;
 }
 
+.column-lb {
+    margin: 0 auto 20px auto;
+    width: 1000px;
+}
+
 .column-lb-title {
     padding: 14px 0 10px 10px;
     color: #3156a3;
     font-size: 25px;
     line-height: 26px;
     text-align: left;
+}
+
+.column-lb-img{
+    width:228px;
+    height:125px;
+}
+
+.column-lb-img img{
+    float:left;
+    width:228px;
+    height:125px;
 }
 
 .column-fixed .source_title {
@@ -390,11 +406,6 @@ a:hover {
 
 .column-fixed .tui_jian_title {
     text-align: left;
-}
-
-.column-lb {
-    margin: 0 auto 20px auto;
-    width: 1000px;
 }
 
 .footer {
@@ -449,5 +460,13 @@ a:hover {
 .index_sub_time{
     text-align: right;
     float: right;
+}
+
+.resource_title{
+   height:80px;
+}
+
+.resource_title .title{
+    padding-top:20px;
 }
 
