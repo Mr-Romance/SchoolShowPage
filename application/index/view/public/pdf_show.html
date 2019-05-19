@@ -1,9 +1,9 @@
 {if condition="!empty($resource)"}
+{if condition="$resource->type eq '4' OR $resource->type eq '5'"}
 <div class="resource_title">
     <h5 class="title">{$resource->title}<h5>
                         <span>上传时间：{$resource->create_at}<span>
 </div>
-{if condition="$resource->type eq '4' OR $resource->type eq '5'"}
 <div class="res-show-media">
 <div class="m2">
 <video poster="vs.png" controls>
@@ -11,7 +11,14 @@
 </video>
 </div>
 </div>
+
 {else /}
+<div class="resource_title2">
+    <div class="title2">{$resource->title}</div>
+        <div class="pdf_upd_time">
+        <span>上传时间：{$resource->create_at}<span>
+        </div>
+</div>
 <div class="panel-body">
     <a class="media" href="{$resource->src}"></a>
 </div>

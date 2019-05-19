@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/bootstrap4.2/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="stylesheet" href="/static/plyr.css">
-    <!--<link rel="stylesheet" href="/static/lrtk.css">-->
+    <link rel="stylesheet" href="/static/lrtk.css">
     <script src="/static/jQuery331.js"></script>
     <script src="/static/jquery.min.js"></script>
     <!--<script src="/static/layer/layer.js"></script>-->
@@ -24,13 +24,23 @@
     </script>
 
     <style>
+        .nav a{
+            color:white;
+        }
+
+        .plyr audio, .plyr video {
+            width: 269px;
+            height: 269px;
+            vertical-align: middle;
+            border-radius: inherit
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="school-name-img">
-        <img src="/index_rec/logo_title.png">
-    </div>
+    <!--<div class="school-name-img">-->
+        <!--<img src="/index_rec/logo_title.png">-->
+    <!--</div>-->
     <div class="banner">
         <div class="slide_container">
             <ul class="rslides" id="slider">
@@ -61,10 +71,7 @@
                 </li>
                 {/volist}
                 {/if}
-
-                <li>
-                    <a href="/resource_index" target="_blank">资源库</a>
-                </li>
+                    <a href="/resource_index" target="_blank"><li>资源库</li></a>
             </ul>
         </div>
     </div>
@@ -245,6 +252,7 @@
 
 <script>
     plyr.setup();
+
 </script>
 
 </body>

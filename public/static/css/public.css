@@ -6,6 +6,21 @@
     min-width: 100% !important;
 }
 
+.school-name-img {
+    float: right;
+    position: absolute;
+    z-index: 100;
+    top: 20px;
+    right: 50px;
+    width:400px;
+    height:93px;
+}
+
+.school-name-img img{
+    width:400px;
+    height:93px;
+}
+
 .bg-img{
     width:100%;
 }
@@ -79,9 +94,41 @@
     height:46px;
 }
 
+.nav {
+    background: url("/static/imgs/nav_bg.png");
+    height: 56px;
+    text-align: center;
+    padding: 10px;
+}
 
-.top-nav {
-    margin: 0 50px;
+.nav li {
+    float: left;
+    display: inline-block;
+    width: 101px;
+    height: 36px;
+    border-radius: 10px;
+    line-height: 36px;
+}
+
+.nav li.active {
+    background-color: #2D93CA;
+}
+
+.nav li:hover {
+    background-color: #2D93CA;
+
+    -moz-transition: all 1s ease 0s; -webkit-transition:all 1s ease 0s; transition:all 1s ease 0s; -o-transition:all 1s ease 0s;
+}
+
+.nav  a {
+    font-size:1rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav li a {
+    color: #fff;
+    text-decoration: none;
 }
 
 .top-search {

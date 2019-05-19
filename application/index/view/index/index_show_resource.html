@@ -7,7 +7,6 @@
     .resource_title{
         text-align: center;
         background-color: #cccccc;
-        margin-left:10px;
     }
 
     .res-show-media{
@@ -15,20 +14,55 @@
     }
 
     .panel-body{
-        text-align:left;
-        width:400px;
-        min-height:800px;
+        text-align:center;
+        /*margin-right:200px;*/
         margin-bottom: 120px;
+    }
+
+    .panel-body .media{
+        padding-right: 10px;
     }
 
     .title{
        font-size: 25px;
     }
 
+    .title2{
+        font-size: 25px;
+    }
+
     .footer{
         position:fixed;
         bottom: 0;
         left:0;
+    }
+
+    .boxf {
+        height: 50px;
+        background: #fff;
+        position: absolute;
+        opacity:0.3;
+    }
+
+    .top-school-logo{
+        width:400px;
+        height:93px;
+        margin:10px 0;
+        float:left;
+    }
+
+    .top-school-logo img{
+        width:400px;
+        height:93px;
+        float:right;
+    }
+
+    .school-dec{
+        float:left;
+        padding-left:20px;
+        margin-top:50px;
+        font-size: 28px;
+        font-family: "Arial Black";
     }
 
 </style>
@@ -67,10 +101,15 @@
 <script>
     plyr.setup();
 
-    var media_width=$('.resource_title').width();
+    if($('.resource_title').width()){
+        var media_width=$('.resource_title').width();
+    }else{
+        var media_width=$('.resource_title2').width();
+    }
     $(function() {
         $('a.media').media({width:media_width, height:media_width});
-        $('a.mediase').media({width:800, height:800});
+        $(".media").append('<div class="boxf"></div>')
+        $(".media .boxf").width(media_width);
     });
 
     var defaultData= <?php echo $tree;?>;

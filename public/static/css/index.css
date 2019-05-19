@@ -85,6 +85,10 @@ li {
     -moz-transition: all 1s ease 0s; -webkit-transition:all 1s ease 0s; transition:all 1s ease 0s; -o-transition:all 1s ease 0s;
 }
 
+.nav a {
+    color:#fff;
+}
+
 .nav li a {
     color: #fff;
     text-decoration: none;
@@ -468,5 +472,25 @@ a:hover {
 
 .resource_title .title{
     padding-top:20px;
+}
+
+
+.resource_title2{
+    height:80px;
+    margin-left:14px;
+}
+
+.resource_title2 .title2{
+    text-align: center;
+    background-color: #cccccc;
+    height:40px;
+    padding-top:10px;
+    line-height: 40px;
+}
+
+.pdf_upd_time{
+    text-align:center;
+    line-height:40px;
+    background-color: #cccccc;
 }
 

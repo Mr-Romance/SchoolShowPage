@@ -111,7 +111,7 @@ class Index extends Controller
         $this->assign('start_resource_info', $start_resource_info);
 
         // 按照分类获取资源，获取前4名分类
-        $top_category = Categories::order('sort', 'desc')->paginate(4);
+        $top_category = Categories::where('type',1)->order('sort', 'desc')->paginate(4);
         $category_resource_info = [];
 
         $cat_one = Resources::where('category', $top_category[0]->id)->order('id', 'desc')->paginate(4);

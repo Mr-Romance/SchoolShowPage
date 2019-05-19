@@ -39,25 +39,27 @@
                bottom:0;
                left:0;
            }
+           .nav a{
+               color:white;
+           }
+
+
        </style>
     {/block}
 </head>
 <body>
 <div class="container">
-    <div class="banner">
-    <div class="slide_container">
-        <ul class="rslides" id="slider">
-            <li>
-                <img src="/index_rec/top1.jpg" alt="">
-            </li>
-            <li>
-                <img src="/index_rec/top2.jpg" alt="">
-            </li>
-            <li>
-                <img src="/index_rec/top3.jpg" alt="">
-            </li>
-        </ul>
-    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="top-school-logo">
+                <img src="/index_rec/logo_title.png">
+            </div>
+            <div class="school-dec">
+                改革发展示范学校
+            </div>
+        </div>
+        <div class="col-1"></div>
     </div>
 
     <!--导航部分-->
@@ -74,10 +76,7 @@
                 </li>
                 {/volist}
                 {/if}
-
-                <li>
-                    <a href="/resource_index">资源库</a>
-                </li>
+                <a href="/resource_index" target="_blank"><li >资源库</li></a>
             </ul>
         </div>
     </div>
